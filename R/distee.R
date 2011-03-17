@@ -51,10 +51,14 @@
 
 distee <-
 function(e1, e2, cor.threshold, n.col, d.method=c("rmsd", "cor"),
-         transpose=FALSE, verbose=TRUE)
+         transpose=FALSE, labels=c("e1","e2"), verbose=TRUE)
 {
   if(missing(cor.threshold) && missing(n.col))
     stop("Give either cor.threshold or n.col")
+  if(length(labels) != 2) {
+    warning("labels should have length two; input ignored.")
+    labels <- c("e1","e2")
+  }
 
   d.method <- match.arg(d.method)
   if(d.method=="rmsd") 
@@ -136,6 +140,7 @@ function(e1, e2, cor.threshold, n.col, d.method=c("rmsd", "cor"),
   class(d) <- c("ee.lineupdist", "lineupdist")
   attr(d, "d.method") <- d.method
   attr(d, "retained") <- colnames(o1)
+  attr(d, "labels") <- labels
   d
 }
 

@@ -10,7 +10,7 @@
 
 \usage{
 distee(e1, e2, cor.threshold, n.col, d.method=c("rmsd", "cor"),
-       transpose=FALSE, verbose=TRUE)
+       transpose=FALSE, labels=c("e1","e2"), verbose=TRUE)
 }
 
 \arguments{
@@ -29,6 +29,8 @@ distee(e1, e2, cor.threshold, n.col, d.method=c("rmsd", "cor"),
  or as correlation.}
  \item{transpose}{if TRUE, \code{e1} and \code{e2} are input as genes x individuals
  and need to be transposed.}
+ \item{labels}{Two character strings, to use as labels for the two data
+ matrices in subsequent output.}
  \item{verbose}{if TRUE, give verbose output.}
 }
 
