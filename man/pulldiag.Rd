@@ -32,6 +32,6 @@ A vector with the self-self distances.
 %\examples{
 %}
 
-\seealso{ \code{\link{distee}} }
+\seealso{ \code{\link{distee}}, \code{\link{summary.lineupdist}}, \code{\link{plot2dist}} }
 
 \keyword{utilities}

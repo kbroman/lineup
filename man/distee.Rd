@@ -66,6 +66,7 @@ names.  The matrix is assigned class \code{"lineupdist"}.
 %\examples{
 %}
 
-\seealso{ \code{\link{pulldiag}}, \code{\link{summary.lineupdist}} }
+\seealso{ \code{\link{pulldiag}}, \code{\link{summary.lineupdist}},
+\code{\link{plot2dist}}}
 
 \keyword{utilities}

@@ -44,6 +44,6 @@ individuals) that is closest.
 %\examples{
 %}
 
-\seealso{ \code{\link{pulldiag}}, \code{\link{distee}} }
+\seealso{ \code{\link{pulldiag}}, \code{\link{distee}}, \code{\link{plot2dist}} }
 
 \keyword{utilities}
