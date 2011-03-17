@@ -8,7 +8,7 @@
 }
 
 \usage{
-\method{print}{summary.lineupdist(x, \dots)
+\method{print}{summary.lineupdist}(x, \dots)
 }
 
 \details{
