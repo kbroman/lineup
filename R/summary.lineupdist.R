@@ -60,8 +60,11 @@ function(object, dropmatches=TRUE, reorder=TRUE, ...)
   if(reorder)
     res <- lapply(res, function(a) a[order(a$mind, -a$selfd),])
   
-  # cor: return correlations to original scale
-  if(d.method=="cor") res <- lapply(res, function(a) {a[,1:4] <- -a[,1:4]; a})
+  # cor: return correlations to original scale and change colnames
+  if(d.method=="cor") {
+    res <- lapply(res, function(a) {a[,1:4] <- -a[,1:4]; a})
+    for(i in 1:2) colnames(res[[i]])[1:3] <- c("maxc","nextc","selfc")
+  }
 
   class(res) <- "summary.lineupdist"
   attr(res, "labels") <- attr(object, "labels")
