@@ -53,7 +53,7 @@ distee <-
 function(e1, e2, cor.threshold, n.col, d.method=c("rmsd", "cor"),
          transpose=FALSE, labels=c("e1","e2"), verbose=TRUE)
 {
-  if(missing(cor.threshold) && missing(n.col))
+  if(!missing(e2) && missing(cor.threshold) && missing(n.col))
     stop("Give either cor.threshold or n.col")
   if(length(labels) != 2) {
     warning("labels should have length two; input ignored.")
@@ -63,10 +63,12 @@ function(e1, e2, cor.threshold, n.col, d.method=c("rmsd", "cor"),
     stop("e1 is missing column names")
   if(is.null(rownames(e1)))
     stop("e1 is missing row names")
-  if(is.null(colnames(e2)))
-    stop("e2 is missing column names")
-  if(is.null(rownames(e2)))
-    stop("e2 is missing row names")
+  if(!missing(e2)) {
+    if(is.null(colnames(e2)))
+      stop("e2 is missing column names")
+    if(is.null(rownames(e2)))
+      stop("e2 is missing row names")
+  }
 
   d.method <- match.arg(d.method)
   if(d.method=="rmsd") 
@@ -74,9 +76,19 @@ function(e1, e2, cor.threshold, n.col, d.method=c("rmsd", "cor"),
   else
     d.func <- function(a,b) cor(a,b, use="complete")
 
-  if(transpose) {
-    e1 <- t(e1)
-    e2 <- t(e2)
+  if(missing(e2)) { # need to have pre-selected genes
+    compareWithin <- TRUE
+    cor.threshold <- -2
+    if(transpose) e1 <- t(e1)
+    e2 <- e1
+  }
+  else {
+    compareWithin <- FALSE
+    
+    if(transpose) {
+      e1 <- t(e1)
+      e2 <- t(e2)
+    }
   }
 
   if(any(colnames(e1) != colnames(e2))) {
@@ -102,7 +114,10 @@ function(e1, e2, cor.threshold, n.col, d.method=c("rmsd", "cor"),
   }
     
   o1 <- e1 <- scale(e1)
-  o2 <- e2 <- scale(e2)
+  if(compareWithin) # don't repeat the scaling!
+    o2 <- e2 <- e1 
+  else
+    o2 <- e2 <- scale(e2)
 
   # first match cols and rows
   m1 <- match(rownames(e1), rownames(e2))
@@ -141,14 +156,22 @@ function(e1, e2, cor.threshold, n.col, d.method=c("rmsd", "cor"),
 
   d <- matrix(nrow=nrow(o1), ncol=nrow(o2))
   dimnames(d) <- list(rownames(o1), rownames(o2))
-  for(i in 1:nrow(o1))
-    for(j in 1:nrow(o2)) 
-      d[i,j] <- d.func(o1[i,], o2[j,])
+  if(compareWithin) {
+    for(i in 1:(nrow(o1)-1))
+      for(j in (i+1):nrow(o2)) 
+        d[i,j] <- d[j,i] <- d.func(o1[i,], o2[j,])
+  }
+  else {
+    for(i in 1:nrow(o1))
+      for(j in 1:nrow(o2)) 
+        d[i,j] <- d.func(o1[i,], o2[j,])
+  }
 
   class(d) <- c("ee.lineupdist", "lineupdist")
   attr(d, "d.method") <- d.method
   attr(d, "retained") <- colnames(o1)
   attr(d, "labels") <- labels
+  attr(d, "compareWithin") <- compareWithin
   d
 }
 

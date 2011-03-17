@@ -17,7 +17,7 @@ distee(e1, e2, cor.threshold, n.col, d.method=c("rmsd", "cor"),
  \item{e1}{Numeric matrix of gene expression data, as individuals x
  genes (or, if \code{transpose=TRUE}, genes x individuals).  The row and
  column names must contain individual and gene identifiers.}
- \item{e2}{Like \code{e1}.  An appreciable number of individuals and
+ \item{e2}{(Optional) Like \code{e1}.  An appreciable number of individuals and
  genes must be in common.}
  \item{cor.threshold}{threshold on between-gene correlation; use genes
  with between-condition correlation above this to calculate the
@@ -50,6 +50,10 @@ Finally, we calculate the pairwise distance between all individuals
 (rows) in \code{e1} and all individuals in \code{e2}.  This distance is
 either the RMS difference (\code{d.method="rmsd"}) or the correlation
 (\code{d.method="cor"}).  
+
+If \code{e2} is not included, within-tissue comparisons will be made.
+In this case, genes will have to be pre-selected (e.g., as those
+selected in a comparison of one tissue to another).
 }
 
 \value{

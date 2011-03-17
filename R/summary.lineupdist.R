@@ -42,15 +42,20 @@ function(object, dropmatches=TRUE, reorder=TRUE, ...)
   for(i in which(!is.na(m))) 
     bycol$selfd[i] <- object[m[i],i]
 
-  byrow <- data.frame(mind=apply(object, 1, min),
-                      nextd=apply(object, 1, function(a) sort(a)[2]),
-                      selfd=rep(NA, nrow(object)),
-                      mean=apply(object, 1, mean, na.rm=TRUE),
-                      sd=apply(object, 1, sd, na.rm=TRUE),
-                      best=apply(object, 1, function(a, b) paste(b[a==min(a)], collapse=":"), colnames(object)))
-  m <- match(rownames(object), colnames(object))
-  for(i in which(!is.na(m))) 
-    byrow$selfd[i] <- object[i,m[i]]
+  compareWithin <- attr(object, "compareWithin")
+  if(is.null(compareWithin)) compareWithin <- FALSE
+  if(compareWithin) byrow <- bycol[-(1:nrow(bycol)),,drop=FALSE]
+  else {
+    byrow <- data.frame(mind=apply(object, 1, min),
+                        nextd=apply(object, 1, function(a) sort(a)[2]),
+                        selfd=rep(NA, nrow(object)),
+                        mean=apply(object, 1, mean, na.rm=TRUE),
+                        sd=apply(object, 1, sd, na.rm=TRUE),
+                        best=apply(object, 1, function(a, b) paste(b[a==min(a)], collapse=":"), colnames(object)))
+    m <- match(rownames(object), colnames(object))
+    for(i in which(!is.na(m))) 
+      byrow$selfd[i] <- object[i,m[i]]
+  }
 
   if(dropmatches) 
     res <- list(byrow=byrow[is.na(byrow$selfd) | byrow$selfd >= byrow$nextd,,drop=FALSE],
@@ -70,6 +75,7 @@ function(object, dropmatches=TRUE, reorder=TRUE, ...)
   attr(res, "labels") <- attr(object, "labels")
   attr(res, "d.method") <- attr(object, "d.method")
   attr(res, "retained") <- attr(object, "retained")
+  attr(res, "compareWithin") <- compareWithin
   res
 }
 
@@ -82,10 +88,14 @@ function(x, ...)
 
   cat("By ", labels[1], ":\n", sep="")
   print.data.frame(x$byrow, ...)
-  cat("\n")
   
-  cat("By ", labels[2], ":\n", sep="")
-  print.data.frame(x$bycol, ...)
+  compareWithin <- attr(x, "compareWithin")
+  if(is.null(compareWithin)) compareWithin <- FALSE
+  if(!compareWithin) {
+    cat("\n")
+    cat("By ", labels[2], ":\n", sep="")
+    print.data.frame(x$bycol, ...)
+  }
 }
 
 # end of summary.lineupdist.R
