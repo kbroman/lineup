@@ -59,6 +59,14 @@ function(e1, e2, cor.threshold, n.col, d.method=c("rmsd", "cor"),
     warning("labels should have length two; input ignored.")
     labels <- c("e1","e2")
   }
+  if(is.null(colnames(e1)))
+    stop("e1 is missing column names")
+  if(is.null(rownames(e1)))
+    stop("e1 is missing row names")
+  if(is.null(colnames(e2)))
+    stop("e2 is missing column names")
+  if(is.null(rownames(e2)))
+    stop("e2 is missing row names")
 
   d.method <- match.arg(d.method)
   if(d.method=="rmsd") 
