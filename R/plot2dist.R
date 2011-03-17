@@ -27,8 +27,8 @@
 # plot two distances
 ######################################################################
 plot2dist <-
-function(d1, d2, hirow, hicol, xlab, ylab,
-         smoothScatter=TRUE, ...)
+function(d1, d2, hirow, hicol, xlab, ylab, smoothScatter=TRUE,
+         colself="black", colnonself="gray", colhirow="green", colhicol="orange", ...)
 {
   if(missing(xlab)) {
     meth <- attr(d1, "d.method")
@@ -101,14 +101,18 @@ function(d1, d2, hirow, hicol, xlab, ylab,
     hicold2 <- d2[,hicol]
     d1[,hicol] <- d2[,hicol] <- NA
   }
-  if(smoothScatter)
-    smoothScatter(d1, d2, xlab=xlab, ylab=ylab, xlim=xl, ylim=yl,
-                  colramp=colorRampPalette(c("white","blue")))
-  else
-    plot(d1, d2, xlab=xlab, ylab=ylab, xlim=xl, ylim=yl, col="gray", ...)
-  if(!missing(hirow)) points(hirowd1, hirowd2, col="green", ...)
-  if(!missing(hicol)) points(hicold1, hicold2, col="orange", ...)
-  points(self, col="black", pch=16, ...)
+  if(is.null(colnonself)) 
+    plot(0,0,type="n", xlab=xlab, ylab=ylab, xlim=xl, ylim=yl, ...)
+  else {
+    if(smoothScatter)
+      smoothScatter(d1, d2, xlab=xlab, ylab=ylab, xlim=xl, ylim=yl,
+                    colramp=colorRampPalette(c("white","blue")))
+    else 
+      plot(d1, d2, xlab=xlab, ylab=ylab, xlim=xl, ylim=yl, col=colnonself, ...)
+  }
+  if(!missing(hirow) && !is.null(colhirow)) points(hirowd1, hirowd2, col=colhirow, ...)
+  if(!missing(hicol) && !is.null(colhicol)) points(hicold1, hicold2, col=colhicol, ...)
+  if(!is.null(colself)) points(self, col=colself, pch=16, ...)
 }
 
 # end of plot2dist.R

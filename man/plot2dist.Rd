@@ -9,8 +9,8 @@
 }
 
 \usage{
-plot2dist(d1, d2, hirow, hicol, xlab, ylab,
-         smoothScatter=TRUE, \dots)
+plot2dist(d1, d2, hirow, hicol, xlab, ylab, smoothScatter=TRUE,
+         colself="black", colnonself="gray", colhirow="green", colhicol="orange", ...)
 }
 
 \arguments{
@@ -23,6 +23,14 @@ plot2dist(d1, d2, hirow, hicol, xlab, ylab,
  \item{smoothScatter}{If TRUE, plot non-self distances with
  \code{\link[graphics]{smoothScatter}}; if FALSE, use
  \code{\link[graphics]{plot}}.} 
+ \item{colself}{Color to use for the self-self points.  If NULL,
+ these aren't plotted.}
+ \item{colnonself}{Color to use for the non-self points.  If NULL,
+ these aren't plotted.}
+ \item{colhirow}{Color to use for the \code{hirow} points.  If NULL,
+ these aren't plotted.}
+ \item{colhicol}{Color to use for the \code{hicol} points.  If NULL,
+ these aren't plotted.}
  \item{\dots}{Passed to \code{\link[graphics]{plot}} and
  \code{\link[graphics]{points}}.} 
 }
