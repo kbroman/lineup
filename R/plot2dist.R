@@ -27,9 +27,22 @@
 # plot two distances
 ######################################################################
 plot2dist <-
-function(d1, d2, hirow, hicol, xlab="RMS difference", ylab="correlation",
-         smoothscatter=TRUE, ...)
+function(d1, d2, hirow, hicol, xlab, ylab,
+         smoothScatter=TRUE, ...)
 {
+  if(missing(xlab)) {
+    meth <- attr(d1, "d.method")
+    if(is.null(meth)) xlab <- "d1"
+    else if(meth=="cor") xlab <- "Correlation"
+    else if(meth=="rmsd") xlab <- "RMS difference"
+  }
+  if(missing(ylab)) {
+    meth <- attr(d2, "d.method")
+    if(is.null(meth)) ylab <- "d2"
+    else if(meth=="cor") ylab <- "Correlation"
+    else if(meth=="rmsd") ylab <- "RMS difference"
+  }
+
   if(any(dim(d1) != dim(d2)) || any(rownames(d1) != rownames(d2)) ||
      any(colnames(d1) != colnames(d2))) {
     # pull out just the common rows and columns
@@ -88,7 +101,7 @@ function(d1, d2, hirow, hicol, xlab="RMS difference", ylab="correlation",
     hicold2 <- d2[,hicol]
     d1[,hicol] <- d2[,hicol] <- NA
   }
-  if(smoothscatter)
+  if(smoothScatter)
     smoothScatter(d1, d2, xlab=xlab, ylab=ylab, xlim=xl, ylim=yl,
                   colramp=colorRampPalette(c("white","blue")))
   else
