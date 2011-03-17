@@ -110,16 +110,22 @@ function(e1, e2, cor.threshold, n.col, d.method=c("rmsd", "cor"),
     cat("No. genes  = ", ncol(e1), "\n")
   }
 
-  thecor <- rep(NA, ncol(e1))
-  for(i in 1:ncol(e1))
-    thecor[i] <- cor(e1[,i], e2[,i], use="complete")
+  if((!missing(cor.threshold) && cor.threshold <= -1) ||
+     (!missing(n.col) && n.col>=ncol(e1))) {
+    if(verbose) cat("Retained all transcripts\n")
+  }
+  else {
+    thecor <- rep(NA, ncol(e1))
+    for(i in 1:ncol(e1))
+      thecor[i] <- cor(e1[,i], e2[,i], use="complete")
 
-  if(missing(cor.threshold)) 
-    cor.threshold <- sort(thecor, decreasing=TRUE)[n.col]
+    if(missing(cor.threshold)) 
+      cor.threshold <- sort(thecor, decreasing=TRUE)[n.col]
 
-  o1 <- o1[,thecor >= cor.threshold]
-  o2 <- o2[,thecor >= cor.threshold]
-  if(verbose) cat("Retained", ncol(o1), "transcripts\n")
+    o1 <- o1[,thecor >= cor.threshold]
+    o2 <- o2[,thecor >= cor.threshold]
+    if(verbose) cat("Retained", ncol(o1), "transcripts\n")
+  }
 
   d <- matrix(nrow=nrow(o1), ncol=nrow(o2))
   dimnames(d) <- list(rownames(o1), rownames(o2))
@@ -127,7 +133,7 @@ function(e1, e2, cor.threshold, n.col, d.method=c("rmsd", "cor"),
     for(j in 1:nrow(o2)) 
       d[i,j] <- d.func(o1[i,], o2[j,])
 
-  class(d) <- "lineupdist"
+  class(d) <- c("ee.lineupdist", "lineupdist")
   attr(d, "d.method") <- d.method
   attr(d, "retained") <- colnames(o1)
   d
