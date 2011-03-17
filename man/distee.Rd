@@ -56,6 +56,9 @@ either the RMS difference (\code{d.method="rmsd"}) or the correlation
 A matrix with \code{nrow(e1)} rows and \code{nrow(e2)} columns,
 containing the distances.  The individual IDs are in the row and column
 names.  The matrix is assigned class \code{"lineupdist"}.
+
+The names of the genes that are retained are saved in an attribute
+\code{"retained"}.
 }
 
 \author{Karl W Broman, \email{kbroman@biostat.wisc.edu} }
@@ -64,14 +67,14 @@ names.  The matrix is assigned class \code{"lineupdist"}.
 %}
 
 \examples{
-# simulate MVN, 100 individuals, 20 measurements
+# simulate MVN, 100 individuals, 40 measurements (of which 20 are just noise)
 V <- matrix(0.3, ncol=20, nrow=20) + diag(rep(0.5, 20)) 
 D <- chol(V)
 z <- matrix(rnorm(20*100), ncol=20) %*% D
 
 # create two data matrices as z + noise
-x <- z + rnorm(20*100, 0, 0.2)
-y <- z + rnorm(20*100, 0, 0.2)
+x <- cbind(z + rnorm(20*100, 0, 0.2), matrix(rnorm(20*100), ncol=20))
+y <- cbind(z + rnorm(20*100, 0, 0.2), matrix(rnorm(20*100), ncol=20))
 
 # permute some rows
 x[51:53,] <- x[c(52,53,51),]
@@ -79,7 +82,7 @@ y[41:42,] <- y[42:41,]
 
 # add column and row names
 dimnames(x) <- dimnames(y) <- list(paste("ind", 1:100, sep=""),
-                                   paste("gene", 1:20, sep=""))
+                                   paste("gene", 1:40, sep=""))
 
 # calculate distance (using "RMS difference" as a measure)
 d1 <- distee(x, y, cor.threshold=0.8)

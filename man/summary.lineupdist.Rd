@@ -43,14 +43,14 @@ individuals) that is closest.
 
 \examples{
 \dontrun{
-# simulate MVN, 100 individuals, 20 measurements
+# simulate MVN, 100 individuals, 40 measurements (of which 20 are just noise)
 V <- matrix(0.3, ncol=20, nrow=20) + diag(rep(0.5, 20)) 
 D <- chol(V)
 z <- matrix(rnorm(20*100), ncol=20) %*% D
 
 # create two data matrices as z + noise
-x <- z + rnorm(20*100, 0, 0.2)
-y <- z + rnorm(20*100, 0, 0.2)
+x <- cbind(z + rnorm(20*100, 0, 0.2), matrix(rnorm(20*100), ncol=20))
+y <- cbind(z + rnorm(20*100, 0, 0.2), matrix(rnorm(20*100), ncol=20))
 
 # permute some rows
 x[51:53,] <- x[c(52,53,51),]
