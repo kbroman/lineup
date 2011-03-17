@@ -85,8 +85,8 @@ function(d1, d2, hirow, hicol, xlab, ylab, smoothScatter=TRUE,
   self <- matrix(ncol=2, nrow=sum(!is.na(m)))
   wh <- which(!is.na(m))
   m <- m[!is.na(m)]
-  xl <- range(d1)
-  yl <- range(d2)
+  xl <- range(d1, na.rm=TRUE)
+  yl <- range(d2, na.rm=TRUE)
   for(i in seq(along=wh)) {
     self[i,] <- c(d1[wh[i],m[i]], d2[wh[i],m[i]])
     d1[wh[i],m[i]] <- d2[wh[i],m[i]] <- NA
