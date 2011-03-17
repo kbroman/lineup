@@ -1,0 +1,10 @@
+Package: lineup
+Version: 0.30-1
+Date: 3/17/2011
+Title: Lining up two sets of measurements
+Author: Karl W Broman <kbroman@biostat.wisc.edu>
+Maintainer: Karl W Broman <kbroman@biostat.wisc.edu>
+Depends: R (>= 2.10.1)
+Description: Tools for detecting and correcting sample mix-ups between two sets of measurements, such as between gene expression data on two tissues.
+License: GPL-3
+URL: http://www.biostat.wisc.edu/~kbroman/software
