@@ -9,12 +9,15 @@
 }
 
 \usage{
-\method{summary}{lineupdist}(object, dropmatches=TRUE, reorder=TRUE,
+\method{summary}{lineupdist}(object, cutoff, dropmatches=TRUE, reorder=TRUE,
                   \dots)
 }
 
 \arguments{
- \item{object}{Output of \code{\link{distee}}.}
+  \item{object}{Output of \code{\link{distee}}.}
+  \item{cutoff}{(Optional) Cutoff on correlation/distance, with rows in
+  the results only being kept if the best distance/correlation is above
+  this cutoff or the self-self result is not missing and is above this cutoff.}
  \item{dropmatches}{If TRUE, omit rows for which an individual's best
  match is itself.}
  \item{reorder}{If TRUE, reorder rows by increasing distance (or

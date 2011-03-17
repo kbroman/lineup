@@ -24,7 +24,7 @@
 ######################################################################
 
 summary.lineupdist <-
-function(object, dropmatches=TRUE, reorder=TRUE, ...)
+function(object, cutoff, dropmatches=TRUE, reorder=TRUE, ...)
 {
   d.method <- attr(object, "d.method")
   if(is.null(d.method)) d.method <- "rmsd"
@@ -32,43 +32,58 @@ function(object, dropmatches=TRUE, reorder=TRUE, ...)
   # cor: replace with negatives so sorting biggest to smallest
   if(d.method=="cor") object <- -object
 
-  bycol <- data.frame(mind=apply(object, 2, min),
-                      nextd=apply(object, 2, function(a) sort(a)[2]),
-                      selfd=rep(NA, ncol(object)),
-                      mean=apply(object, 2, mean, na.rm=TRUE),
-                      sd=apply(object, 2, sd, na.rm=TRUE),
-                      best=apply(object, 2, function(a, b) paste(b[a==min(a)], collapse=":"), rownames(object)))
-  m <- match(colnames(object), rownames(object))
-  for(i in which(!is.na(m))) 
-    bycol$selfd[i] <- object[m[i],i]
-
+  # comparison within tissue?
   compareWithin <- attr(object, "compareWithin")
   if(is.null(compareWithin)) compareWithin <- FALSE
-  if(compareWithin) byrow <- bycol[-(1:nrow(bycol)),,drop=FALSE]
+
+  byrow <- data.frame(mind=apply(object, 1, min, na.rm=TRUE),
+                      nextd=apply(object, 1, function(a) sort(a)[2]),
+                      selfd=rep(NA, nrow(object)),
+                      mean=apply(object, 1, mean, na.rm=TRUE),
+                      sd=apply(object, 1, sd, na.rm=TRUE),
+                      best=apply(object, 1, function(a, b)
+                        paste(b[!is.na(a) & a==min(a, na.rm=TRUE)], collapse=":"), colnames(object)))
+  m <- match(rownames(object), colnames(object))
+  for(i in which(!is.na(m))) 
+    byrow$selfd[i] <- object[i,m[i]]
+
+  if(compareWithin) bycol <- byrow[-(1:nrow(byrow)),,drop=FALSE]
   else {
-    byrow <- data.frame(mind=apply(object, 1, min),
-                        nextd=apply(object, 1, function(a) sort(a)[2]),
-                        selfd=rep(NA, nrow(object)),
-                        mean=apply(object, 1, mean, na.rm=TRUE),
-                        sd=apply(object, 1, sd, na.rm=TRUE),
-                        best=apply(object, 1, function(a, b) paste(b[a==min(a)], collapse=":"), colnames(object)))
-    m <- match(rownames(object), colnames(object))
+    bycol <- data.frame(mind=apply(object, 2, min, na.rm=TRUE),
+                        nextd=apply(object, 2, function(a) sort(a)[2]),
+                        selfd=rep(NA, ncol(object)),
+                        mean=apply(object, 2, mean, na.rm=TRUE),
+                        sd=apply(object, 2, sd, na.rm=TRUE),
+                        best=apply(object, 2, function(a, b)
+                          paste(b[!is.na(a) & a==min(a, na.rm=TRUE)], collapse=":"), rownames(object)))
+    m <- match(colnames(object), rownames(object))
     for(i in which(!is.na(m))) 
-      byrow$selfd[i] <- object[i,m[i]]
+      bycol$selfd[i] <- object[m[i],i]
   }
 
-  if(dropmatches) 
+  if(!compareWithin && dropmatches)
     res <- list(byrow=byrow[is.na(byrow$selfd) | byrow$selfd >= byrow$nextd,,drop=FALSE],
                 bycol=bycol[is.na(bycol$selfd) | bycol$selfd >= bycol$nextd,,drop=FALSE])
   else res <- list(byrow=byrow, bycol=bycol)
   
-  if(reorder)
-    res <- lapply(res, function(a) a[order(a$mind, -a$selfd),])
+  if(reorder) {
+    if(compareWithin) 
+      res <- lapply(res, function(a) a[order(a$mind),])
+    else 
+      res <- lapply(res, function(a) a[order(a$mind, -a$selfd),])
+  }
   
   # cor: return correlations to original scale and change colnames
   if(d.method=="cor") {
     res <- lapply(res, function(a) {a[,1:4] <- -a[,1:4]; a})
     for(i in 1:2) colnames(res[[i]])[1:3] <- c("maxc","nextc","selfc")
+  }
+
+  if(!missing(cutoff)) {
+    if(d.method=="cor") 
+      res <- lapply(res, function(a,cut) a[a[,1]>=cut | (!is.na(a[,3]) & a[,3]>=cut),,drop=FALSE],cutoff)
+    else 
+      res <- lapply(res, function(a,cut) a[a[,1]<=cut | (!is.na(a[,3]) & a[,3]<=cut),,drop=FALSE],cutoff)
   }
 
   class(res) <- "summary.lineupdist"
