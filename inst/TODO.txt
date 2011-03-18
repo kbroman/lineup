@@ -7,12 +7,7 @@ that are planned for the R/lineup package.
 If you any additions or revisions to suggest, please send an email to
 Karl Broman, <kbroman@biostat.wisc.edu>.
 ----------------------------------------------------------------------
-o find.gene.pseudomarker: function for finding nearest pseudomarkers
-                          of transcripts
-
-  Input: cross, physical map, transcript locations
-
-  Output: data.frame with chr, pseudomarker (gene names as rownames)
+o help file for find.gene.pseudomarker
 
 o calc.locallod: function for calculating the locus-by-locus LOD score
   
