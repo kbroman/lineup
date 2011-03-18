@@ -1,0 +1,33 @@
+
+"To do" list for R/lineup
+----------------------------------------------------------------------
+This file is intended to contain a list of additions and revisions
+that are planned for the R/lineup package.
+
+If you any additions or revisions to suggest, please send an email to
+Karl Broman, <kbroman@biostat.wisc.edu>.
+----------------------------------------------------------------------
+o find.gene.pseudomarker: function for finding nearest pseudomarkers
+                          of transcripts
+
+  Input: cross, physical map, transcript locations
+
+  Output: data.frame with chr, pseudomarker (gene names as rownames)
+
+o calc.locallod: function for calculating the locus-by-locus LOD score
+  
+  Use positions from find.gene.pseudomarker to do Haley-Knott
+  regression at each pseudomarker.  
+
+  Input: cross, expression data, transcript pseudomarkers
+
+o pull.eqtl.geno: pull out inferred eQTL genotypes for local eQTL with
+  large LOD
+
+o disteg: use knn to predict eQTL genotypes and then calculate
+  distance between each genotype for one individual and expression
+  data for another
+
+  Input: geno, pheno, pseudomarkers, various parameters
+----------------------------------------------------------------------
+end of TODO.txt
