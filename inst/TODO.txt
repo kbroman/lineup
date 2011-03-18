@@ -9,6 +9,16 @@ Karl Broman, <kbroman@biostat.wisc.edu>.
 ----------------------------------------------------------------------
 o help file for find.gene.pseudomarker
 
+o findCommonInd: function for lining up phenotype data and cross
+  input: cross, phenotype matrix (with rownames = ids), crossid
+
+  if crossid missing, use getid(); 
+  if length 1, take it as a phenotype name
+  if length == nind(cross), take it as a set of ids
+
+  output: matrix indicating individuals' locations in cross and
+  phenotype data
+
 o calc.locallod: function for calculating the locus-by-locus LOD score
   
   Use positions from find.gene.pseudomarker to do Haley-Knott
