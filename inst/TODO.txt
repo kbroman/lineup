@@ -11,12 +11,7 @@ o help file for find.gene.pseudomarker
 
 o help file for findCommonInd
 
-o calc.locallod: function for calculating the locus-by-locus LOD score
-  
-  Use positions from find.gene.pseudomarker to do Haley-Knott
-  regression at each pseudomarker.  
-
-  Input: cross, expression data, transcript pseudomarkers
+o help file for calc.locallod
 
 o pull.eqtl.geno: pull out inferred eQTL genotypes for local eQTL with
   large LOD
