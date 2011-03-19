@@ -39,6 +39,8 @@
 calc.locallod <-
 function(cross, pheno, pmark, verbose=TRUE)
 {
+  require(qtl)
+  
   if(nind(cross) != nrow(pheno))
     stop("cross and pheno have incompatible numbers of individuals.")
   m <- match(colnames(pheno), rownames(pmark))
