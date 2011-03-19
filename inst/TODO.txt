@@ -8,7 +8,8 @@ If you any additions or revisions to suggest, please send an email to
 Karl Broman, <kbroman@biostat.wisc.edu>.
 ----------------------------------------------------------------------
 
-o help file for calc.locallod, disteg
+o Add examples in help files (calc.locallod, disteg, etc.)
+  ...likely a simulated example
 
 o plot method for single distance measure
 

@@ -24,10 +24,10 @@ find.gene.pseudomarker(cross, pmap, geneloc, where=c("prob", "draws"),
  genes.  There should be two columns, \code{chr} for chromosome and
  \code{pos} for position in Mbp.  The rownames should indicate the gene
  names.}
- \code{where}{Indicates whether to pull pseudomarkers from the genotype
+ \item{where}{Indicates whether to pull pseudomarkers from the genotype
  probabilities (produced by \code{\link[qtl]{calc.genoprob}}) or from
  the imputed genotypes (produced by \code{\link[qtl]{sim.geno}}).}
- \code{includepos}{If TRUE, the output includes a column containing the
+ \item{includepos}{If TRUE, the output includes a column containing the
  position of the pseudomarker in Mbp.}
 }
 

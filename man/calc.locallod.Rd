@@ -1,0 +1,61 @@
+\name{calc.locallod}
+\alias{calc.locallod}
+
+\title{Calculate LOD score at physical position of each gene}
+
+\description{
+  For gene expression data with physical positions of the genes,
+  calculate the LOD score at those positions to assess evidence for
+  local eQTL.
+}
+
+\usage{
+calc.locallod(cross, pheno, pmark, verbose=TRUE)
+}
+
+\arguments{
+ \item{cross}{An object of class \code{"cross"} containing data for a
+ QTL experiment.  See the help file for \code{\link[qtl]{read.cross}} in
+ the R/qtl package (\url{http://www.rqtl.org}).  There must be a
+ phenotype named \code{"id"} or \code{"ID"} that contains the
+ individual identifiers.}
+ \item{pheno}{A data frame of phenotypes (generally gene expression
+ data), stored as individuals x phenotypes.  The row names must contain
+ individual identifiers.}
+ \item{pmark}{Pseudomarkers that are closest to the genes in
+ \code{pheno}, as output by \code{\link{find.gene.pseudomarker}}.}
+ \item{verbose}{If TRUE, print tracing information.}
+}
+
+\details{
+  \code{cross} and \code{pheno} must contain exactly the same
+  individuals in the same order.  (Use \code{\link{findCommonInd}} to
+  line them up.)
+
+  We consider the expression phenotypes in batches: those whose closest
+  pseudomarker is the same.
+
+  We use Haley-Knott regression to calculate the LOD scores.  
+
+  Actually, we use a bit of a contortion of the data to force the
+  \code{\link[qtl]{scanone}} function in R/qtl to calculate the LOD
+  score at a single position.
+}
+
+\value{
+A vector of LOD scores.  The names indicate the gene names (rows in
+\code{pheno}). 
+}
+
+\author{Karl W Broman, \email{kbroman@biostat.wisc.edu} }
+
+%\references{
+%}
+
+%\examples{
+%}
+
+\seealso{ \code{\link{find.gene.pseudomarker}},
+  \code{\link{findCommonInd}}, \code{\link{disteg}} }
+
+\keyword{utilities}

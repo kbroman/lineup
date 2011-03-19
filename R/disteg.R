@@ -28,12 +28,39 @@
 #
 # cross: A cross object 
 #
+# pheno: A matrix of expression phenotypes
+#
+# pmark: Pseudomarkers closest to each gene
+#
+# min.genoprob: Threshold on genotype probabilities; if maximum
+#               probability is less than this, observed genotype taken
+#               as NA.
+# 
+# k             Number of nearest neighbors to consider in forming a
+#               k-nearest neighbor classifier
+#
+# min.classprob Minimum proportion of neighbors with a common class
+#               to make a class prediction
+#
+# repeatKNN     If true, repeat k-nearest neighbor a second time,
+#               after omitting individuals who seem to not be
+#               self-self matches
+#      
+# min.selfd     Min distance from self (as proportion of mismatches
+#               between observed and predicted eQTL genotypes) to be
+#               excluded from the second round of k-nearest neighbor
+#
+# phenolabel    Label for expression phenotypes to place in the output
+#               distance matrix
+#
+# verbose       If TRUE, print tracing information.
+#
 ######################################################################
 
 disteg <-
 function(cross, pheno, pmark, min.genoprob=0.99,
-         k=20, min.classprob=0.8, max.selfd=0.3,
-         phenolabel="phenotype", verbose=TRUE)
+         k=20, min.classprob=0.8, repeatKNN=TRUE,
+         max.selfd=0.3, phenolabel="phenotype", verbose=TRUE)
 {
   require(class)
   
@@ -85,33 +112,35 @@ function(cross, pheno, pmark, min.genoprob=0.99,
                          k=k, l=ceiling(k*min.classprob))
   }
 
-  if(verbose) cat("Calculate self-self distances\n")
-  # calculate self-self distances
-  pd <- rep(NA, nrow(theids))
-  names(pd) <- rownames(theids)
-  for(i in rownames(theids)[theids[,3]]) 
-    pd[i] <- mean(obsg[i,] != infg[i,], na.rm=TRUE)
+  if(repeatKNN) {
+    if(verbose) cat("Calculate self-self distances\n")
+    # calculate self-self distances
+    pd <- rep(NA, nrow(theids))
+    names(pd) <- rownames(theids)
+    for(i in rownames(theids)[theids[,3]]) 
+      pd[i] <- mean(obsg[i,] != infg[i,], na.rm=TRUE)
 
-  # bad individuals
-  bad <- names(pd)[!is.na(pd) & pd>= max.selfd]
-  subids <- theids[is.na(match(rownames(theids), bad)),,drop=FALSE]
+    # bad individuals
+    bad <- names(pd)[!is.na(pd) & pd>= max.selfd]
+    subids <- theids[is.na(match(rownames(theids), bad)),,drop=FALSE]
 
-  # repeat the k-nearest neighbor classification without the bad individuals
-  if(verbose) cat("Second pass through knn\n")
-  for(i in seq(along=upmark)) {
-    wh <- which(cpmark == upmark[i])
-    
-    y <- pheno[,wh,drop=FALSE]
-    gi <- obsg[,i]
+    # repeat the k-nearest neighbor classification without the bad individuals
+    if(verbose) cat("Second pass through knn\n")
+    for(i in seq(along=upmark)) {
+      wh <- which(cpmark == upmark[i])
+      
+      y <- pheno[,wh,drop=FALSE]
+      gi <- obsg[,i]
+  
+      ysub <- y[subids[subids[,3],2],,drop=FALSE]
+      gisub <- gi[subids[subids[,3],1]]
+      keep <- !is.na(gisub) & apply(ysub, 1, function(a) !any(is.na(a) ))
+      keep2 <- apply(y, 1, function(a) !any(is.na(a)))
 
-    ysub <- y[subids[subids[,3],2],,drop=FALSE]
-    gisub <- gi[subids[subids[,3],1]]
-    keep <- !is.na(gisub) & apply(ysub, 1, function(a) !any(is.na(a) ))
-    keep2 <- apply(y, 1, function(a) !any(is.na(a)))
-
-    infg[!keep2,i] <- NA
-    infg[keep2,i] <- knn(ysub[keep,,drop=FALSE], y[keep2,,drop=FALSE], gisub[keep],
-                         k=k, l=ceiling(k*min.classprob))
+      infg[!keep2,i] <- NA
+      infg[keep2,i] <- knn(ysub[keep,,drop=FALSE], y[keep2,,drop=FALSE], gisub[keep],
+                           k=k, l=ceiling(k*min.classprob))
+    }
   }
   
   # calculate final distance
@@ -129,7 +158,7 @@ function(cross, pheno, pmark, min.genoprob=0.99,
   attr(d, "d.method") <- "prop.mismatch"
   attr(d, "labels") <- c("genotype", phenolabel)
   attr(d, "retained") <- colnames(pheno)
-  attr(d, "orig.selfd") <- pd
+  if(repeatKNN) attr(d, "orig.selfd") <- pd
   attr(d, "obsg") <- obsg
   attr(d, "infg") <- infg
   attr(d, "denom") <- denom

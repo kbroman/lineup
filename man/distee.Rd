@@ -106,6 +106,6 @@ plot2dist(d1, d2)
 }
 
 \seealso{ \code{\link{pulldiag}}, \code{\link{summary.lineupdist}},
-\code{\link{plot2dist}}}
+\code{\link{plot2dist}}, \code{\link{disteg}} }
 
 \keyword{utilities}
