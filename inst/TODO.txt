@@ -7,19 +7,9 @@ that are planned for the R/lineup package.
 If you any additions or revisions to suggest, please send an email to
 Karl Broman, <kbroman@biostat.wisc.edu>.
 ----------------------------------------------------------------------
-o help file for find.gene.pseudomarker
 
-o help file for findCommonInd
+o help file for find.gene.pseudomarker, findCommonInd,
+  calc.locallod, disteg
 
-o help file for calc.locallod
-
-o pull.eqtl.geno: pull out inferred eQTL genotypes for local eQTL with
-  large LOD
-
-o disteg: use knn to predict eQTL genotypes and then calculate
-  distance between each genotype for one individual and expression
-  data for another
-
-  Input: geno, pheno, pseudomarkers, various parameters
 ----------------------------------------------------------------------
 end of TODO.txt

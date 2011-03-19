@@ -1,0 +1,132 @@
+######################################################################
+#
+# disteg.R
+#
+# copyright (c) 2011, Karl W Broman
+# last modified Mar, 2011
+# first written Mar, 2011
+#
+#     This program is free software; you can redistribute it and/or
+#     modify it under the terms of the GNU General Public License,
+#     version 3, as published by the Free Software Foundation.
+# 
+#     This program is distributed in the hope that it will be useful,
+#     but without any warranty; without even the implied warranty of
+#     merchantability or fitness for a particular purpose.  See the GNU
+#     General Public License, version 3, for more details.
+# 
+#     A copy of the GNU General Public License, version 3, is available
+#     at http://www.r-project.org/Licenses/GPL-3
+# 
+# Part of the R/lineup package
+# Contains: disteg
+#
+######################################################################
+
+######################################################################
+# disteg
+#
+# cross: A cross object 
+#
+######################################################################
+
+disteg <-
+function(cross, pheno, pmark, min.genoprob=0.99,
+         k=20, min.classprob=0.8, max.selfd=0.3,
+         phenolabel="phenotype", verbose=TRUE)
+{
+  require(class)
+  
+  # individuals in common between two data sets
+  theids <- findCommonInd(cross, pheno)
+  if(sum(theids$inBoth) < k)
+    stop("You need at least ", k, " individuals in common between the data sets.")
+
+  # make sure pheno and pmark line up
+  m <- match(colnames(pheno), rownames(pmark))
+  if(any(is.na(m))) pheno <- pheno[,!is.na(m),drop=FALSE]
+  m <- match(rownames(pmark), colnames(pheno))
+  if(any(is.na(m))) pmark <- pmark[!is.na(m),,drop=FALSE]
+  pheno <- pheno[,match(rownames(pmark), colnames(pheno)),drop=FALSE]
+
+  # unique eQTL locations
+  cpmark <- paste(pmark$chr, pmark$pmark, sep=":")
+  upmark <- unique(cpmark)
+
+  # to contain observed and inferred eQTL genotypes
+  obsg <- matrix(ncol=length(upmark), nrow=nind(cross))
+  infg <- matrix(ncol=length(upmark), nrow=nrow(pheno))
+  colnames(obsg) <- colnames(infg) <-
+    apply(pmark[match(upmark, cpmark),c(1,3)], 1, paste, collapse="@")
+  rownames(obsg) <- getid(cross)
+  rownames(infg) <- rownames(pheno)
+  
+  # loop over eQTL; use k-nearest neighbor to classify
+  if(verbose) cat("First pass through knn\n")
+  for(i in seq(along=upmark)) {
+    wh <- which(cpmark == upmark[i])
+    
+    y <- pheno[,wh,drop=FALSE]
+    gp <- cross$geno[[pmark$chr[wh[1]]]]$prob[,pmark$pmark[wh[1]],,drop=FALSE]
+    gi <- apply(gp, 1, function(a) which(a==max(a, na.rm=TRUE)))
+    gmx <- apply(gp, 1, max, na.rm=TRUE)
+    gi[gmx < min.genoprob] <- NA
+    obsg[,i] <- gi
+
+    y <- scale(y)
+    y[is.na(y)] <- 0
+    ysub <- y[theids[theids[,3],2],,drop=FALSE]
+    gisub <- gi[theids[theids[,3],1]]
+    keep <- !is.na(gisub) & apply(ysub, 1, function(a) !any(is.na(a) ))
+
+    infg[,i] <- knn(ysub[keep,,drop=FALSE], y, gisub[keep],
+                    k=k, l=ceiling(k*min.classprob))
+  }
+
+  if(verbose) cat("Calculate self-self distances\n")
+  # calculate self-self distances
+  pd <- rep(NA, nrow(theids))
+  names(pd) <- rownames(theids)
+  for(i in rownames(theids)[theids[,3]]) 
+    pd[i] <- mean(obsg[i,] != infg[i,], na.rm=TRUE)
+
+  # bad individuals
+  bad <- names(pd)[!is.na(pd) & pd>= max.selfd]
+  subids <- theids[is.na(match(rownames(theids), bad)),,drop=FALSE]
+
+  # repeat the k-nearest neighbor classification without the bad individuals
+  if(verbose) cat("Second pass through knn\n")
+  for(i in seq(along=upmark)) {
+    wh <- which(cpmark == upmark[i])
+    
+    y <- pheno[,wh,drop=FALSE]
+    gi <- obsg[,i]
+
+    ysub <- y[subids[subids[,3],2],,drop=FALSE]
+    gisub <- gi[subids[subids[,3],1]]
+    keep <- !is.na(gisub) & apply(ysub, 1, function(a) !any(is.na(a) ))
+
+    infg[,i] <- knn(ysub[keep,,drop=FALSE], y, gisub[keep],
+                    k=k, l=ceiling(k*min.classprob))
+  }
+  
+  # calculate final distance
+  if(verbose) cat("Calculate distance matrix\n")
+  d <- matrix(nrow=nrow(obsg), ncol=nrow(infg))
+  dimnames(d) <- list(rownames(obsg), rownames(infg))
+  for(i in 1:nrow(obsg))
+    for(j in 1:nrow(infg))
+      d[i,j] <- mean(obsg[i,] != infg[j,], na.rm=TRUE)
+
+  attr(d, "d.method") <- "prop.mismatch"
+  attr(d, "labels") <- c("genotype", phenolabel)
+  attr(d, "retained") <- colnames(pheno)
+  attr(d, "orig.selfd") <- pd
+  class(d) <- c("eg.lineupdist", "lineupdist")
+  attr(d, "obsg") <- obsg
+  attr(d, "infg") <- infg
+
+  d
+}
+
+# end of disteg.R
