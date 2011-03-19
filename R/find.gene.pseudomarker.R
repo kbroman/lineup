@@ -46,6 +46,8 @@ function(cross, pmap, geneloc, where=c("prob", "draws"), includepos=FALSE)
   if(!(where %in% names(cross$geno[[1]]))) 
     stop("You first need to run ", ifelse(where=="prob", "calc.genoprob", "sim.geno"), ".")
   
+  require(qtl)
+
   cross <- replacemap(cross, pmap)
   res <- data.frame(chr=geneloc$chr,
                     pmark=find.pseudomarker(cross, geneloc$chr, geneloc$pos, where, addchr=FALSE),
@@ -66,7 +68,7 @@ function(cross, pmap, geneloc, where=c("prob", "draws"), includepos=FALSE)
     if(any(d > 2)) {
       ngap <- sum(d>2)
       maxd <- max(d)
-      warning(ngap, " genes differ from pseudomarker pos by > 2 Mbp, with gaps as big as ", myround(maxd, 1), " Mbp")
+      warning(ngap, " genes differ from pseudomarker pos by > 2 Mbp, with gaps as big as ", round(maxd, 1), " Mbp")
     }
 
   }
