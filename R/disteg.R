@@ -78,9 +78,11 @@ function(cross, pheno, pmark, min.genoprob=0.99,
     ysub <- y[theids[theids[,3],2],,drop=FALSE]
     gisub <- gi[theids[theids[,3],1]]
     keep <- !is.na(gisub) & apply(ysub, 1, function(a) !any(is.na(a) ))
+    keep2 <- apply(y, 1, function(a) !any(is.na(a)))
 
-    infg[,i] <- knn(ysub[keep,,drop=FALSE], y, gisub[keep],
-                    k=k, l=ceiling(k*min.classprob))
+    infg[!keep2,i] <- NA
+    infg[keep2,i] <- knn(ysub[keep,,drop=FALSE], y[keep2,,drop=FALSE], gisub[keep],
+                         k=k, l=ceiling(k*min.classprob))
   }
 
   if(verbose) cat("Calculate self-self distances\n")
@@ -105,9 +107,11 @@ function(cross, pheno, pmark, min.genoprob=0.99,
     ysub <- y[subids[subids[,3],2],,drop=FALSE]
     gisub <- gi[subids[subids[,3],1]]
     keep <- !is.na(gisub) & apply(ysub, 1, function(a) !any(is.na(a) ))
+    keep2 <- apply(y, 1, function(a) !any(is.na(a)))
 
-    infg[,i] <- knn(ysub[keep,,drop=FALSE], y, gisub[keep],
-                    k=k, l=ceiling(k*min.classprob))
+    infg[!keep2,i] <- NA
+    infg[keep2,i] <- knn(ysub[keep,,drop=FALSE], y[keep2,,drop=FALSE], gisub[keep],
+                         k=k, l=ceiling(k*min.classprob))
   }
   
   # calculate final distance
