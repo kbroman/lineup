@@ -37,15 +37,9 @@
 ######################################################################
 
 findCommonInd <-
-function(cross, pheno, crossID)
+function(cross, pheno)
 {
-  if(missing(crossID)) 
-    crossID <- getid(cross)
-  else if(length(crossID)==1) 
-    crossID <- pull.pheno(cross, crossID)
-  if(is.null(crossID)) stop("Can't find IDs")
-  crossID <- as.character(crossID)
-
+  crossID <- getid(cross)
   pheID <- rownames(pheno)
   
   m1 <- match(pheID, crossID)
@@ -62,7 +56,5 @@ function(cross, pheno, crossID)
   allID[,3] <- !is.na(allID[,1]) & !is.na(allID[,2])
   allID
 }
-  
-
 
 # end of findCommonInd.R
