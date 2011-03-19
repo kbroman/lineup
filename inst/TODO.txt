@@ -8,8 +8,13 @@ If you any additions or revisions to suggest, please send an email to
 Karl Broman, <kbroman@biostat.wisc.edu>.
 ----------------------------------------------------------------------
 
-o help file for find.gene.pseudomarker, findCommonInd,
-  calc.locallod, disteg
+o help file for calc.locallod, disteg
+
+o plot method for single distance measure
+
+o algorithm for using distances to make a decision about what is
+  messed up (that is, what happened).  I guess separate the inference
+  of errors from the correction of errors.
 
 ----------------------------------------------------------------------
 end of TODO.txt
