@@ -118,17 +118,22 @@ function(cross, pheno, pmark, min.genoprob=0.99,
   if(verbose) cat("Calculate distance matrix\n")
   d <- matrix(nrow=nrow(obsg), ncol=nrow(infg))
   dimnames(d) <- list(rownames(obsg), rownames(infg))
-  for(i in 1:nrow(obsg))
-    for(j in 1:nrow(infg))
+  denom <- d
+  for(i in 1:nrow(obsg)) {
+    for(j in 1:nrow(infg)) {
       d[i,j] <- mean(obsg[i,] != infg[j,], na.rm=TRUE)
+      denom[i,j] <- sum(!is.na(obsg[i,]) & !is.na(infg[j,]))
+    }
+  }
 
   attr(d, "d.method") <- "prop.mismatch"
   attr(d, "labels") <- c("genotype", phenolabel)
   attr(d, "retained") <- colnames(pheno)
   attr(d, "orig.selfd") <- pd
-  class(d) <- c("eg.lineupdist", "lineupdist")
   attr(d, "obsg") <- obsg
   attr(d, "infg") <- infg
+  attr(d, "denom") <- denom
+  class(d) <- c("eg.lineupdist", "lineupdist")
 
   d
 }
