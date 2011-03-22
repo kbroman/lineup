@@ -11,7 +11,10 @@
 \usage{
 disteg(cross, pheno, pmark, min.genoprob=0.99,
        k=20, min.classprob=0.8, repeatKNN=TRUE,
-       max.selfd=0.3, phenolabel="phenotype", verbose=TRUE)
+       max.selfd=0.3, phenolabel="phenotype",
+       weights, weightByLinkage=TRUE,
+       map.function=c("haldane", "kosambi", "c-f", "morgan"),
+       verbose=TRUE)
 
 }
 
@@ -39,6 +42,14 @@ disteg(cross, pheno, pmark, min.genoprob=0.99,
  second round of k-nearest neighbor.} 
  \item{phenolabel}{Label for expression phenotypes to place in the
  output distance matrix.}
+ \item{weights}{If not missing, use these as weights on the genes in the
+calculation of inter-individual distances (actually, since we're working
+with eQTL rather than transcripts, we take the average weight for the
+multiple transcripts that correspond to a give eQTL},
+ \item{weightByLinkage}{If TRUE, weight the eQTL to account for their
+relative positions (for example, two tightly linked eQTL would each
+count about 1/2 of an isolated eQTL)},
+ \item{map.function}{Used if \code{weightByLinkage} is TRUE},
  \item{verbose}{if TRUE, give verbose output.}
 }
 
@@ -64,6 +75,8 @@ Finally, we calculate the distance between the observed eQTL genotypes
 for each individual in \code{cross} and the inferred eQTL genotypes for
 each individual in \code{pheno}, as the proportion of mismatches between
 the observed and inferred eQTL genotypes.
+
+[Explain the use of the weights.]
 }
 
 \value{

@@ -53,6 +53,18 @@
 # phenolabel    Label for expression phenotypes to place in the output
 #               distance matrix
 #
+# weights       If not missing, use these as weights on the genes in
+#               the calculation of inter-individual distances
+#               (actually, since we're working with eQTL rather than
+#               transcripts, we take the average weight for the
+#               multiple transcripts that correspond to a give eQTL
+#
+# weightByLinkage If TRUE, weight the eQTL to account for their
+#                 relative positions (for example, two tightly linked
+#                 eQTL would each count about 1/2 of an isolated eQTL)
+#
+# map.function    Used if weightByLinkage is TRUE
+#
 # verbose       If TRUE, print tracing information.
 #
 ######################################################################
@@ -60,7 +72,10 @@
 disteg <-
 function(cross, pheno, pmark, min.genoprob=0.99,
          k=20, min.classprob=0.8, repeatKNN=TRUE,
-         max.selfd=0.3, phenolabel="phenotype", verbose=TRUE)
+         max.selfd=0.3, phenolabel="phenotype", weights,
+         weightByLinkage=TRUE,
+         map.function=c("haldane", "kosambi", "c-f", "morgan"),
+         verbose=TRUE)
 {
   require(class)
   
@@ -69,16 +84,54 @@ function(cross, pheno, pmark, min.genoprob=0.99,
   if(sum(theids$inBoth) < k)
     stop("You need at least ", k, " individuals in common between the data sets.")
 
+  if(!missing(weights)) {
+    if(ncol(pheno) != length(weights)) {
+      weights <- rep(1, ncol(pheno))
+      warning("weights should have length ncol(pheno), [", ncol(pheno),
+              "]; ignored.")
+    }
+  }
+  else
+    weights <- rep(1, ncol(pheno))
+
   # make sure pheno and pmark line up
   m <- match(colnames(pheno), rownames(pmark))
   if(any(is.na(m))) pheno <- pheno[,!is.na(m),drop=FALSE]
   m <- match(rownames(pmark), colnames(pheno))
   if(any(is.na(m))) pmark <- pmark[!is.na(m),,drop=FALSE]
-  pheno <- pheno[,match(rownames(pmark), colnames(pheno)),drop=FALSE]
-
+  m <- match(rownames(pmark), colnames(pheno))
+  weights <- weights[m]
+  pheno <- pheno[,m,drop=FALSE]
+  
   # unique eQTL locations
   cpmark <- paste(pmark$chr, pmark$pmark, sep=":")
   upmark <- unique(cpmark)
+  uweights <- rep(0, length(upmark))
+
+  m <- match(upmark, cpmark)
+  thechr <- pmark$chr[m]
+  thepos <- pmark$pos[m]
+
+  # construct weights to account for linkage
+  if(weightByLinkage) {
+    uchr <- unique(thechr)
+    linkwts <- rep(1, length(thechr))
+
+    map.function <- match.arg(map.function)
+    mf <- switch(map.function,
+                 "haldane" = mf.h,
+                 "kosambi" = mf.k,
+                 "c-f" = mf.cf,
+                 "morgan" = mf.m)
+
+    for(i in uchr) {
+      d <- thepos[thechr==i]
+      D <- matrix(1-2*mf(abs(outer(d, d, "-"))), ncol=length(d))
+      linkwts[uchr==i] <- (length(d) + 1 - colSums(D))/length(d)
+    }
+  }
+
+
 
   # to contain observed and inferred eQTL genotypes
   obsg <- matrix(ncol=length(upmark), nrow=nind(cross))
@@ -92,6 +145,7 @@ function(cross, pheno, pmark, min.genoprob=0.99,
   if(verbose) cat("First pass through knn\n")
   for(i in seq(along=upmark)) {
     wh <- which(cpmark == upmark[i])
+    uweights[i] <- mean(weights[cpmark==upmark[i]])
     
     y <- pheno[,wh,drop=FALSE]
     gp <- cross$geno[[pmark$chr[wh[1]]]]$prob[,pmark$pmark[wh[1]],,drop=FALSE]
@@ -111,6 +165,8 @@ function(cross, pheno, pmark, min.genoprob=0.99,
     infg[keep2,i] <- knn(ysub[keep,,drop=FALSE], y[keep2,,drop=FALSE], gisub[keep],
                          k=k, l=ceiling(k*min.classprob))
   }
+  if(weightByLinkage) uweights <- uweights * linkwts
+  
 
   if(repeatKNN) {
     if(verbose) cat("Calculate self-self distances\n")
@@ -150,8 +206,8 @@ function(cross, pheno, pmark, min.genoprob=0.99,
   denom <- d
   for(i in 1:nrow(obsg)) {
     for(j in 1:nrow(infg)) {
-      d[i,j] <- mean(obsg[i,] != infg[j,], na.rm=TRUE)
-      denom[i,j] <- sum(!is.na(obsg[i,]) & !is.na(infg[j,]))
+      denom[i,j] <- sum((!is.na(obsg[i,]) & !is.na(infg[j,]))*uweights)
+      d[i,j] <- sum((obsg[i,] != infg[j,])*uweights, na.rm=TRUE)/denom[i,j]
     }
   }
 
@@ -162,6 +218,8 @@ function(cross, pheno, pmark, min.genoprob=0.99,
   attr(d, "obsg") <- obsg
   attr(d, "infg") <- infg
   attr(d, "denom") <- denom
+  names(uweights) <- upmark
+  attr(d, "weights") <- uweights
   class(d) <- c("eg.lineupdist", "lineupdist")
 
   d
