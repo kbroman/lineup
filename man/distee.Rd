@@ -10,7 +10,8 @@
 
 \usage{
 distee(e1, e2, cor.threshold, n.col, d.method=c("rmsd", "cor"),
-       transpose=FALSE, labels=c("e1","e2"), verbose=TRUE)
+       transpose=FALSE, labels=c("e1","e2"), weightByCorr=TRUE,
+       verbose=TRUE)
 }
 
 \arguments{
@@ -31,6 +32,8 @@ distee(e1, e2, cor.threshold, n.col, d.method=c("rmsd", "cor"),
  and need to be transposed.}
  \item{labels}{Two character strings, to use as labels for the two data
  matrices in subsequent output.}
+ \item{weightByCorr}{If TRUE, in the calculate of inter-individual
+ distances, weight genes by their cross-tissue correlation.}
  \item{verbose}{if TRUE, give verbose output.}
 }
 

@@ -45,13 +45,20 @@
 # transpose = if TRUE, e1 and e2 are input as genes x individuals and
 #             need to be transposed
 #
+# labels = labels to attach to the two data sets
+#
+# weightByCorr = if TRUE, in the calculate of inter-individual
+#                distances, weight genes by their cross-tissue
+#                correlation
+#
 # verbose = if TRUE, give verbose output
 # 
 ######################################################################
 
 distee <-
 function(e1, e2, cor.threshold, n.col, d.method=c("rmsd", "cor"),
-         transpose=FALSE, labels=c("e1","e2"), verbose=TRUE)
+         transpose=FALSE, labels=c("e1","e2"), weightByCorr=TRUE,
+         verbose=TRUE)
 {
   if(!missing(e2) && missing(cor.threshold) && missing(n.col))
     stop("Give either cor.threshold or n.col")
@@ -71,11 +78,25 @@ function(e1, e2, cor.threshold, n.col, d.method=c("rmsd", "cor"),
   }
 
   d.method <- match.arg(d.method)
-  if(d.method=="rmsd") 
-    d.func <- function(a,b) sqrt(mean((a-b)^2, na.rm=TRUE))
-  else
-    d.func <- function(a,b) cor(a,b, use="complete")
-
+  if(d.method=="rmsd") {
+    d.func <-
+      function(a,b,weights=NULL) {
+        if(is.null(weights)) return(sqrt(mean((a-b)^2, na.rm=TRUE)))
+        wh <- !is.na(a) & !is.na(b)
+        a <- a[wh]
+        b <- b[wh]
+        weights <- weights[wh]
+        sqrt(sum((a-b)^2*weights)/sum(weights))
+      }
+  }
+  else {
+    d.func <-
+      function(a,b,weights=NULL) {
+        if(is.null(weights)) return(cor(a,b, use="complete"))
+        wh <- !is.na(a) & !is.na(b)
+        cov.wt(cbind(a[wh],b[wh]), wt=weights[wh], cor=TRUE)$cor[1,2]
+      }
+  }
   if(missing(e2)) { # need to have pre-selected genes
     compareWithin <- TRUE
     cor.threshold <- -2
@@ -139,9 +160,12 @@ function(e1, e2, cor.threshold, n.col, d.method=c("rmsd", "cor"),
 
   if((!missing(cor.threshold) && cor.threshold <= -1) ||
      (!missing(n.col) && n.col>=ncol(e1))) {
+    keepAll <- TRUE
     if(verbose) cat("Retained all transcripts\n")
   }
-  else {
+  else keepAll <- FALSE
+
+  if(!keepAll || weightByCorr) {
     thecor <- rep(NA, ncol(e1))
     for(i in 1:ncol(e1))
       thecor[i] <- cor(e1[,i], e2[,i], use="complete")
@@ -149,22 +173,28 @@ function(e1, e2, cor.threshold, n.col, d.method=c("rmsd", "cor"),
     if(missing(cor.threshold)) 
       cor.threshold <- sort(thecor, decreasing=TRUE)[n.col]
 
-    o1 <- o1[,thecor >= cor.threshold]
-    o2 <- o2[,thecor >= cor.threshold]
+    if(!keepAll) {
+      o1 <- o1[,thecor >= cor.threshold]
+      o2 <- o2[,thecor >= cor.threshold]
+    }
+    if(!keepAll && weightByCorr) 
+      thecor <- thecor[thecor >= cor.threshold]
+    
     if(verbose) cat("Retained", ncol(o1), "transcripts\n")
   }
+  if(!weightByCorr) thecor <- NULL
 
   d <- matrix(nrow=nrow(o1), ncol=nrow(o2))
   dimnames(d) <- list(rownames(o1), rownames(o2))
   if(compareWithin) {
     for(i in 1:(nrow(o1)-1))
       for(j in (i+1):nrow(o2)) 
-        d[i,j] <- d[j,i] <- d.func(o1[i,], o2[j,])
+        d[i,j] <- d[j,i] <- d.func(o1[i,], o2[j,], thecor)
   }
   else {
     for(i in 1:nrow(o1))
       for(j in 1:nrow(o2)) 
-        d[i,j] <- d.func(o1[i,], o2[j,])
+        d[i,j] <- d.func(o1[i,], o2[j,], thecor)
   }
 
   class(d) <- c("ee.lineupdist", "lineupdist")
