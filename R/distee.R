@@ -112,6 +112,8 @@ function(e1, e2, cor.threshold, n.col, d.method=c("rmsd", "cor"),
     }
   }
 
+  if(compareWithin) weightByCorr <- FALSE 
+
   if(any(colnames(e1) != colnames(e2))) {
     cn1 <- colnames(e1)
     cn2 <- colnames(e2)

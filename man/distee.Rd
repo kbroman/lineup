@@ -57,6 +57,8 @@ either the RMS difference (\code{d.method="rmsd"}) or the correlation
 If \code{e2} is not included, within-tissue comparisons will be made.
 In this case, genes will have to be pre-selected (e.g., as those
 selected in a comparison of one tissue to another).
+
+[Explain the use of the weights.]
 }
 
 \value{
