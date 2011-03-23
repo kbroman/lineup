@@ -106,6 +106,12 @@ sort(pulldiag(d2))[1:8]
 summary(d1)
 summary(d2)
 
+# plot histograms of RMS distances
+plot(d1)
+
+# plot histograms of correlations
+plot(d2)
+
 # plot distances against one another
 plot2dist(d1, d2)
 }

@@ -105,6 +105,6 @@ distances are in the attribute \code{"denom"}.
 \seealso{ \code{\link{distee}}, \code{\link{summary.lineupdist}},
   \code{\link{pulldiag}}, \code{\link{omitdiag}},
   \code{\link{findCommonInd}}, \code{\link{find.gene.pseudomarker}},
-  \code{\link{calc.locallod}} }
+  \code{\link{calc.locallod}}, \code{\link{plot.lineupdist}} }
 
 \keyword{utilities}
