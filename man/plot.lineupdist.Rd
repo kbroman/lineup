@@ -22,6 +22,9 @@
 \details{
   We call \code{\link{pulldiag}} and \code{\link{omitdiag}} to get the
   self-self and self-nonself distances.
+
+  If all of the self-self distances are missing, we plot just the
+  self-nonself distances.
 }
 
 \value{

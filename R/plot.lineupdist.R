@@ -26,20 +26,23 @@
 plot.lineupdist <-
 function(x, breaks, add.rug=TRUE, ...)
 {
-  old.mfrow <- par("mfrow")
-  old.las <- par("las")
-  on.exit(par(mfrow=old.mfrow, las=old.las))
-  par(mfrow=c(2,1), las=1)
-
+  di <- pulldiag(x)
   ra <- range(x, na.rm=TRUE)
   if(missing(breaks)) breaks <- seq(ra[1], ra[2], len=sqrt(prod(dim(x))))
   d.method <- switch(attr(x, "d.method"), "cor"="correlation", "rmsd"="RMS distance")
   main <- paste(c("Self-self", "Self-nonself"), switch(attr(x, "d.method"), "cor"="correlation", "rmsd"="distance"))
 
-  di <- pulldiag(x)
-  hist(di, breaks=breaks, xlab=d.method, main=main[1])
-  if(add.rug) rug(di)
+  if(!all(is.na(di))) { # some self-self distances
+    
+    old.mfrow <- par("mfrow")
+    old.las <- par("las")
+    on.exit(par(mfrow=old.mfrow, las=old.las))
+    par(mfrow=c(2,1), las=1)
 
+    hist(di, breaks=breaks, xlab=d.method, main=main[1])
+    if(add.rug) rug(di)
+  }
+  
   x <- omitdiag(x)
   hist(x, breaks=breaks, xlab=d.method, main=main[2])
   if(add.rug) rug(x)
