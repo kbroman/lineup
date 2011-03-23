@@ -40,7 +40,7 @@
 ######################################################################
 
 find.gene.pseudomarker <-
-function(cross, pmap, geneloc, where=c("prob", "draws"), includepos=FALSE)
+function(cross, pmap, geneloc, where=c("prob", "draws"))
 {
   where <- match.arg(where)
   if(!(where %in% names(cross$geno[[1]]))) 
@@ -55,22 +55,19 @@ function(cross, pmap, geneloc, where=c("prob", "draws"), includepos=FALSE)
 
   rownames(res) <- rownames(geneloc)
 
-  if(includepos) {
-    pmark <- res$pmark
-    gr <- grep("^loc[0-9]+\\.*[0-9]*(\\.[0-9]+)*$", pmark)
-    if(length(gr)>0) 
-      pmark[gr] <- paste("c", res$chr[gr], ".", pmark[gr], sep="")
-    upmark <- unique(pmark)
-    thepos <- find.pseudomarkerpos(cross, upmark, where)
-    res$pos <- thepos[match(pmark, rownames(thepos)),2]
+  pmark <- res$pmark
+  gr <- grep("^loc[0-9]+\\.*[0-9]*(\\.[0-9]+)*$", pmark)
+  if(length(gr)>0) 
+    pmark[gr] <- paste("c", res$chr[gr], ".", pmark[gr], sep="")
+  upmark <- unique(pmark)
+  thepos <- find.pseudomarkerpos(cross, upmark, where)
+  res$pos <- thepos[match(pmark, rownames(thepos)),2]
 
-    d <- abs(res$pos - geneloc$pos)
-    if(any(d > 2)) {
-      ngap <- sum(d>2)
-      maxd <- max(d)
-      warning(ngap, " genes differ from pseudomarker pos by > 2 Mbp, with gaps as big as ", round(maxd, 1), " Mbp")
-    }
-
+  d <- abs(res$pos - geneloc$pos)
+  if(any(d > 2)) {
+    ngap <- sum(d>2)
+    maxd <- max(d)
+    warning(ngap, " genes differ from pseudomarker pos by > 2 Mbp, with gaps as big as ", round(maxd, 1), " Mbp")
   }
 
   res

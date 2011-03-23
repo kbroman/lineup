@@ -8,6 +8,12 @@ If you any additions or revisions to suggest, please send an email to
 Karl Broman, <kbroman@biostat.wisc.edu>.
 ----------------------------------------------------------------------
 
+o Add function omitdiag() to make the "diagonal" values of a distance
+  matrix (the self-self ones) missing so that only the self-nonself
+  values are left.
+
+o distep, and distgp, for phenotype data
+
 o Add examples in help files (calc.locallod, disteg, etc.)
   ...likely a simulated example
 

@@ -9,8 +9,7 @@
 }
 
 \usage{
-find.gene.pseudomarker(cross, pmap, geneloc, where=c("prob", "draws"),
-                       includepos=FALSE)
+find.gene.pseudomarker(cross, pmap, geneloc, where=c("prob", "draws"))
 }
 
 \arguments{
@@ -27,8 +26,6 @@ find.gene.pseudomarker(cross, pmap, geneloc, where=c("prob", "draws"),
  \item{where}{Indicates whether to pull pseudomarkers from the genotype
  probabilities (produced by \code{\link[qtl]{calc.genoprob}}) or from
  the imputed genotypes (produced by \code{\link[qtl]{sim.geno}}).}
- \item{includepos}{If TRUE, the output includes a column containing the
- position of the pseudomarker in Mbp.}
 }
 
 \details{
@@ -37,16 +34,15 @@ find.gene.pseudomarker(cross, pmap, geneloc, where=c("prob", "draws"),
   We then use \code{\link[qtl]{find.pseudomarker}} to identify the
   closest pseudomarker to each gene location.
 
-  If \code{includepos=TRUE}, we also include the positions of the
-  pseudomarkers, and we print a warning message if pseudomarkers are >
-  2 Mbp from the respective gene.  
+  We also include the positions of the pseudomarkers, and we print a
+  warning message if pseudomarkers are > 2 Mbp from the respective gene.
 }
 
 \value{
-A data frame with columns \code{chr} (the chromosome) and \code{pmark} (the
-name of the pseudomarker).  If \code{includepos=TRUE}, there will be a
-third column \code{pos} (the Mbp position of the pseudomarker).  The
-rownames indicate the gene names.
+A data frame with columns \code{chr} (the chromosome) and \code{pmark}
+(the name of the pseudomarker).  The third column \code{pos} contains
+the Mbp position of the pseudomarker.  The rownames indicate the gene
+names.
 }
 
 \author{Karl W Broman, \email{kbroman@biostat.wisc.edu} }
