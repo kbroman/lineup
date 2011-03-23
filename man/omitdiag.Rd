@@ -1,19 +1,20 @@
-\name{pulldiag}
-\alias{pulldiag}
+\name{omitdiag}
+\alias{omitdiag}
 
-\title{Pull out the diagonal from a distance matrix}
+\title{Replace the diagonal in a distance matrix with missing values}
 
 \description{
-  Pull out the diagonal from a distance matrix calculated by
-  \code{\link{distee}} (that is, self-self distances).
+  Replace the diagonal (that is, self-self distances) from a distance
+  matrix calculated by \code{\link{distee}} or \code{\link{disteg}} with
+  missing values (so that only self-nonself distances are left).
 }
 
 \usage{
-pulldiag(d)
+omitdiag(d)
 }
 
 \arguments{
- \item{d}{A distance matrix calculated by \code{\link{distee}}.}
+ \item{d}{A distance matrix calculated by \code{\link{distee}} or \code{\link{disteg}}.}
 }
 
 \details{
@@ -21,7 +22,8 @@ We use the row and column names to identify which entries are self-self.
 }
 
 \value{
-A vector with the self-self distances.
+A matrix of the same form as the input, but with self-self distances
+replaced with \code{NA}.
 }
 
 \author{Karl W Broman, \email{kbroman@biostat.wisc.edu} }
@@ -55,7 +57,7 @@ d1 <- distee(x, y, cor.threshold=0.8)
 d2 <- distee(x, y, cor.threshold=0.8, d.method="cor")
 
 # pull out the smallest 8 self-self correlations
-sort(pulldiag(d2))[1:8]
+sort(omitdiag(d2))[1:8]
 
 # summary of results
 summary(d1)
@@ -66,8 +68,8 @@ plot2dist(d1, d2)
 }
 }
 
-\seealso{ \code{\link{omitdiag}}, \code{\link{distee}},
+\seealso{ \code{\link{pulldiag}}, \code{\link{distee}},
   \code{\link{disteg}}, \code{\link{summary.lineupdist}},
-  \code{\link{plot2dist}} } 
+  \code{\link{plot2dist}} }
 
 \keyword{utilities}
