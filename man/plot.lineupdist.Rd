@@ -1,29 +1,31 @@
-\name{omitdiag}
-\alias{omitdiag}
+\name{plot.lineupdist}
+\alias{plot.lineupdist}
 
-\title{Replace the diagonal in a distance matrix with missing values}
+\title{Plot summary of inter-individual distances}
 
 \description{
-  Replace the diagonal (that is, self-self distances) from a distance
-  matrix calculated by \code{\link{distee}} or \code{\link{disteg}} with
-  missing values (so that only self-nonself distances are left).
+  Plot histograms of self-self and self-nonself distances from a
+  distance matrix calculated by \code{\link{distee}} or \code{\link{disteg}}.
 }
 
 \usage{
-omitdiag(d)
+\method{plot}{lineupdist}(x, breaks, add.rug=TRUE, \dots)
 }
 
 \arguments{
- \item{d}{A distance matrix calculated by \code{\link{distee}} or \code{\link{disteg}}.}
+ \item{x}{Output of \code{\link{distee}} or \code{\link{disteg}}.}
+ \item{breaks}{Optional vector of breaks, passed to \code{\link[graphics]{hist}}.}
+ \item{add.rug}{If true, also include \code{\link[graphics]{rug}} below histograms.}
+ \item{\dots}{Ignored at this point.}
 }
 
 \details{
-We use the row and column names to identify which entries are self-self.
+  We call \code{\link{pulldiag}} and \code{\link{omitdiag}} to get the
+  self-self and self-nonself distances.
 }
 
 \value{
-A matrix of the same form as the input, but with self-self distances
-replaced with \code{NA}.
+None.
 }
 
 \author{Karl W Broman, \email{kbroman@biostat.wisc.edu} }
@@ -57,7 +59,7 @@ d1 <- distee(x, y, cor.threshold=0.8)
 d2 <- distee(x, y, cor.threshold=0.8, d.method="cor")
 
 # pull out the smallest 8 self-self correlations
-sort(omitdiag(d2))[1:8]
+sort(pulldiag(d2))[1:8]
 
 # summary of results
 summary(d1)
@@ -74,8 +76,6 @@ plot2dist(d1, d2)
 }
 }
 
-\seealso{ \code{\link{pulldiag}}, \code{\link{distee}},
-  \code{\link{disteg}}, \code{\link{summary.lineupdist}},
-  \code{\link{plot2dist}}, \code{\link{plot.lineupdist}} }
+\seealso{ \code{\link{pulldiag}}, \code{\link{distee}}, \code{\link{plot2dist}} }
 
 \keyword{utilities}

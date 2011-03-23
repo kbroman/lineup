@@ -4,8 +4,9 @@
 \title{Summarize inter-individual distances}
 
 \description{
-  Summarize the results of \code{\link{distee}}, with inter-individual
-  distances between two sets of gene expression data.
+  Summarize the results of \code{\link{distee}} or \code{\link{disteg}},
+  with inter-individual distances between two sets of gene expression
+  data.
 }
 
 \usage{
@@ -14,7 +15,7 @@
 }
 
 \arguments{
-  \item{object}{Output of \code{\link{distee}}.}
+  \item{object}{Output of \code{\link{distee}} or \code{\link{disteg}}.}
   \item{cutoff}{(Optional) Cutoff on correlation/distance, with rows in
   the results only being kept if the best distance/correlation is above
   this cutoff or the self-self result is not missing and is above this cutoff.}
@@ -76,11 +77,18 @@ sort(pulldiag(d2))[1:8]
 summary(d1)
 summary(d2)
 
+# plot histograms of RMS distances
+plot(d1)
+
+# plot histograms of correlations
+plot(d2)
+
 # plot distances against one another
 plot2dist(d1, d2)
 }
 }
 
-\seealso{ \code{\link{pulldiag}}, \code{\link{distee}}, \code{\link{plot2dist}} }
+\seealso{ \code{\link{pulldiag}}, \code{\link{omitdiag}}, \code{\link{distee}},
+  \code{\link{disteg}}, \code{\link{plot2dist}}, \code{\link{plot.lineupdist}} }
 
 \keyword{utilities}
