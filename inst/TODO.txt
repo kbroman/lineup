@@ -8,9 +8,6 @@ If you any additions or revisions to suggest, please send an email to
 Karl Broman, <kbroman@biostat.wisc.edu>.
 ----------------------------------------------------------------------
 
-o plot method for single distance measure (histograms of self-self and
-  self-nonself?) 
-
 o distep, and distgp, for phenotype data
 
 o Add examples in help files (calc.locallod, disteg, etc.)
