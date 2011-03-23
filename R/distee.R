@@ -51,6 +51,9 @@
 #                distances, weight genes by their cross-tissue
 #                correlation
 #
+# standardize = if TRUE, standardize the columns of the expression
+#               matrices so they have mean 0 and SD 1
+#
 # verbose = if TRUE, give verbose output
 # 
 ######################################################################
@@ -58,7 +61,7 @@
 distee <-
 function(e1, e2, cor.threshold, n.col, d.method=c("rmsd", "cor"),
          transpose=FALSE, labels=c("e1","e2"), weightByCorr=TRUE,
-         verbose=TRUE)
+         standardize=TRUE, verbose=TRUE)
 {
   if(!missing(e2) && missing(cor.threshold) && missing(n.col))
     stop("Give either cor.threshold or n.col")
@@ -136,11 +139,14 @@ function(e1, e2, cor.threshold, n.col, d.method=c("rmsd", "cor"),
     if(verbose) cat("Changing n.col to", n.col, "(all genes in common)\n")
   }
     
-  o1 <- e1 <- scale(e1)
-  if(compareWithin) # don't repeat the scaling!
-    o2 <- e2 <- e1 
-  else
-    o2 <- e2 <- scale(e2)
+  if(standardize) {
+    e1 <- scale(e1)
+    if(!compareWithin) e2 <- scale(e2)
+  }
+
+  o1 <- e1 
+  if(compareWithin) e2 <- e1
+  o2 <- e2
 
   # first match cols and rows
   m1 <- match(rownames(e1), rownames(e2))

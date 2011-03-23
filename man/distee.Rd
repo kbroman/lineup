@@ -11,7 +11,7 @@
 \usage{
 distee(e1, e2, cor.threshold, n.col, d.method=c("rmsd", "cor"),
        transpose=FALSE, labels=c("e1","e2"), weightByCorr=TRUE,
-       verbose=TRUE)
+       standardize=TRUE, verbose=TRUE)
 }
 
 \arguments{
@@ -34,6 +34,8 @@ distee(e1, e2, cor.threshold, n.col, d.method=c("rmsd", "cor"),
  matrices in subsequent output.}
  \item{weightByCorr}{If TRUE, in the calculate of inter-individual
  distances, weight genes by their cross-tissue correlation.}
+ \item{standardize}{If TRUE, standardize the gene columns so that they
+ have mean 0 and SD 1.}
  \item{verbose}{if TRUE, give verbose output.}
 }
 

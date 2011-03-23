@@ -65,6 +65,9 @@
 #
 # map.function    Used if weightByLinkage is TRUE
 #
+# standardize = if TRUE, standardize the columns of the expression
+#               matrices so they have mean 0 and SD 1
+#
 # verbose       If TRUE, print tracing information.
 #
 ######################################################################
@@ -75,7 +78,7 @@ function(cross, pheno, pmark, min.genoprob=0.99,
          max.selfd=0.3, phenolabel="phenotype", weights,
          weightByLinkage=TRUE,
          map.function=c("haldane", "kosambi", "c-f", "morgan"),
-         verbose=TRUE)
+         standardize=TRUE, verbose=TRUE)
 {
   require(class)
   
@@ -154,8 +157,14 @@ function(cross, pheno, pmark, min.genoprob=0.99,
     gi[gmx < min.genoprob] <- NA
     obsg[,i] <- gi
 
-    y <- scale(y)
-    y[is.na(y)] <- 0
+    if(standardize) {
+      y <- scale(y)
+      y[is.na(y)] <- 0
+    }
+    else {
+      for(i in 1:ncol(y)) 
+        y[is.na(y[,i]),i] <- mean(y[,i], na.rm=TRUE)
+    }
     ysub <- y[theids[theids[,3],2],,drop=FALSE]
     gisub <- gi[theids[theids[,3],1]]
     keep <- !is.na(gisub) & apply(ysub, 1, function(a) !any(is.na(a) ))

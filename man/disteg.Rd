@@ -14,7 +14,7 @@ disteg(cross, pheno, pmark, min.genoprob=0.99,
        max.selfd=0.3, phenolabel="phenotype",
        weights, weightByLinkage=TRUE,
        map.function=c("haldane", "kosambi", "c-f", "morgan"),
-       verbose=TRUE)
+       standardize=TRUE, verbose=TRUE)
 
 }
 
@@ -50,6 +50,8 @@ multiple transcripts that correspond to a give eQTL},
 relative positions (for example, two tightly linked eQTL would each
 count about 1/2 of an isolated eQTL)},
  \item{map.function}{Used if \code{weightByLinkage} is TRUE},
+ \item{standardize}{If TRUE, standardize the gene columns so that they
+ have mean 0 and SD 1.}
  \item{verbose}{if TRUE, give verbose output.}
 }
 
