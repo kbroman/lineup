@@ -14,7 +14,10 @@
 
 \arguments{
  \item{x}{Output of \code{\link{distee}} or \code{\link{disteg}}.}
- \item{breaks}{Optional vector of breaks, passed to \code{\link[graphics]{hist}}.}
+ \item{breaks}{Optional vector of breaks, passed to
+   \code{\link[graphics]{hist}}, though if it is length 1, we interpret
+ it as the number of breaks and ensure that both histograms use the same
+ set of breaks.}
  \item{add.rug}{If true, also include \code{\link[graphics]{rug}} below histograms.}
  \item{\dots}{Ignored at this point.}
 }

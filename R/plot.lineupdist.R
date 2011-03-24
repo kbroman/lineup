@@ -29,6 +29,7 @@ function(x, breaks, add.rug=TRUE, ...)
   di <- pulldiag(x)
   ra <- range(x, na.rm=TRUE)
   if(missing(breaks)) breaks <- seq(ra[1], ra[2], len=sqrt(prod(dim(x))))
+  if(length(breaks)==1) breaks <- seq(ra[1], ra[2], len=breaks)
   d.method <- switch(attr(x, "d.method"), "cor"="correlation", "rmsd"="RMS distance")
   main <- paste(c("Self-self", "Self-nonself"), switch(attr(x, "d.method"), "cor"="correlation", "rmsd"="distance"))
 

@@ -8,6 +8,9 @@ If you any additions or revisions to suggest, please send an email to
 Karl Broman, <kbroman@biostat.wisc.edu>.
 ----------------------------------------------------------------------
 
+o A function for making those pairs plots for a set of individuals
+  from one or two tissues.
+
 o distep, and distgp, for phenotype data
 
 o Add examples in help files (calc.locallod, disteg, etc.)
