@@ -10,8 +10,8 @@
 
 \usage{
 distee(e1, e2, cor.threshold, n.col, d.method=c("rmsd", "cor"),
-       transpose=FALSE, labels=c("e1","e2"), weightByCorr=TRUE,
-       standardize=TRUE, verbose=TRUE)
+       transpose=FALSE, labels=c("e1","e2"), weightByCorr=FALSE,
+       standardize=FALSE, verbose=TRUE)
 }
 
 \arguments{

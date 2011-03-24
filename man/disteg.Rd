@@ -12,9 +12,9 @@
 disteg(cross, pheno, pmark, min.genoprob=0.99,
        k=20, min.classprob=0.8, repeatKNN=TRUE,
        max.selfd=0.3, phenolabel="phenotype",
-       weights, weightByLinkage=TRUE,
+       weights, weightByLinkage=FALSE,
        map.function=c("haldane", "kosambi", "c-f", "morgan"),
-       standardize=TRUE, verbose=TRUE)
+       standardize=FALSE, verbose=TRUE)
 
 }
 
