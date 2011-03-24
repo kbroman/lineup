@@ -11,6 +11,11 @@ Karl Broman, <kbroman@biostat.wisc.edu>.
 o A function for making those pairs plots for a set of individuals
   from one or two tissues.
 
+o bring the dist down to C
+
+o maybe separate the calculation of correlated pairs (like
+  calc.locallod) from the calculate of distance
+
 o distep, and distgp, for phenotype data
 
 o Add examples in help files (calc.locallod, disteg, etc.)
