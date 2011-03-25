@@ -10,19 +10,21 @@ Karl Broman, <kbroman@biostat.wisc.edu>.
 
 o Include distance in output of find.gene.pseudomarker
 
+o Separate the calculation of correlated pairs (like
+  calc.locallod) from the calculate of distance
+
+o findCommonInd: make it just take two vectors of IDs
+
+o bring the dist down to C
+
+o A function for making those pairs plots for a set of individuals
+  from one or two tissues.
+
 o Function to plot knn classifier info for a particular eQTL
 
 o Why are there so many eQTL obs/inf mismatches?
   Perhaps weight the eQTL by their proportion of mismatches across all
   mice?
-
-o A function for making those pairs plots for a set of individuals
-  from one or two tissues.
-
-o bring the dist down to C
-
-o maybe separate the calculation of correlated pairs (like
-  calc.locallod) from the calculate of distance
 
 o distep, and distgp, for phenotype data
 
