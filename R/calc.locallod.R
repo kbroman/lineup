@@ -41,6 +41,11 @@ function(cross, pheno, pmark, verbose=TRUE)
 {
   require(qtl)
   
+  if(any(pmark$chr == "X")) {
+    warning("Dropping X chr loci; we can only handle autosomes for now.")
+    pmark <- pmark[pmark$chr != "X",]
+  }
+
   if(nind(cross) != nrow(pheno))
     stop("cross and pheno have incompatible numbers of individuals.")
   m <- match(colnames(pheno), rownames(pmark))

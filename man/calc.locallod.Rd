@@ -40,6 +40,9 @@ calc.locallod(cross, pheno, pmark, verbose=TRUE)
   Actually, we use a bit of a contortion of the data to force the
   \code{\link[qtl]{scanone}} function in R/qtl to calculate the LOD
   score at a single position.
+
+  We omit any transcripts that map to the X chromosome; we can only
+  handle autosomal loci for now.
 }
 
 \value{
