@@ -23,11 +23,15 @@
  *
  * These are utility functions
  *
- * Other functions: reorg_dmatrix
+ * Contains: reorg_dmatrix
  *
  **********************************************************************/
 
+#include <math.h>
+#include <stdlib.h>
+#include <stdio.h>
 #include <R.h>
+#include <Rmath.h>
 #include "util.h"
 
 /**********************************************************************

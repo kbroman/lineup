@@ -23,7 +23,7 @@
  *
  * These are utility functions
  *
- * Other functions: reorg_dmatrix
+ * Contains: reorg_dmatrix
  *
  **********************************************************************/
 
