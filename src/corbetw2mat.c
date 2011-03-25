@@ -170,7 +170,7 @@ void corbetw2mat_unpaired_best(int nrow, int ncolx, double **X,
       }
       if(n > 1) {
 	temp /= (double)(n-1);
-	if(temp > corthresh) {
+	if(temp >= corthresh) {
 	  cor[*numpairs] = temp;
 	  xindex[*numpairs] = jx+1;
 	  yindex[*numpairs] = jy+1;

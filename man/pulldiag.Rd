@@ -76,4 +76,4 @@ plot2dist(d1, d2)
   \code{\link{disteg}}, \code{\link{summary.lineupdist}},
   \code{\link{plot2dist}}, \code{\link{plot.lineupdist}} } 
 
-\keyword{utilities}
+\keyword{array}
