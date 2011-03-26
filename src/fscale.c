@@ -50,30 +50,35 @@ void R_fscale(int *nrow, int *ncol, double *x)
  * Notes:  X indexed as X[col][row] 
  *
  *         The one-pass method can have a lot of round-off error,  
- *         but it is quick
+ *         but it is quick.
  *
  **********************************************************************/
 void fscale(int nrow, int ncol, double **X)
 {
   int i, j, n;
-  double sum, sumsq;
+  double sum, sumsq, first, diff;
   
   for(j=0; j<ncol; j++) {
     sum = sumsq = 0.0;
     n = 0;
+    first=NA_REAL;
     for(i=0; i<nrow; i++) {
       if(R_FINITE(X[j][i])) {
 	n++;
-	sum += X[j][i];
-	sumsq += (X[j][i]*X[j][i]);
+	if(!R_FINITE(first)) first = X[j][i]; /* first non-missing value */
+	else {
+	  /* sum(x) and sum(x*x) with x centered at first non-missing value*/
+	  sum += (diff=(X[j][i]-first)); 
+	  sumsq += (diff*diff);
+	}
       }
     }
     if(n > 1) { /* if n < 2, do nothing */
       sumsq = sqrt((sumsq - (sum*sum)/(double)n)/(double)(n-1));
       sum /= (double)n;
       for(i=0; i<nrow; i++) 
-	if(R_FINITE(X[j][i]))
-	  X[j][i] = (X[j][i] - sum)/(sumsq);
+	if(R_FINITE(X[j][i])) 
+	  X[j][i] = (X[j][i] - sum - first)/(sumsq);
     }
   }
 }
