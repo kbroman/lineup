@@ -61,7 +61,7 @@
 distee <-
 function(e1, e2, cor.threshold, n.col, d.method=c("rmsd", "cor"),
          transpose=FALSE, labels=c("e1","e2"), weightByCorr=FALSE,
-         standardize=FALSE, verbose=TRUE, newversion=TRUE)
+         standardize=FALSE, verbose=TRUE)
 {
   if(!missing(e2) && missing(cor.threshold) && missing(n.col))
     stop("Give either cor.threshold or n.col")
@@ -174,16 +174,8 @@ function(e1, e2, cor.threshold, n.col, d.method=c("rmsd", "cor"),
   else keepAll <- FALSE
 
   if(!keepAll || weightByCorr) {
-    if(newversion) {
-      thecor <- corbetw2mat(e1, e2, paired=TRUE,
-                            scaled=standardize)
-    }
-    else {
-      thecor <- rep(NA, ncol(e1))
-      for(i in 1:ncol(e1))
-        thecor[i] <- cor(e1[,i], e2[,i], use="complete")
-    }
-    return(thecor)
+    thecor <- corbetw2mat(e1, e2, paired=TRUE,
+                          scaled=standardize)
 
     if(missing(cor.threshold)) 
       cor.threshold <- sort(thecor, decreasing=TRUE)[n.col]
