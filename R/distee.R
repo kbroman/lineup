@@ -35,11 +35,6 @@
 #
 # labels = labels to attach to the two data sets
 #
-# weights = Optional vector of weights
-#
-# scaled = if TRUE, the columns of e1 and e2 are assumed to have
-#          mean 0 and SD 1
-#
 # verbose = if TRUE, give verbose output
 # 
 ######################################################################
@@ -91,14 +86,14 @@ function(e1, e2, d.method=c("rmsd", "cor"), labels=c("e1","e2"),
   d <- matrix(nrow=nrow(e1), ncol=nrow(e2))
   dimnames(d) <- list(rownames(e1), rownames(e2))
   if(compareWithin) {
-    for(i in 1:(nrow(o1)-1))
-      for(j in (i+1):nrow(o2)) 
-        d[i,j] <- d[j,i] <- d.func(e1[i,], e2[j,], thecor)
+    for(i in 1:(nrow(e1)-1))
+      for(j in (i+1):nrow(e2)) 
+        d[i,j] <- d[j,i] <- d.func(e1[i,], e2[j,])
   }
   else {
     for(i in 1:nrow(e1))
       for(j in 1:nrow(e2)) 
-        d[i,j] <- d.func(e1[i,], e2[j,], thecor)
+        d[i,j] <- d.func(e1[i,], e2[j,])
   }
 
   class(d) <- c("ee.lineupdist", "lineupdist")

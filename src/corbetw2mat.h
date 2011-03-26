@@ -24,6 +24,7 @@
  * Contains: R_corbetw2mat_paired, corbetw2mat_paired,
  *           R_corbetw2mat_unpaired_lr, corbetw2mat_unpaired_lr
  *           R_corbetw2mat_unpaired_best, corbetw2mat_unpaired_best
+ *           R_corbetw2mat_unpaired_all, corbetw2mat_unpaired_all
  *
  **********************************************************************/
 
@@ -55,5 +56,13 @@ void corbetw2mat_unpaired_best(int nrow, int ncolx, double **X,
 			       int scaled, double *cor, 
 			       int *xindex, int *yindex, 
 			       int *numpairs, double corthresh);
+
+void R_corbetw2mat_unpaired_all(int *nrow, int *ncolx, double *x, 
+				int *ncoly, double *y,
+				int *scaled, double *cor);
+
+void corbetw2mat_unpaired_all(int nrow, int ncolx, double **X, 
+			      int ncoly, double **Y,
+			      int scaled, double **Cor);
 
 /* end of corbetw2mat.h */

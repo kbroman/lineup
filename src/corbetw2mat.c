@@ -24,6 +24,7 @@
  * Contains: R_corbetw2mat_paired, corbetw2mat_paired,
  *           R_corbetw2mat_unpaired_lr, corbetw2mat_unpaired_lr
  *           R_corbetw2mat_unpaired_best, corbetw2mat_unpaired_best
+ *           R_corbetw2mat_unpaired_all, corbetw2mat_unpaired_all
  *
  **********************************************************************/
 
@@ -182,5 +183,48 @@ void corbetw2mat_unpaired_best(int nrow, int ncolx, double **X,
   } /* end loop over col of x */
 }
 
+
+void R_corbetw2mat_unpaired_all(int *nrow, int *ncolx, double *x, 
+				int *ncoly, double *y,
+				int *scaled, double *cor) 
+{
+  double **X, **Y, **Cor;
+
+  reorg_dmatrix(*nrow, *ncolx, x, &X);
+  reorg_dmatrix(*nrow, *ncoly, y, &Y);
+  reorg_dmatrix(*ncolx, *ncoly, cor, &Cor);
+  
+  corbetw2mat_unpaired_all(*nrow, *ncolx, X, *ncoly, Y, *scaled, Cor);
+}
+
+void corbetw2mat_unpaired_all(int nrow, int ncolx, double **X, 
+			      int ncoly, double **Y,
+			      int scaled, double **Cor)
+{
+  int i, jx, jy, n;
+  double temp;
+
+  if(!scaled) { /* scale columns to have mean 0 and SD 1 */
+    fscale(nrow, ncolx, X);
+    fscale(nrow, ncoly, Y);
+  } 
+    
+  for(jy=0; jy<ncoly; jy++) {
+    for(jx=0; jx<ncolx; jx++) {
+      temp=0.0; 
+      n=0;
+    
+      for(i=0; i<nrow; i++) {
+	if(R_FINITE(X[jx][i]) && R_FINITE(Y[jy][i])) {
+	  temp += (X[jx][i] * Y[jy][i]);
+	  n++;
+	}
+      }
+      if(n > 1) Cor[jy][jx] = temp/(double)(n-1);
+      else Cor[jy][jx] = NA_REAL;
+
+    } /* end loop over col of y */	  
+  } /* end loop over col of x */
+}
 
 /* end of corbetw2mat.c */
