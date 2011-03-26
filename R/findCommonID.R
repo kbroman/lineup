@@ -59,8 +59,8 @@ function(id1, id2)
   allID$mat[,2] <- match(rownames(allID$mat), id2)
   allID$mat[,3] <- !is.na(allID$mat[,1]) & !is.na(allID$mat[,2])
 
-  allID$first <- allID$mat[!allID$mat[,3],1]
-  allID$second <- allID$mat[!allID$mat[,3],2]
+  allID$first <- allID$mat[allID$mat[,3],1]
+  allID$second <- allID$mat[allID$mat[,3],2]
 
   allID
 }
