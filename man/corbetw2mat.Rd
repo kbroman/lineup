@@ -37,7 +37,7 @@ corbetw2mat(x, y, paired=TRUE, scaled=FALSE, bestpairs=FALSE, corthresh=0.9)
 
   If \code{scaled=TRUE}, we assume that the columns of \code{x} and
   \code{y} have already been standardized, to have mean 0 and SD 1.
-  Otherwise, we use \code{\link{mystandardize}} to standardize the
+  Otherwise, we use \code{\link{fscale}} to standardize the
   columns and then calculate correlations as
   \code{mean(x[,i]*y[,j])/(nrow(x)-1)}.
 }
@@ -98,7 +98,7 @@ corbetw2mat(x, y, paired=FALSE, bestpairs=TRUE, corthresh=0.6)
 corbetw2mat(x, z, paired=FALSE, bestpairs=TRUE, corthresh=0.6)
 }
 
-\seealso{ \code{\link{distee}}, \code{\link{mystandardize}} }
+\seealso{ \code{\link{distee}}, \code{\link{fscale}} }
 
 \keyword{array}
 \keyword{univar}

@@ -1,6 +1,6 @@
 /**********************************************************************
  * 
- * mystandardize.h
+ * fscale.c
  *
  * copyright (c) 2011, Karl W Broman
  *
@@ -21,16 +21,31 @@
  *
  * C functions for the R/lineup package
  *
- * Contains: R_mystandardize, mystandardize
+ * Contains: R_fscale, fscale
  *
  **********************************************************************/
 
-/* for calling mystandardize() from R */
-void R_mystandardize(int *nrow, int *ncol, double *x);
+#include <math.h>
+#include <stdlib.h>
+#include <stdio.h>
+#include <R.h>
+#include <Rmath.h>
+#include "fscale.h"
+#include "util.h"
+
+/* for calling fscale() from R */
+void R_fscale(int *nrow, int *ncol, double *x)
+{
+  double **X;
+
+  reorg_dmatrix(*nrow, *ncol, x, &X);
+  
+  fscale(*nrow, *ncol, X);
+}
 
 /**********************************************************************
  * 
- * mystandardize: standardize columns of a matrix 
+ * fscale: standardize columns of a matrix 
  *
  * Notes:  X indexed as X[col][row] 
  *
@@ -38,6 +53,29 @@ void R_mystandardize(int *nrow, int *ncol, double *x);
  *         but it is quick
  *
  **********************************************************************/
-void mystandardize(int nrow, int ncol, double **X);
+void fscale(int nrow, int ncol, double **X)
+{
+  int i, j, n;
+  double sum, sumsq;
+  
+  for(j=0; j<ncol; j++) {
+    sum = sumsq = 0.0;
+    n = 0;
+    for(i=0; i<nrow; i++) {
+      if(R_FINITE(X[j][i])) {
+	n++;
+	sum += X[j][i];
+	sumsq += (X[j][i]*X[j][i]);
+      }
+    }
+    if(n > 1) { /* if n < 2, do nothing */
+      sumsq = sqrt((sumsq - (sum*sum)/(double)n)/(double)(n-1));
+      sum /= (double)n;
+      for(i=0; i<nrow; i++) 
+	if(R_FINITE(X[j][i]))
+	  X[j][i] = (X[j][i] - sum)/(sumsq);
+    }
+  }
+}
 
-/* end of mystandardize.h */
+/* end of fscale.c */

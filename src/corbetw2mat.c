@@ -33,7 +33,7 @@
 #include <math.h>
 #include "corbetw2mat.h"
 #include "util.h"
-#include "mystandardize.h"
+#include "fscale.h"
 
 void R_corbetw2mat_paired(int *nrow, int *ncol, double *x, double *y,
 			  int *scaled, double *cor)
@@ -53,8 +53,8 @@ void corbetw2mat_paired(int nrow, int ncol, double **X, double **Y,
   double temp;
 
   if(!scaled) { /* scale columns to have mean 0 and SD 1 */
-    mystandardize(nrow, ncol, X);
-    mystandardize(nrow, ncol, Y);
+    fscale(nrow, ncol, X);
+    fscale(nrow, ncol, Y);
   } 
     
   for(j=0; j<ncol; j++) {
@@ -93,8 +93,8 @@ void corbetw2mat_unpaired_lr(int nrow, int ncolx, double **X,
   double temp, themax;
 
   if(!scaled) { /* scale columns to have mean 0 and SD 1 */
-    mystandardize(nrow, ncolx, X);
-    mystandardize(nrow, ncoly, Y);
+    fscale(nrow, ncolx, X);
+    fscale(nrow, ncoly, Y);
   } 
     
   for(jx=0; jx<ncolx; jx++) {
@@ -152,8 +152,8 @@ void corbetw2mat_unpaired_best(int nrow, int ncolx, double **X,
   double temp;
 
   if(!scaled) { /* scale columns to have mean 0 and SD 1 */
-    mystandardize(nrow, ncolx, X);
-    mystandardize(nrow, ncoly, Y);
+    fscale(nrow, ncolx, X);
+    fscale(nrow, ncoly, Y);
   } 
     
   *numpairs = 0;

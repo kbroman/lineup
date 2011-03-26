@@ -120,6 +120,6 @@ plot2dist(d1, d2)
 
 \seealso{ \code{\link{pulldiag}}, \code{\link{omitdiag}},
 \code{\link{summary.lineupdist}}, \code{\link{plot2dist}},
-\code{\link{disteg}}, \code{\link{corbetw2mat}}, \code{\link{mystandardize}} }
+\code{\link{disteg}}, \code{\link{corbetw2mat}}, \code{\link{fscale}} }
 
 \keyword{utilities}
