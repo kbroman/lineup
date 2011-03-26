@@ -41,7 +41,7 @@ function(id1, id2)
   if("cross" %in% class(id2)) 
     id2 <- getid(id2)
   else if(!is.null(rownames(id2)))
-    id2 <- rownames(id1)
+    id2 <- rownames(id2)
   
   m1 <- match(id2, id1)
   m2 <- match(id1, id2)
