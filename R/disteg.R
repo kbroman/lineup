@@ -83,7 +83,7 @@ function(cross, pheno, pmark, min.genoprob=0.99,
   require(class)
   
   # individuals in common between two data sets
-  theids <- findCommonInd(cross, pheno)
+  theids <- findCommonID(cross, pheno)
   if(sum(theids$inBoth) < k)
     stop("You need at least ", k, " individuals in common between the data sets.")
 

@@ -98,7 +98,7 @@ corbetw2mat(x, y, paired=FALSE, bestpairs=TRUE, corthresh=0.6)
 corbetw2mat(x, z, paired=FALSE, bestpairs=TRUE, corthresh=0.6)
 }
 
-\seealso{ \code{\link{distee}}, \code{\link{fscale}} }
+\seealso{ \code{\link{distee}}, \code{\link{fscale}}, \code{\link{findCommonID}} }
 
 \keyword{array}
 \keyword{univar}

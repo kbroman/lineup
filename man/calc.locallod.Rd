@@ -29,7 +29,7 @@ calc.locallod(cross, pheno, pmark, verbose=TRUE)
 
 \details{
   \code{cross} and \code{pheno} must contain exactly the same
-  individuals in the same order.  (Use \code{\link{findCommonInd}} to
+  individuals in the same order.  (Use \code{\link{findCommonID}} to
   line them up.)
 
   We consider the expression phenotypes in batches: those whose closest
@@ -59,6 +59,6 @@ A vector of LOD scores.  The names indicate the gene names (rows in
 %}
 
 \seealso{ \code{\link{find.gene.pseudomarker}},
-  \code{\link{findCommonInd}}, \code{\link{disteg}} }
+  \code{\link{findCommonID}}, \code{\link{disteg}} }
 
 \keyword{utilities}
