@@ -11,14 +11,24 @@ Karl Broman, <kbroman@biostat.wisc.edu>.
 o Separate the calculation of correlated pairs (like
   calc.locallod) from the calculate of distance
 
-o findCommonInd: make it just take two vectors of IDs
-
 o bring the dist down to C
 
 o A function for making those pairs plots for a set of individuals
   from one or two tissues.
 
 o Function to plot knn classifier info for a particular eQTL
+
+o Another plot of distance matrix: image of dichotomized version of
+  distance (some threshold as input, checking d.method to decide
+  whether to color above or below threshold).
+
+o As an option to summary.lineupdist, arrange the results so that the
+  first has the closest pair and then try to find a match among the
+  others, repeating until you can't find further ones, then print the
+  next closest pair, to more clearly show A-B switches or chains like
+  A-B-C-D-E-F-A.  Also, indicate if next individual was not measured
+  or matches self?  Perhaps combine the two directions?  ("For which
+  columns is this row the max correlation?")
 
 o Why are there so many eQTL obs/inf mismatches?
   Perhaps weight the eQTL by their proportion of mismatches across all
@@ -32,6 +42,8 @@ o Add examples in help files (calc.locallod, disteg, etc.)
 o algorithm for using distances to make a decision about what is
   messed up (that is, what happened).  I guess separate the inference
   of errors from the correction of errors.
+
+o Include a vignette
 
 ----------------------------------------------------------------------
 end of TODO.txt

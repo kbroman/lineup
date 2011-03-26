@@ -9,29 +9,35 @@
 }
 
 \usage{
-findCommonInd(cross, pheno)
+findCommonInd(id1, id2)
 }
 
 \arguments{
- \item{cross}{An object of class \code{"cross"} containing data for a
- QTL experiment.  See the help file for \code{\link[qtl]{read.cross}} in
- the R/qtl package (\url{http://www.rqtl.org}).  There must be a
- phenotype named \code{"id"} or \code{"ID"} that contains the
- individual identifiers.}
- \item{pheno}{A data frame of phenotypes, stored as individuals x
- phenotypes.  The row names must contain individual identifiers.}
+ \item{id1}{A character vector of individual IDs.  This can also be a QTL cross
+   object (see \code{\link[qtl]{read.cross}}), in which case
+   \code{\link[qtl]{getid}} is used to grab individual IDs, or a matrix
+   or data frame, in which case the rownames are taken to be IDs.}
+ \item{id2}{Like \code{id1}, can be a character vector, a cross or a
+ matrix/data frame.}
 }
 
 %\details{
 %}
 
 \value{
-A data frame with rows correspond to all individuals and three
-columns: \code{indexInCross} and \code{indexInPheno} contain numeric
+  A list with three components:
+  
+First, a data frame with rows corresponding to all individuals (across
+the two sets of individual IDs) and three
+columns: \code{indexInFirst} and \code{indexInSecond} contain numeric
 indices to the locations of the individuals within \code{cross} and
 \code{pheno}, and \code{inBoth} is a logical vector to indicate which
 individuals appear in both crosses.  The row names are the
 individual identifiers. 
+
+The second and third components are vectors of indices in \code{id1} and
+\code{id2}, respectively, indicating the paired locations of the
+individuals that are in common.
 }
 
 \author{Karl W Broman, \email{kbroman@biostat.wisc.edu} }
@@ -39,9 +45,12 @@ individual identifiers.
 %\references{
 %}
 
-%\examples{
-%}
+\examples{
+id1 <- sample(LETTERS[1:5])
+id2 <- LETTERS[3:8]
+findCommonInd(id1, id2)
+}
 
-\seealso{ \code{\link{calc.locallod}} }
+\seealso{ \code{\link{calc.locallod}}, \code{\link{corbetw2mat}} }
 
 \keyword{utilities}

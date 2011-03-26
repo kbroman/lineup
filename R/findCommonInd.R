@@ -26,34 +26,42 @@
 ######################################################################
 # findCommonInd
 #
-# cross: A cross object 
-#
-# pheno: A matrix of phenotypes (row names = IDs)
-#
-# crossID: could be missing (in which case we use getid(cross))
-#          if length 1, taken to be a phenotype name in cross that contains IDs
-#          if length nind(cross), taken to be the cross IDs
+# id1, id2: two character vectors of IDs
 #
 ######################################################################
 
 findCommonInd <-
-function(cross, pheno)
+function(id1, id2)
 {
-  crossID <- getid(cross)
-  pheID <- rownames(pheno)
+  if("cross" %in% class(id1)) 
+    id1 <- getid(id1)
+  else if(!is.null(rownames(id1)))
+    id1 <- rownames(id1)
+
+  if("cross" %in% class(id2)) 
+    id2 <- getid(id2)
+  else if(!is.null(rownames(id2)))
+    id2 <- rownames(id1)
   
-  m1 <- match(pheID, crossID)
-  m2 <- match(crossID, pheID)
+  m1 <- match(id2, id1)
+  m2 <- match(id1, id2)
 
-  totind <- length(crossID) + sum(is.na(m1))
-  allID <- data.frame(indexInCross=rep(0, totind),
-                      indexInPheno=rep(0, totind),
-                      inBoth=rep(FALSE,totind))
-  rownames(allID) <- c(crossID, pheID[is.na(m1)])
+  totind <- length(id1) + sum(is.na(m1))
+  allID <- list(mat=data.frame(indexInFirst=rep(0, totind),
+                  indexInSecond=rep(0, totind),
+                  inBoth=rep(FALSE,totind)),
+                first=rep(NA, totind),
+                second=rep(NA, totind))
+                
+  rownames(allID$mat) <- c(id1, id2[is.na(m1)])
 
-  allID[,1] <- match(rownames(allID), crossID)
-  allID[,2] <- match(rownames(allID), pheID)
-  allID[,3] <- !is.na(allID[,1]) & !is.na(allID[,2])
+  allID$mat[,1] <- match(rownames(allID$mat), id1)
+  allID$mat[,2] <- match(rownames(allID$mat), id2)
+  allID$mat[,3] <- !is.na(allID$mat[,1]) & !is.na(allID$mat[,2])
+
+  allID$first <- allID$mat[!allID$mat[,3],1]
+  allID$second <- allID$mat[!allID$mat[,3],2]
+
   allID
 }
 
