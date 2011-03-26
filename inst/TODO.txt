@@ -8,8 +8,20 @@ If you any additions or revisions to suggest, please send an email to
 Karl Broman, <kbroman@biostat.wisc.edu>.
 ----------------------------------------------------------------------
 
-o Separate the calculation of correlated pairs (like
-  calc.locallod) from the calculate of distance
+o Big revisions to distee: 
+    - pull out the correlation calculation and thresholding
+    - drop the transpose business
+    - use "scaled" in place of "standardized" argument; presume that
+      it's of the desired form.
+    - regular vector of weights [need weighted correlation function]
+    - move distance calculation down to C
+
+o Big revisions to disteg:
+    - If missing values: don't use those individuals to form
+      classifier and don't make a prediction about them.
+    - take the distance calculation down to C
+
+o Revise example for distee to take account of the new structure
 
 o bring the dist down to C
 

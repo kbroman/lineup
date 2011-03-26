@@ -39,7 +39,7 @@ function(object, cutoff, dropmatches=TRUE, reorder=TRUE, ...)
   byrow <- data.frame(mind=apply(object, 1, min, na.rm=TRUE),
                       nextd=apply(object, 1, function(a) sort(a)[2]),
                       selfd=rep(NA, nrow(object)),
-                      mean=apply(object, 1, mean, na.rm=TRUE),
+                      mean=rowMeans(object, na.rm=TRUE),
                       sd=apply(object, 1, sd, na.rm=TRUE),
                       best=apply(object, 1, function(a, b)
                         paste(b[!is.na(a) & a==min(a, na.rm=TRUE)], collapse=":"), colnames(object)))
@@ -52,7 +52,7 @@ function(object, cutoff, dropmatches=TRUE, reorder=TRUE, ...)
     bycol <- data.frame(mind=apply(object, 2, min, na.rm=TRUE),
                         nextd=apply(object, 2, function(a) sort(a)[2]),
                         selfd=rep(NA, ncol(object)),
-                        mean=apply(object, 2, mean, na.rm=TRUE),
+                        mean=colMeans(object, na.rm=TRUE),
                         sd=apply(object, 2, sd, na.rm=TRUE),
                         best=apply(object, 2, function(a, b)
                           paste(b[!is.na(a) & a==min(a, na.rm=TRUE)], collapse=":"), rownames(object)))
