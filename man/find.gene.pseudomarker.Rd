@@ -41,8 +41,9 @@ find.gene.pseudomarker(cross, pmap, geneloc, where=c("prob", "draws"))
 \value{
 A data frame with columns \code{chr} (the chromosome) and \code{pmark}
 (the name of the pseudomarker).  The third column \code{pos} contains
-the Mbp position of the pseudomarker.  The rownames indicate the gene
-names.
+the Mbp position of the pseudomarker.  The final column is the signed
+distance between the gene and the pseudomarker.  The rownames indicate
+the gene names.
 }
 
 \author{Karl W Broman, \email{kbroman@biostat.wisc.edu} }

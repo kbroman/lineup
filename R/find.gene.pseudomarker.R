@@ -63,7 +63,8 @@ function(cross, pmap, geneloc, where=c("prob", "draws"))
   thepos <- find.pseudomarkerpos(cross, upmark, where)
   res$pos <- thepos[match(pmark, rownames(thepos)),2]
 
-  d <- abs(res$pos - geneloc$pos)
+  res <- cbind(res, dist.from.gene=(d <- geneloc$pos - res$pos))
+  d <- abs(d)
   if(any(d > 2)) {
     ngap <- sum(d>2)
     maxd <- max(d)

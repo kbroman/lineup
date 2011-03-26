@@ -8,8 +8,6 @@ If you any additions or revisions to suggest, please send an email to
 Karl Broman, <kbroman@biostat.wisc.edu>.
 ----------------------------------------------------------------------
 
-o Include distance in output of find.gene.pseudomarker
-
 o Separate the calculation of correlated pairs (like
   calc.locallod) from the calculate of distance
 
