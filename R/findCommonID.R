@@ -1,6 +1,6 @@
 ######################################################################
 #
-# findCommonInd.R
+# findCommonID.R
 #
 # copyright (c) 2011, Karl W Broman
 # last modified Mar, 2011
@@ -19,18 +19,18 @@
 #     at http://www.r-project.org/Licenses/GPL-3
 # 
 # Part of the R/lineup package
-# Contains: findCommonInd
+# Contains: findCommonID
 #
 ######################################################################
 
 ######################################################################
-# findCommonInd
+# findCommonID
 #
 # id1, id2: two character vectors of IDs
 #
 ######################################################################
 
-findCommonInd <-
+findCommonID <-
 function(id1, id2)
 {
   if("cross" %in% class(id1)) 
@@ -65,4 +65,4 @@ function(id1, id2)
   allID
 }
 
-# end of findCommonInd.R
+# end of findCommonID.R

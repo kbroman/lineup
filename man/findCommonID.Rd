@@ -1,5 +1,5 @@
-\name{findCommonInd}
-\alias{findCommonInd}
+\name{findCommonID}
+\alias{findCommonID}
 
 \title{Find individuals in common between a cross and a phenotype matrix}
 
@@ -9,7 +9,7 @@
 }
 
 \usage{
-findCommonInd(id1, id2)
+findCommonID(id1, id2)
 }
 
 \arguments{
@@ -48,11 +48,11 @@ individuals that are in common.
 \examples{
 id1 <- sample(LETTERS[1:5])
 id2 <- LETTERS[3:8]
-findCommonInd(id1, id2)
+findCommonID(id1, id2)
 
 x <- matrix(0, nrow=length(id2), ncol=3)
 rownames(x) <- id2
-findCommonInd(id1, x)
+findCommonID(id1, x)
 }
 
 \seealso{ \code{\link{calc.locallod}}, \code{\link{corbetw2mat}} }
