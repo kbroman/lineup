@@ -83,19 +83,40 @@ function(e1, e2, d.method=c("rmsd", "cor"), labels=c("e1","e2"),
     }
   }
 
-  d <- matrix(nrow=nrow(e1), ncol=nrow(e2))
-  dimnames(d) <- list(rownames(e1), rownames(e2))
   if(compareWithin) {
-    for(i in 1:(nrow(e1)-1))
-      for(j in (i+1):nrow(e2)) 
-        d[i,j] <- d[j,i] <- d.func(e1[i,], e2[j,])
+    if(d.method=="cor") {
+      d <- cor(t(e1), use="pairwise.complete.obs")
+      diag(d) <- NA
+    }
+    else 
+      d <- matrix(.C("R_mat_rmsd",
+                     as.integer(ncol(e1)),
+                     as.integer(nrow(e1)),
+                     as.double(t(e1)),
+                     as.integer(nrow(e2)),
+                     as.double(t(e2)),
+                     d=as.double(rep(NA, nrow(e1)*nrow(e2))),
+                     as.integer(1), # symmetric (e1==e2)
+                     PACKAGE="lineup",
+                     NAOK=TRUE)$d, ncol=nrow(e2))
   }
   else {
-    for(i in 1:nrow(e1))
-      for(j in 1:nrow(e2)) 
-        d[i,j] <- d.func(e1[i,], e2[j,])
+    if(d.method=="cor")
+      d <- corbetw2mat(t(e1), t(e2), what="all")
+    else
+      d <- matrix(.C("R_mat_rmsd",
+                     as.integer(ncol(e1)),
+                     as.integer(nrow(e1)),
+                     as.double(t(e1)),
+                     as.integer(nrow(e2)),
+                     as.double(t(e2)),
+                     d=as.double(rep(NA, nrow(e1)*nrow(e2))),
+                     as.integer(0), # not symmetric (e1 != e2)
+                     PACKAGE="lineup",
+                     NAOK=TRUE)$d, ncol=nrow(e2))
   }
 
+  dimnames(d) <- list(rownames(e1), rownames(e2))
   class(d) <- c("ee.lineupdist", "lineupdist")
   attr(d, "d.method") <- d.method
   attr(d, "labels") <- labels

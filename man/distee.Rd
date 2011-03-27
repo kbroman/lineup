@@ -62,11 +62,18 @@ y[41:42,] <- y[42:41,]
 dimnames(x) <- dimnames(y) <- list(paste("ind", 1:100, sep=""),
                                    paste("gene", 1:40, sep=""))
 
+# calculate correlations between cols of x and cols of y
+thecor <- corbetw2mat(x, y)
+
+# subset x and y, taking only columns with corr > 0.75
+xs <- x[,thecor > 0.8]
+ys <- y[,thecor > 0.8]
+
 # calculate distance (using "RMS difference" as a measure)
-d1 <- distee(x, y, cor.threshold=0.8)
+d1 <- distee(xs, ys, d.method="rmsd", labels=c("x","y"))
 
 # calculate distance (using "correlation" as a measure...really similarity)
-d2 <- distee(x, y, cor.threshold=0.8, d.method="cor")
+d2 <- distee(xs, ys, d.method="cor", labels=c("x", "y"))
 
 # pull out the smallest 8 self-self correlations
 sort(pulldiag(d2))[1:8]
