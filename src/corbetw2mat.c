@@ -21,10 +21,11 @@
  *
  * C functions for the R/lineup package
  *
- * Contains: R_corbetw2mat_paired, corbetw2mat_paired,
+ * Contains: R_corbetw2mat_paired, corbetw2mat_paired
  *           R_corbetw2mat_unpaired_lr, corbetw2mat_unpaired_lr
  *           R_corbetw2mat_unpaired_best, corbetw2mat_unpaired_best
  *           R_corbetw2mat_unpaired_all, corbetw2mat_unpaired_all
+ *           R_corbetw2mat_self, corbetw2mat_self
  *
  **********************************************************************/
 
@@ -224,6 +225,44 @@ void corbetw2mat_unpaired_all(int nrow, int ncolx, double **X,
       else Cor[jy][jx] = NA_REAL;
 
     } /* end loop over col of y */	  
+  } /* end loop over col of x */
+}
+
+
+void R_corbetw2mat_self(int *nrow, int *ncol, double *x, 
+			int *scaled, double *cor) 
+{
+  double **X, **Cor;
+
+  reorg_dmatrix(*nrow, *ncol, x, &X);
+  reorg_dmatrix(*ncol, *ncol, cor, &Cor);
+  
+  corbetw2mat_self(*nrow, *ncol, X, *scaled, Cor);
+}
+
+void corbetw2mat_self(int nrow, int ncol, double **X, 
+		      int scaled, double **Cor)
+{
+  int i, j, k, n;
+  double temp;
+
+  if(!scaled)  /* scale columns to have mean 0 and SD 1 */
+    fscale(nrow, ncol, X);
+    
+  for(j=0; j<ncol-1; j++) {
+    for(k=(j+1); k<ncol; k++) {
+      temp=0.0; 
+      n=0;
+      for(i=0; i<nrow; i++) {
+	if(R_FINITE(X[j][i]) && R_FINITE(X[k][i])) {
+	  temp += (X[j][i] * X[k][i]);
+	  n++;
+	}
+      }
+      if(n > 1) Cor[j][k] = temp/(double)(n-1);
+      else Cor[j][k] = NA_REAL;
+      Cor[k][j] = Cor[j][k];
+    } /* end loop over col of x */	  
   } /* end loop over col of x */
 }
 

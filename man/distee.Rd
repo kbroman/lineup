@@ -10,7 +10,7 @@
 
 \usage{
 distee(e1, e2, d.method=c("rmsd", "cor"), labels=c("e1","e2"),
-       verbose=TRUE)
+       scaled=FALSE, verbose=TRUE)
 }
 
 \arguments{
@@ -23,6 +23,8 @@ distee(e1, e2, d.method=c("rmsd", "cor"), labels=c("e1","e2"),
  or as correlation.}
  \item{labels}{Two character strings, to use as labels for the two data
  matrices in subsequent output.}
+ \item{scaled}{If TRUE, assume that the columns of \code{x} and
+ \code{y} each have mean 0 and SD 1. (Used only if \code{d.method="cor"}.)}
  \item{verbose}{if TRUE, give verbose output.}
 }
 

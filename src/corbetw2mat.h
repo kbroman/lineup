@@ -25,6 +25,7 @@
  *           R_corbetw2mat_unpaired_lr, corbetw2mat_unpaired_lr
  *           R_corbetw2mat_unpaired_best, corbetw2mat_unpaired_best
  *           R_corbetw2mat_unpaired_all, corbetw2mat_unpaired_all
+ *           R_corbetw2mat_self, corbetw2mat_self
  *
  **********************************************************************/
 
@@ -64,5 +65,11 @@ void R_corbetw2mat_unpaired_all(int *nrow, int *ncolx, double *x,
 void corbetw2mat_unpaired_all(int nrow, int ncolx, double **X, 
 			      int ncoly, double **Y,
 			      int scaled, double **Cor);
+
+void R_corbetw2mat_self(int *nrow, int *ncol, double *x, 
+			int *scaled, double *cor);
+
+void corbetw2mat_self(int nrow, int ncol, double **X, 
+		      int scaled, double **Cor);
 
 /* end of corbetw2mat.h */

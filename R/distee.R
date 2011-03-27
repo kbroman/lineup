@@ -41,7 +41,7 @@
 
 distee <-
 function(e1, e2, d.method=c("rmsd", "cor"), labels=c("e1","e2"),
-         verbose=TRUE)
+         scaled=FALSE, verbose=TRUE)
 {
   if(length(labels) != 2) {
     warning("labels should have length two; input ignored.")
@@ -87,6 +87,14 @@ function(e1, e2, d.method=c("rmsd", "cor"), labels=c("e1","e2"),
     if(d.method=="cor") {
       d <- cor(t(e1), use="pairwise.complete.obs")
       diag(d) <- NA
+#      d <- matrix(.C("R_corbetw2mat_self",
+#                     as.integer(ncol(e1)),
+#                     as.integer(nrow(e1)),
+#                     as.double(t(e1)),
+#                     as.integer(scaled),
+#                     d=as.double(rep(NA, nrow(e1)*nrow(e2))),
+#                     PACKAGE="lineup",
+#                     NAOK=TRUE)$d, ncol=nrow(e1))
     }
     else 
       d <- matrix(.C("R_mat_rmsd",
@@ -102,7 +110,7 @@ function(e1, e2, d.method=c("rmsd", "cor"), labels=c("e1","e2"),
   }
   else {
     if(d.method=="cor")
-      d <- corbetw2mat(t(e1), t(e2), what="all")
+      d <- corbetw2mat(t(e1), t(e2), what="all", scaled=scaled)
     else
       d <- matrix(.C("R_mat_rmsd",
                      as.integer(ncol(e1)),
