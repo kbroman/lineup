@@ -59,7 +59,7 @@ void propmismatch(int nrow, int ncolx, int **X, int ncoly, int **Y,
       for(k=0; k<nrow; k++) {
 	if(R_FINITE(X[i][k]) && R_FINITE(Y[j][k])) {
 	  temp2 += wts[k];
-	  temp1 += ((double)(X[i][k] == Y[j][k]) * wts[k]);
+	  temp1 += ((double)(X[i][k] != Y[j][k]) * wts[k]);
 	}
       }
       Denom[j][i] = temp2;
