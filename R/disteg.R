@@ -75,17 +75,32 @@ function(cross, pheno, pmark, min.genoprob=0.99,
   
   # individuals in common between two data sets
   theids <- findCommonID(cross, pheno)
-  if(sum(theids$mat$inBoth) < k)
+  if(length(theids$first) < k)
     stop("You need at least ", k, " individuals in common between the data sets.")
 
   # make sure pheno and pmark line up
-  m <- match(colnames(pheno), rownames(pmark))
-  if(any(is.na(m))) pheno <- pheno[,!is.na(m),drop=FALSE]
-  m <- match(rownames(pmark), colnames(pheno))
-  if(any(is.na(m))) pmark <- pmark[!is.na(m),,drop=FALSE]
-  m <- match(rownames(pmark), colnames(pheno))
-  pheno <- pheno[,m,drop=FALSE]
+  m <- findCommonID(colnames(pheno), rownames(pmark))
+  pheno <- pheno[,m$first,drop=FALSE]
+  pmark <- pmark[m$second,,drop=FALSE]
   
+  # drop X chromosome from cross
+  chrtype <- sapply(cross$geno, class)
+  if(any(chrtype=="X")) {
+    warning("Dropping X chromosome")
+    cross <- subset(cross, names(cross$geno)[chrtype=="A"])
+  }
+  crosschr <- names(cross$geno)
+
+  # find transcript chr in cross
+  m <- match(pmark$chr, crosschr)
+  if(any(is.na(m))) {
+    warning("Dropping ", sum(is.na(m)), " transcripts with unknown chromosome assignment.")
+    pheno <- pheno[,!is.na(m), drop=FALSE]
+    pmark <- pmark[!is.na(m),, drop=FALSE]
+  }
+  if(ncol(pheno) < 1)
+    stop("Need at least one expression phenotype.")
+
   # unique eQTL locations
   cpmark <- paste(pmark$chr, pmark$pmark, sep=":")
   upmark <- unique(cpmark)
@@ -107,9 +122,11 @@ function(cross, pheno, pmark, min.genoprob=0.99,
                  "morgan" = mf.m)
 
     for(i in uchr) {
+      if(sum(thechr==i)==1) next # just one eQTL on this chromosome
+
       d <- thepos[thechr==i]
       D <- matrix(1-2*mf(abs(outer(d, d, "-"))), ncol=length(d))
-      linkwts[uchr==i] <- (length(d) + 1 - colSums(D))/length(d)
+      linkwts[thechr==i] <- (length(d) + 1 - colSums(D))/length(d)
     }
   }
 
@@ -125,18 +142,20 @@ function(cross, pheno, pmark, min.genoprob=0.99,
   if(verbose) cat("First pass through knn\n")
   for(i in seq(along=upmark)) {
     wh <- which(cpmark == upmark[i])
+    pmarkchr <- pmark$chr[wh[1]]
+    pmarkpmark <- pmark$pmark[wh[1]]
     
     y <- pheno[,wh,drop=FALSE]
-    gp <- cross$geno[[pmark$chr[wh[1]]]]$prob[,pmark$pmark[wh[1]],,drop=FALSE]
+    gp <- cross$geno[[pmarkchr]]$prob[,pmarkpmark,,drop=FALSE]
     gi <- apply(gp, 1, function(a) which(a==max(a, na.rm=TRUE)))
     gmx <- apply(gp, 1, max, na.rm=TRUE)
     gi[gmx < min.genoprob] <- NA
     obsg[,i] <- gi
 
-    ysub <- y[theids$first,,drop=FALSE]
-    gisub <- gi[theids$second]
-    keep <- !is.na(gisub) & apply(ysub, 1, function(a) !any(is.na(a) ))
-    keep2 <- apply(y, 1, function(a) !any(is.na(a)))
+    ysub <- y[theids$second,,drop=FALSE]
+    gisub <- gi[theids$first]
+    keep <- !is.na(gisub) & (rowSums(is.na(ysub)) == 0) # have genotype and all phenotypes
+    keep2 <- rowSums(is.na(y)) == 0 # have all phenotypes
 
     infg[!keep2,i] <- NA
     infg[keep2,i] <- knn(ysub[keep,,drop=FALSE], y[keep2,,drop=FALSE], gisub[keep],
@@ -153,7 +172,6 @@ function(cross, pheno, pmark, min.genoprob=0.99,
 
     # bad individuals
     bad <- names(pd)[!is.na(pd) & pd>= max.selfd]
-    subids <- theids$mat[is.na(match(rownames(theids$mat), bad)),,drop=FALSE]
 
     # repeat the k-nearest neighbor classification without the bad individuals
     if(verbose) cat("Second pass through knn\n")
@@ -163,10 +181,10 @@ function(cross, pheno, pmark, min.genoprob=0.99,
       y <- pheno[,wh,drop=FALSE]
       gi <- obsg[,i]
   
-      ysub <- y[subids[subids[,3],2],,drop=FALSE]
-      gisub <- gi[subids[subids[,3],1]]
-      keep <- !is.na(gisub) & apply(ysub, 1, function(a) !any(is.na(a) ))
-      keep2 <- apply(y, 1, function(a) !any(is.na(a)))
+      ysub <- y[theids$second,,drop=FALSE]
+      gisub <- gi[theids$first]
+      keep <- !is.na(gisub) & (rowSums(is.na(ysub)) == 0) & is.na(match(rownames(ysub), bad))  
+      keep2 <- rowSums(is.na(y)) == 0
 
       infg[!keep2,i] <- NA
       infg[keep2,i] <- knn(ysub[keep,,drop=FALSE], y[keep2,,drop=FALSE], gisub[keep],
@@ -196,7 +214,10 @@ function(cross, pheno, pmark, min.genoprob=0.99,
   attr(d, "d.method") <- "prop.mismatch"
   attr(d, "labels") <- c("genotype", phenolabel)
   attr(d, "retained") <- colnames(pheno)
-  if(repeatKNN) attr(d, "orig.selfd") <- pd
+  if(repeatKNN) {
+    attr(d, "orig.selfd") <- pd
+    attr(d, "badind") <- bad
+  }
   attr(d, "obsg") <- obsg
   attr(d, "infg") <- infg
   attr(d, "denom") <- denom
