@@ -8,11 +8,7 @@ If you any additions or revisions to suggest, please send an email to
 Karl Broman, <kbroman@biostat.wisc.edu>.
 ----------------------------------------------------------------------
 
-o Big revisions to disteg:
-    - If missing values: don't use those individuals to form
-      classifier and don't make a prediction about them. [test that I
-      got this right]
-    - take the distance calculation down to C
+o Clean up the code in disteg()
 
 o A function for making those pairs plots for a set of individuals
   from one or two tissues.
@@ -36,9 +32,6 @@ o Why are there so many eQTL obs/inf mismatches?
   mice?
 
 o distep, and distgp, for phenotype data
-
-o Add examples in help files (calc.locallod, disteg, etc.)
-  ...likely a simulated example
 
 o algorithm for using distances to make a decision about what is
   messed up (that is, what happened).  I guess separate the inference
