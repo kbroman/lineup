@@ -43,6 +43,11 @@ function(id1, id2)
   else if(!is.null(rownames(id2)))
     id2 <- rownames(id2)
   
+  if(is.null(id1))
+    stop("Can't find IDs in id1")
+  if(is.null(id2))
+    stop("Can't find IDs in id2")
+
   m1 <- match(id2, id1)
   m2 <- match(id1, id2)
 
