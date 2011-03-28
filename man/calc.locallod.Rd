@@ -83,9 +83,6 @@ edata <- cbind((x$qtlgeno[,1:20] - 2)*10+rnorm(prod(dim(x$qtlgeno[,1:20]))),
                (x$qtlgeno[,21:40] - 2)*0.1+rnorm(prod(dim(x$qtlgeno[,21:40]))))
 dimnames(edata) <- list(x$pheno$id, paste("e", 1:ncol(edata), sep=""))
 
-# add a bit of missing data
-#edata[sample(1:prod(dim(edata)), 30)] <- NA
-
 # gene locations
 theloc <- data.frame(chr=thechr[eqtl.loc], pos=theppos[eqtl.loc])
 rownames(theloc) <- colnames(edata)
