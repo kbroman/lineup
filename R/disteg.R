@@ -225,6 +225,8 @@ function(cross, pheno, pmark, min.genoprob=0.99,
   attr(d, "y") <- ysave
   attr(d, "denom") <- denom
   attr(d, "linkwts") <- linkwts
+  attr(d, "genonames") <- getgenonames(class(cross)[1], "A", "simple",
+                                       getsex(cross), attributes(cross))
   class(d) <- c("eg.lineupdist", "lineupdist")
 
   d
