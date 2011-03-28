@@ -35,12 +35,16 @@ function(d1, d2, hirow, hicol, xlab, ylab, smoothScatter=TRUE,
     if(is.null(meth)) xlab <- "d1"
     else if(meth=="cor") xlab <- "Correlation"
     else if(meth=="rmsd") xlab <- "RMS difference"
+    else if(meth=="prop.mismatch") xlab <- "Proportion mismatches"
+    else xlab <- "d1"
   }
   if(missing(ylab)) {
     meth <- attr(d2, "d.method")
     if(is.null(meth)) ylab <- "d2"
     else if(meth=="cor") ylab <- "Correlation"
     else if(meth=="rmsd") ylab <- "RMS difference"
+    else if(meth=="prop.mismatch") ylab <- "Proportion mismatches"
+    else ylab <- "d2"
   }
 
   if(any(dim(d1) != dim(d2)) || any(rownames(d1) != rownames(d2)) ||
