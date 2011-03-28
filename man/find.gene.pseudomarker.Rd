@@ -103,7 +103,7 @@ edatasub <- edata[,locallod>100,drop=FALSE]
 
 # calculate distance between individuals
 #     (prop'n mismatches between obs and inferred eQTL geno)
-d <- disteg(x, edatasub, pmark[1:20,])
+d <- disteg(x, edatasub, pmark)
 
 # plot distances
 plot(d)
