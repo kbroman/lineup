@@ -140,12 +140,14 @@ function(cross, pheno, pmark, min.genoprob=0.99,
   
   # loop over eQTL; use k-nearest neighbor to classify
   if(verbose) cat("First pass through knn\n")
+  ysave <- vector("list", length(upmark))
+  names(ysave) <- colnames(obsg)
   for(i in seq(along=upmark)) {
     wh <- which(cpmark == upmark[i])
     pmarkchr <- pmark$chr[wh[1]]
     pmarkpmark <- pmark$pmark[wh[1]]
     
-    y <- pheno[,wh,drop=FALSE]
+    ysave[[i]] <- y <- pheno[,wh,drop=FALSE]
     gp <- cross$geno[[pmarkchr]]$prob[,pmarkpmark,,drop=FALSE]
     gi <- apply(gp, 1, function(a) which(a==max(a, na.rm=TRUE)))
     gmx <- apply(gp, 1, max, na.rm=TRUE)
@@ -220,6 +222,7 @@ function(cross, pheno, pmark, min.genoprob=0.99,
   }
   attr(d, "obsg") <- obsg
   attr(d, "infg") <- infg
+  attr(d, "y") <- ysave
   attr(d, "denom") <- denom
   attr(d, "linkwts") <- linkwts
   class(d) <- c("eg.lineupdist", "lineupdist")
