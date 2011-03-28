@@ -75,7 +75,7 @@ function(cross, pheno, pmark, min.genoprob=0.99,
   
   # individuals in common between two data sets
   theids <- findCommonID(cross, pheno)
-  if(sum(theids$inBoth) < k)
+  if(sum(theids$mat$inBoth) < k)
     stop("You need at least ", k, " individuals in common between the data sets.")
 
   # make sure pheno and pmark line up
@@ -133,8 +133,8 @@ function(cross, pheno, pmark, min.genoprob=0.99,
     gi[gmx < min.genoprob] <- NA
     obsg[,i] <- gi
 
-    ysub <- y[theids[theids[,3],2],,drop=FALSE]
-    gisub <- gi[theids[theids[,3],1]]
+    ysub <- y[theids$first,,drop=FALSE]
+    gisub <- gi[theids$second]
     keep <- !is.na(gisub) & apply(ysub, 1, function(a) !any(is.na(a) ))
     keep2 <- apply(y, 1, function(a) !any(is.na(a)))
 
@@ -146,14 +146,14 @@ function(cross, pheno, pmark, min.genoprob=0.99,
   if(repeatKNN) {
     if(verbose) cat("Calculate self-self distances\n")
     # calculate self-self distances
-    pd <- rep(NA, nrow(theids))
-    names(pd) <- rownames(theids)
-    for(i in rownames(theids)[theids[,3]]) 
+    pd <- rep(NA, nrow(theids$mat))
+    names(pd) <- rownames(theids$mat)
+    for(i in rownames(theids$mat)[theids$mat$inBoth])
       pd[i] <- mean(obsg[i,] != infg[i,], na.rm=TRUE)
 
     # bad individuals
     bad <- names(pd)[!is.na(pd) & pd>= max.selfd]
-    subids <- theids[is.na(match(rownames(theids), bad)),,drop=FALSE]
+    subids <- theids$mat[is.na(match(rownames(theids$mat), bad)),,drop=FALSE]
 
     # repeat the k-nearest neighbor classification without the bad individuals
     if(verbose) cat("Second pass through knn\n")
@@ -200,8 +200,7 @@ function(cross, pheno, pmark, min.genoprob=0.99,
   attr(d, "obsg") <- obsg
   attr(d, "infg") <- infg
   attr(d, "denom") <- denom
-  names(uweights) <- upmark
-  attr(d, "weights") <- uweights
+  attr(d, "linkwts") <- linkwts
   class(d) <- c("eg.lineupdist", "lineupdist")
 
   d
