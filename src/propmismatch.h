@@ -1,6 +1,6 @@
 /**********************************************************************
  * 
- * mat_rmsd.h
+ * propmismatch.h
  *
  * copyright (c) 2011, Karl W Broman
  *
@@ -21,15 +21,15 @@
  *
  * C functions for the R/lineup package
  *
- * Contains: R_mat_rmsd, mat_rmsd
+ * Contains: R_propmismatch, propmismatch
  *
  **********************************************************************/
 
-void R_mat_rmsd(int *nrow, int *ncolx, double *x, 
-		int *ncoly, double *y, double *d,
-		int *symmetric);
+void R_propmismatch(int *nrow, int *ncolx, int *x, 
+		    int *ncoly, int *y, double *wts,
+		    double *prop, double *denom);
 
-void mat_rmsd(int nrow, int ncolx, double **X, int ncoly, double **Y,
-	      double **D, int symmetric);
+void propmismatch(int nrow, int ncolx, int **X, int ncoly, int **Y,
+		  double *wts, double **Prop, double **Denom);
 
-/* end of mat_rmsd.h */
+/* end of propmismatch.h */

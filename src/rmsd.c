@@ -1,6 +1,6 @@
 /**********************************************************************
  * 
- * mat_rmsd.c
+ * rmsd.c
  *
  * copyright (c) 2011, Karl W Broman
  *
@@ -21,7 +21,7 @@
  *
  * C functions for the R/lineup package
  *
- * Contains: R_mat_rmsd, mat_rmsd
+ * Contains: R_rmsd, rmsd
  *
  **********************************************************************/
 
@@ -29,12 +29,12 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <math.h>
-#include "mat_rmsd.h"
+#include "rmsd.h"
 #include "util.h"
 
-void R_mat_rmsd(int *nrow, int *ncolx, double *x, 
-		int *ncoly, double *y, double *d,
-		int *symmetric)
+void R_rmsd(int *nrow, int *ncolx, double *x, 
+	    int *ncoly, double *y, double *d,
+	    int *symmetric)
 {
   double **X, **Y, **D;
 
@@ -42,11 +42,11 @@ void R_mat_rmsd(int *nrow, int *ncolx, double *x,
   reorg_dmatrix(*nrow, *ncoly, y, &Y);
   reorg_dmatrix(*ncolx, *ncoly, d, &D);
   
-  mat_rmsd(*nrow, *ncolx, X, *ncoly, Y, D, *symmetric);
+  rmsd(*nrow, *ncolx, X, *ncoly, Y, D, *symmetric);
 }
 
-void mat_rmsd(int nrow, int ncolx, double **X, int ncoly, double **Y,
-	      double **D, int symmetric)
+void rmsd(int nrow, int ncolx, double **X, int ncoly, double **Y,
+	  double **D, int symmetric)
 {
   int i, j, k;
   double temp;
@@ -54,21 +54,21 @@ void mat_rmsd(int nrow, int ncolx, double **X, int ncoly, double **Y,
   if(symmetric) {
     for(i=0; i<ncolx-1; i++) {
       for(j=(i+1); j<ncoly; j++) {
-	D[j][i] = 0.0;
+	D[i][j] = 0.0;
 	for(k=0; k<nrow; k++) {
 	  if(R_FINITE(X[i][k]) && R_FINITE(Y[j][k])) {
 	    temp = (X[i][k] - Y[j][k]);
-	    D[j][i] += temp*temp;
+	    D[i][j] += temp*temp;
 	  }
 	}
-	D[i][j] = D[j][i];
+	D[j][i] = D[i][j];
       }
     }
   }
 
   else {
-    for(i=0; i<ncolx; i++) {
-      for(j=0; j<ncoly; j++) {
+    for(j=0; j<ncoly; j++) {
+      for(i=0; i<ncolx; i++) {
 	D[j][i] = 0.0;
 	for(k=0; k<nrow; k++) {
 	  if(R_FINITE(X[i][k]) && R_FINITE(Y[j][k])) {
@@ -82,4 +82,4 @@ void mat_rmsd(int nrow, int ncolx, double **X, int ncoly, double **Y,
 
 }
 
-/* end of mat_rmsd.c */
+/* end of rmsd.c */

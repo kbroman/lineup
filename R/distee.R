@@ -97,7 +97,7 @@ function(e1, e2, d.method=c("rmsd", "cor"), labels=c("e1","e2"),
 #                     NAOK=TRUE)$d, ncol=nrow(e1))
     }
     else 
-      d <- matrix(.C("R_mat_rmsd",
+      d <- matrix(.C("R_rmsd",
                      as.integer(ncol(e1)),
                      as.integer(nrow(e1)),
                      as.double(t(e1)),
@@ -112,7 +112,7 @@ function(e1, e2, d.method=c("rmsd", "cor"), labels=c("e1","e2"),
     if(d.method=="cor")
       d <- corbetw2mat(t(e1), t(e2), what="all", scaled=scaled)
     else
-      d <- matrix(.C("R_mat_rmsd",
+      d <- matrix(.C("R_rmsd",
                      as.integer(ncol(e1)),
                      as.integer(nrow(e1)),
                      as.double(t(e1)),

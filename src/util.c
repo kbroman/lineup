@@ -23,7 +23,7 @@
  *
  * These are utility functions
  *
- * Contains: reorg_dmatrix
+ * Contains: reorg_dmatrix, reorg_imatrix
  *
  **********************************************************************/
 
@@ -51,6 +51,29 @@ void reorg_dmatrix(int nrow, int ncol, double *x, double ***X)
   int i;
 
   *X = (double **)R_alloc(ncol, sizeof(double *));
+
+  (*X)[0] = x;
+  for(i=1; i< ncol; i++) 
+    (*X)[i] = (*X)[i-1] + nrow;
+}
+
+/**********************************************************************
+ * 
+ * reorg_imatrix
+ *
+ * Reorganize a singly-indexed matrix of ints so it is a 
+ * doubly-indexed array rather than a single long vector
+ *
+ * Afterwards, X indexed like X[col][row]
+ *
+ * Allocation done by R_alloc, so that R does the cleanup.
+ *
+ **********************************************************************/
+void reorg_imatrix(int nrow, int ncol, int *x, int ***X)
+{
+  int i;
+
+  *X = (int **)R_alloc(ncol, sizeof(int *));
 
   (*X)[0] = x;
   for(i=1; i< ncol; i++) 

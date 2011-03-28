@@ -176,15 +176,22 @@ function(cross, pheno, pmark, min.genoprob=0.99,
   
   # calculate final distance
   if(verbose) cat("Calculate distance matrix\n")
-  d <- matrix(nrow=nrow(obsg), ncol=nrow(infg))
-  dimnames(d) <- list(rownames(obsg), rownames(infg))
-  denom <- d
-  for(i in 1:nrow(obsg)) {
-    for(j in 1:nrow(infg)) {
-      denom[i,j] <- sum((!is.na(obsg[i,]) & !is.na(infg[j,]))*linkwts)
-      d[i,j] <- sum((obsg[i,] != infg[j,])*linkwts, na.rm=TRUE)/denom[i,j]
-    }
-  }
+
+  z <- .C("R_propmismatch",
+          as.integer(ncol(obsg)),
+          as.integer(nrow(obsg)),
+          as.integer(t(obsg)),
+          as.integer(nrow(infg)),
+          as.integer(t(infg)),
+          as.double(linkwts),
+          prop=as.double(rep(NA, nrow(obsg)*nrow(infg))),
+          denom=as.double(rep(NA, nrow(obsg)*nrow(infg))),
+          PACKAGE="lineup",
+          NAOK=TRUE)
+
+  d <- matrix(z$prop, ncol=nrow(infg))
+  denom <- matrix(z$denom, ncol=nrow(infg))
+  dimnames(denom) <- dimnames(d) <- list(rownames(obsg), rownames(infg))
 
   attr(d, "d.method") <- "prop.mismatch"
   attr(d, "labels") <- c("genotype", phenolabel)
