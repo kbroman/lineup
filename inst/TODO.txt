@@ -8,10 +8,10 @@ If you any additions or revisions to suggest, please send an email to
 Karl Broman, <kbroman@biostat.wisc.edu>.
 ----------------------------------------------------------------------
 
+o Help file for plotEGclass()
+
 o A function for making those pairs plots for a set of individuals
   from one or two tissues.
-
-o Function to plot knn classifier info for a particular eQTL
 
 o Another plot of distance matrix: image of dichotomized version of
   distance (some threshold as input, checking d.method to decide
