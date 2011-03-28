@@ -215,7 +215,6 @@ function(cross, pheno, pmark, min.genoprob=0.99,
 
   attr(d, "d.method") <- "prop.mismatch"
   attr(d, "labels") <- c("genotype", phenolabel)
-  attr(d, "retained") <- colnames(pheno)
   if(repeatKNN) {
     attr(d, "orig.selfd") <- pd
     attr(d, "badind") <- bad
