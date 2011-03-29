@@ -10,7 +10,7 @@
 
 \usage{
 plot2dist(d1, d2, hirow, hicol, xlab, ylab, smoothScatter=TRUE,
-         colself="black", colnonself="gray", colhirow="green", colhicol="orange", ...)
+         colself="black", colnonself="gray", colhirow="green", colhicol="orange", \dots)
 }
 
 \arguments{
