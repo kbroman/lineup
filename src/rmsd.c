@@ -48,20 +48,22 @@ void R_rmsd(int *nrow, int *ncolx, double *x,
 void rmsd(int nrow, int ncolx, double **X, int ncoly, double **Y,
 	  double **D, int symmetric)
 {
-  int i, j, k;
+  int i, j, k, n;
   double temp;
 
   if(symmetric) {
     for(i=0; i<ncolx-1; i++) {
       for(j=(i+1); j<ncoly; j++) {
 	D[i][j] = 0.0;
+	n = 0;
 	for(k=0; k<nrow; k++) {
 	  if(R_FINITE(X[i][k]) && R_FINITE(Y[j][k])) {
 	    temp = (X[i][k] - Y[j][k]);
 	    D[i][j] += temp*temp;
+	    n++;
 	  }
 	}
-	D[j][i] = D[i][j];
+	D[j][i] = D[i][j] = sqrt(D[i][j]/(double)n);
       }
     }
   }
@@ -70,12 +72,15 @@ void rmsd(int nrow, int ncolx, double **X, int ncoly, double **Y,
     for(j=0; j<ncoly; j++) {
       for(i=0; i<ncolx; i++) {
 	D[j][i] = 0.0;
+	n = 0;
 	for(k=0; k<nrow; k++) {
 	  if(R_FINITE(X[i][k]) && R_FINITE(Y[j][k])) {
 	    temp = (X[i][k] - Y[j][k]);
 	    D[j][i] += temp*temp;
+	    n++;
 	  }
 	}
+	D[j][i] = sqrt(D[j][i]/(double)n);
       }
     }
   }
