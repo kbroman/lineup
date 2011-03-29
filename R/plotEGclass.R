@@ -27,17 +27,18 @@
 # plot expression -> eQTL genotype classifier
 ######################################################################
 plotEGclass <-
-function(d, eqtl=1, outercol, innercol, 
+function(d, eqtl=1, outercol="inferred", innercol="observed", 
          thecolors=c("blue","green","red","orange"), ...)
 {
   if(!("eg.lineupdist" %in% class(d)))
     stop("Input d must be as produced by disteg().")
 
   # inner and outer colors based on...
-  if(missing(outercol)) outercol <- "inferred"
-  if(missing(innercol)) innercol <- "observed"
-  outercol <- switch(outercol, "obs"="observed", "inf"="inferred", outercol)
-  innercol <- switch(innercol, "obs"="observed", "inf"="inferred", innercol)
+  choices <- c("observed", "inferred")
+  if(!is.na(pm <- pmatch(outercol, choices)))
+    outercol <- choices[pm]
+  if(!is.na(pm <- pmatch(innercol, choices)))
+    innercol <- choices[pm]
 
   ginf <- attr(d, "infg")
   gobs <- attr(d, "obsg")
