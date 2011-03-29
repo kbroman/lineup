@@ -152,11 +152,15 @@ plot(d)
 
 # summary of apparent mix-ups
 summary(d)
+
+# plot of classifier for first eQTL
+plotEGclass(d)
 }
 
 \seealso{ \code{\link{distee}}, \code{\link{summary.lineupdist}},
   \code{\link{pulldiag}}, \code{\link{omitdiag}},
   \code{\link{findCommonID}}, \code{\link{find.gene.pseudomarker}},
-  \code{\link{calc.locallod}}, \code{\link{plot.lineupdist}} }
+  \code{\link{calc.locallod}}, \code{\link{plot.lineupdist}},
+  \code{\link[class]{knn}}, \code{\link{plotEGclass}} }
 
 \keyword{utilities}

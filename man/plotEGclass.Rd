@@ -1,53 +1,53 @@
-\name{calc.locallod}
-\alias{calc.locallod}
+\name{plotEGclass}
+\alias{plotEGclass}
 
-\title{Calculate LOD score at physical position of each gene}
+\title{Plot classifier of eQTL genotype from expression data}
 
 \description{
-  For gene expression data with physical positions of the genes,
-  calculate the LOD score at those positions to assess evidence for
-  local eQTL.
+  Diagnostic plot of one of the eQTL classifiers from the results of
+  \code{\link{disteg}}: generally expression phenotype against observed
+  eQTL genotype, colored by inferred eQTL genotype.
 }
 
 \usage{
-calc.locallod(cross, pheno, pmark, verbose=TRUE)
+plotEGclass(d, eqtl=1, outercol="inferred", innercol="observed", 
+            thecolors=c("blue","green","red","orange"), \dots)
 }
 
 \arguments{
- \item{cross}{An object of class \code{"cross"} containing data for a
- QTL experiment.  See the help file for \code{\link[qtl]{read.cross}} in
- the R/qtl package (\url{http://www.rqtl.org}).  There must be a
- phenotype named \code{"id"} or \code{"ID"} that contains the
- individual identifiers.}
- \item{pheno}{A data frame of phenotypes (generally gene expression
- data), stored as individuals x phenotypes.  The row names must contain
- individual identifiers.}
- \item{pmark}{Pseudomarkers that are closest to the genes in
- \code{pheno}, as output by \code{\link{find.gene.pseudomarker}}.}
- \item{verbose}{If TRUE, print tracing information.}
+  \item{d}{Output of \code{\link{disteg}}.}
+  \item{eqtl}{Numeric index or a character vector (of the form
+    "1@102.35") indicating the eQTL to consider.}
+  \item{outercol}{Indicates how to color the outer edge of the points:
+  \code{"observed"} indicates to color based on observed genotypes;
+  \code{"inferred"} indicates to color based on inferred genotypes;
+  otherwise, give a color.}
+  \item{innercol}{Like \code{outercol}, but indicating the interior of
+    the points.}
+  \item{thecolors}{The colors to use in the plot.  The last element
+  (after the number of genotypes) indicates the color to use for missing
+  values.}
+ \item{\dots}{Passed to \code{\link[graphics]{plot}} and
+ \code{\link[graphics]{points}}.} 
 }
 
 \details{
-  \code{cross} and \code{pheno} must contain exactly the same
-  individuals in the same order.  (Use \code{\link{findCommonID}} to
-  line them up.)
+  The function produces a diagnostic plot for studying one of the
+  k-nearest neighbor classifiers underlying the output from
+  \code{\link{disteg}}. 
 
-  We consider the expression phenotypes in batches: those whose closest
-  pseudomarker is the same.
+  In the case of one expression phenotype attached to the selected eQTL, 
+  the plot is a dot plot of gene expression against observed eQTL genotype.
 
-  We use Haley-Knott regression to calculate the LOD scores.  
+  In the case of two expression phenotypes, the plot is a scatterplot of
+  the two expression phenotypes against each other.
 
-  Actually, we use a bit of a contortion of the data to force the
-  \code{\link[qtl]{scanone}} function in R/qtl to calculate the LOD
-  score at a single position.
-
-  We omit any transcripts that map to the X chromosome; we can only
-  handle autosomal loci for now.
+  In the case of more than two expression phenotypes, we use
+  \code{\link[graphics]{pairs}} to produce a matrix of scatterplots.
 }
 
 \value{
-A vector of LOD scores.  The names indicate the gene names (rows in
-\code{pheno}). 
+None.
 }
 
 \author{Karl W Broman, \email{kbroman@biostat.wisc.edu} }
@@ -120,7 +120,7 @@ plotEGclass(d)
 }
 }
 
-\seealso{ \code{\link{find.gene.pseudomarker}}, \code{\link{plotEGclass}},
-  \code{\link{findCommonID}}, \code{\link{disteg}} }
+\seealso{ \code{\link{disteg}}, \code{\link{plot.lineupdist}},
+  \code{\link{plot2dist}}, \code{\link[class]{knn}} }
 
-\keyword{utilities}
+\keyword{graphics}

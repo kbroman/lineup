@@ -110,11 +110,14 @@ plot(d)
 
 # summary of apparent mix-ups
 summary(d)
+
+# plot of classifier for first eQTL
+plotEGclass(d)
 }
 }
 
 \seealso{ \code{\link[qtl]{find.pseudomarker}},
-  \code{\link[qtl]{find.pseudomarkerpos}}, 
-  \code{\link{disteg}} \code{\link{calc.locallod}} }
+  \code{\link[qtl]{find.pseudomarkerpos}}, \code{\link{plotEGclass}},
+  \code{\link{disteg}}, \code{\link{calc.locallod}} }
 
 \keyword{utilities}
