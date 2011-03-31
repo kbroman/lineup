@@ -78,6 +78,9 @@ sort(pulldiag(d2))[1:8]
 summary(d1)
 summary(d2)
 
+# order to put matches together
+summary(d2, reorder="alignmatches")
+
 # plot histograms of RMS distances
 plot(d1)
 
