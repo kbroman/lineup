@@ -24,13 +24,15 @@
 ######################################################################
 
 summary.lineupdist <-
-function(object, cutoff, dropmatches=TRUE, reorder=TRUE, ...)
+function(object, cutoff, dropmatches=TRUE, reorder=c("bydistance", "alignmatches", "no"), ...)
 {
   d.method <- attr(object, "d.method")
   if(is.null(d.method)) d.method <- "rmsd"
 
   # cor: replace with negatives so sorting biggest to smallest
   if(d.method=="cor") object <- -object
+
+  reorder <- match.arg(reorder)
 
   # comparison within tissue?
   compareWithin <- attr(object, "compareWithin")
@@ -66,11 +68,28 @@ function(object, cutoff, dropmatches=TRUE, reorder=TRUE, ...)
                 bycol=bycol[is.na(bycol$selfd) | bycol$selfd >= bycol$nextd,,drop=FALSE])
   else res <- list(byrow=byrow, bycol=bycol)
   
-  if(reorder) {
+  if(reorder!="no") {
     if(compareWithin) 
       res <- lapply(res, function(a) a[order(a$mind),])
     else 
       res <- lapply(res, function(a) a[order(a$mind, -a$selfd),])
+  }
+  if(reorder=="alignmatches" && !compareWithin) {
+    for(i in seq(along=res)) {
+      if(nrow(res[[i]])<3) next
+      col1 <- rownames(res[[i]])
+      col2 <- as.character(res[[i]][,ncol(res[[i]])])
+      n <- length(col1)
+      theorder <- 1:n
+      for(j in 1:(n-1)) {
+        if(any(col2[theorder[j]] == col1[theorder[-(1:j)]])) {
+          wh <- which(col2[theorder[j]] == col1[theorder[-(1:j)]])
+
+          theorder[-(1:j)] <- theorder[c(wh+j, ((j+1):length(theorder))[-wh])]
+        }
+      }
+      res[[i]] <- res[[i]][theorder,,drop=FALSE]
+    }
   }
   
   # cor: return correlations to original scale and change colnames

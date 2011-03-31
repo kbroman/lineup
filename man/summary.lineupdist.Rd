@@ -10,8 +10,8 @@
 }
 
 \usage{
-\method{summary}{lineupdist}(object, cutoff, dropmatches=TRUE, reorder=TRUE,
-                  \dots)
+\method{summary}{lineupdist}(object, cutoff, dropmatches=TRUE,
+                  reorder=c("bydistance", "alignmatches", "no"), \dots)
 }
 
 \arguments{
@@ -21,9 +21,10 @@
   this cutoff or the self-self result is not missing and is above this cutoff.}
  \item{dropmatches}{If TRUE, omit rows for which an individual's best
  match is itself.}
- \item{reorder}{If TRUE, reorder rows by increasing distance (or
+ \item{reorder}{If \code{"bydistance"}, reorder rows by increasing distance (or
  decreasing correlation) to the best match and then by decreasing
- distance (or decreasing correlation) to self.}
+ distance (or decreasing correlation) to self; if \code{"alignmatches"},
+  group related errors together; if \code{"no"}, leave as is.}
  \item{\dots}{Passed to \code{\link[base]{print.data.frame}}.}
 }
 
