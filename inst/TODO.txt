@@ -15,14 +15,6 @@ o Another plot of distance matrix: image of dichotomized version of
   distance (some threshold as input, checking d.method to decide
   whether to color above or below threshold).
 
-o As an option to summary.lineupdist, arrange the results so that the
-  first has the closest pair and then try to find a match among the
-  others, repeating until you can't find further ones, then print the
-  next closest pair, to more clearly show A-B switches or chains like
-  A-B-C-D-E-F-A.  Also, indicate if next individual was not measured
-  or matches self?  Perhaps combine the two directions?  ("For which
-  columns is this row the max correlation?")
-
 o Why are there so many eQTL obs/inf mismatches?
   Perhaps weight the eQTL by their proportion of mismatches across all
   mice?
