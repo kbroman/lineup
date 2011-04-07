@@ -3,7 +3,7 @@
 # summary.lineupdist.R
 #
 # copyright (c) 2011, Karl W Broman
-# last modified Mar, 2011
+# last modified Apr, 2011
 # first written Mar, 2011
 #
 #     This program is free software; you can redistribute it and/or
@@ -19,7 +19,7 @@
 #     at http://www.r-project.org/Licenses/GPL-3
 # 
 # Part of the R/lineup package
-# Contains: summary.lineupdist, print.summary.lineupdist
+# Contains: summary.lineupdist, print.summary.lineupdist, print.lineupdist
 #
 ######################################################################
 
@@ -131,5 +131,17 @@ function(x, ...)
     print.data.frame(x$bycol, ...)
   }
 }
+
+print.lineupdist <-
+function(x, ...)
+{
+  possible.attributes <- c("d.method", "labels", "compareWithin", "orig.selfd",
+                           "badind", "obsg", "infg", "y", "denom", "linkwts", "genonames")
+  for(i in possible.attributes[possible.attributes %in% names(attributes(x))])
+    attr(x, i) <- NULL
+
+  print(unclass(x))
+}
+
 
 # end of summary.lineupdist.R

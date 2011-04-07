@@ -1,5 +1,6 @@
 \name{lineup-internal}
 \alias{print.summary.lineupdist}
+\alias{print.lineupdist}
 
 \title{Internal lineup functions}
 
@@ -9,6 +10,7 @@
 
 \usage{
 \method{print}{summary.lineupdist}(x, \dots)
+\method{print}{lineupdist}(x, \dots)
 }
 
 \details{

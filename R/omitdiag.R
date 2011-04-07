@@ -25,7 +25,6 @@
 
 ##############################
 # replace "diagonal" (the self-self cases) from a distance matrix with NAs
-#     
 ##############################
 
 omitdiag <-
