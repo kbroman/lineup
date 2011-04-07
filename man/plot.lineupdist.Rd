@@ -9,7 +9,7 @@
 }
 
 \usage{
-\method{plot}{lineupdist}(x, breaks, add.rug=TRUE, \dots)
+\method{plot}{lineupdist}(x, breaks, add.rug=TRUE, what=c("both", "ss", "sn"), \dots)
 }
 
 \arguments{
@@ -19,6 +19,9 @@
  it as the number of breaks and ensure that both histograms use the same
  set of breaks.}
  \item{add.rug}{If true, also include \code{\link[graphics]{rug}} below histograms.}
+ \item{what}{Indicates whether to plot both self-self and self-nonself
+ distances (or correlations) or just one or the other.  (\code{"ss"}
+ indicates self-self and \code{"sn"} indicates self-nonself.)}
  \item{\dots}{Ignored at this point.}
 }
 
