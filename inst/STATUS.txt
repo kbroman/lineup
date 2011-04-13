@@ -15,7 +15,7 @@ copyright (c) 2011, Karl W Broman
     at http://www.r-project.org/Licenses/GPL-3
 ----------------------------------------------------------------------
 
-Version 0.30, 4/7/2011:
+Version 0.30, 4/12/2011:
 
     This is a new package to contain tools for lining up two data
     matrices, to detect and correct sample mix-ups.  The key examples

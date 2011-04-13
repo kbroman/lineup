@@ -3,7 +3,7 @@
 # plot.lineupdist.R
 #
 # copyright (c) 2011, Karl W Broman
-# last modified Mar, 2011
+# last modified Apr, 2011
 # first written Mar, 2011
 #
 #     This program is free software; you can redistribute it and/or
@@ -26,8 +26,8 @@
 plot.lineupdist <-
 function(x, breaks, add.rug=TRUE, what=c("both", "ss", "sn"), ...)
 {
-  if(what=="ns") what <- "sn"
   what <- match.arg(what)
+  if(what=="ns") what <- "sn"
 
   di <- pulldiag(x)
   if(what=="both") ra <- range(x, na.rm=TRUE)
