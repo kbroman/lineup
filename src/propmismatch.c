@@ -4,7 +4,7 @@
  *
  * copyright (c) 2011, Karl W Broman
  *
- * last modified Mar, 2011
+ * last modified Apr, 2011
  * first written Mar, 2011
  *
  *     This program is free software; you can redistribute it and/or
@@ -57,7 +57,10 @@ void propmismatch(int nrow, int ncolx, int **X, int ncoly, int **Y,
     for(i=0; i<ncolx; i++) {
       temp1 = temp2 = 0.0;
       for(k=0; k<nrow; k++) {
-	if(R_FINITE(X[i][k]) && R_FINITE(Y[j][k])) {
+
+	/* have a bit of trouble regarding NAs being converted to smallest integer */
+	if(R_FINITE(X[i][k]) && X[i][k]>INT_MIN && 
+           R_FINITE(Y[j][k]) && Y[j][k]>INT_MIN) {
 	  temp2 += wts[k];
 	  temp1 += ((double)(X[i][k] != Y[j][k]) * wts[k]);
 	}
