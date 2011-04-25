@@ -3,7 +3,7 @@
 # corbetw2mat.R
 #
 # copyright (c) 2011, Karl W Broman
-# last modified Mar, 2011
+# last modified Apr, 2011
 # first written Mar, 2011
 #
 #     This program is free software; you can redistribute it and/or
@@ -44,10 +44,6 @@
 #  "all":       Calculate correlation betwen all pairs of columns
 #               (one in x, one in y)
 #
-# scaled: if TRUE, we assume that the columns of each matrix has mean
-#                  0 and SD 1, so we need only calculate
-#                  sum(x[,i]*y[,i])/(n-1)
-#
 # corthresh: threshold on correlations to return; used only if
 #            what="bestpairs"
 #               
@@ -55,7 +51,7 @@
 
 corbetw2mat <-
 function(x, y, what=c("paired", "bestright", "bestpairs", "all"),
-         scaled=FALSE, corthresh=0.9)
+         corthresh=0.9)
 {
   if(!is.matrix(x)) x <- as.matrix(x)
   if(!is.matrix(y)) y <- as.matrix(y)
@@ -77,7 +73,6 @@ function(x, y, what=c("paired", "bestright", "bestpairs", "all"),
               as.integer(px),
               as.double(x),
               as.double(y),
-              as.integer(scaled),
               cor=as.double(rep(NA, px)),
               PACKAGE="lineup",
               NAOK=TRUE)$cor
@@ -91,7 +86,6 @@ function(x, y, what=c("paired", "bestright", "bestpairs", "all"),
               as.double(x),
               as.integer(py),
               as.double(y),
-              as.integer(scaled),
               cor=as.double(rep(NA, px)),
               index=as.integer(rep(NA, px)),
               PACKAGE="lineup",
@@ -106,7 +100,6 @@ function(x, y, what=c("paired", "bestright", "bestpairs", "all"),
               as.double(x),
               as.integer(py),
               as.double(y),
-              as.integer(scaled),
               cor=as.double(rep(NA, px*py)),
               xindex=as.integer(rep(NA, px*py)),
               yindex=as.integer(rep(NA, px*py)),
@@ -125,7 +118,6 @@ function(x, y, what=c("paired", "bestright", "bestpairs", "all"),
               as.double(x),
               as.integer(py),
               as.double(y),
-              as.integer(scaled),
               cor=as.double(rep(NA, px*py)),
               PACKAGE="lineup",
               NAOK=TRUE)$cor

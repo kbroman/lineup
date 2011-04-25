@@ -102,7 +102,7 @@ function(e1, e2, d.method=c("rmsd", "cor"), labels=c("e1","e2"),
   }
   else {
     if(d.method=="cor")
-      d <- corbetw2mat(t(e1), t(e2), what="all", scaled=FALSE)
+      d <- corbetw2mat(t(e1), t(e2), what="all")
     else
       d <- matrix(.C("R_rmsd",
                      as.integer(ncol(e1)),

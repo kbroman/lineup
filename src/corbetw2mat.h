@@ -4,7 +4,7 @@
  *
  * copyright (c) 2011, Karl W Broman
  *
- * last modified Mar, 2011
+ * last modified Apr, 2011
  * first written Mar, 2011
  *
  *     This program is free software; you can redistribute it and/or
@@ -31,45 +31,45 @@
 
 
 void R_corbetw2mat_paired(int *nrow, int *ncol, double *x, double *y,
-			  int *scaled, double *cor);
+			  double *cor);
 
 void corbetw2mat_paired(int nrow, int ncol, double **X, double **Y,
-			int scaled, double *cor);
+			double *cor);
 
 
 void R_corbetw2mat_unpaired_lr(int *nrow, int *ncolx, double *x, 
 			       int *ncoly, double *y,
-			       int *scaled, double *cor, 
+			       double *cor, 
 			       int *index);
 
 void corbetw2mat_unpaired_lr(int nrow, int ncolx, double **X, 
 			     int ncoly, double **Y,
-			     int scaled, double *cor, int *index);
+			     double *cor, int *index);
 
 void R_corbetw2mat_unpaired_best(int *nrow, int *ncolx, double *x, 
 				 int *ncoly, double *y,
-				 int *scaled, double *cor, 
+				 double *cor, 
 				 int *xindex, int *yindex, 
 				 int *numpairs, double *corthresh);
 
 void corbetw2mat_unpaired_best(int nrow, int ncolx, double **X, 
 			       int ncoly, double **Y,
-			       int scaled, double *cor, 
+			       double *cor, 
 			       int *xindex, int *yindex, 
 			       int *numpairs, double corthresh);
 
 void R_corbetw2mat_unpaired_all(int *nrow, int *ncolx, double *x, 
 				int *ncoly, double *y,
-				int *scaled, double *cor);
+				double *cor);
 
 void corbetw2mat_unpaired_all(int nrow, int ncolx, double **X, 
 			      int ncoly, double **Y,
-			      int scaled, double **Cor);
+			      double **Cor);
 
 void R_corbetw2mat_self(int *nrow, int *ncol, double *x, 
-			int *scaled, double *cor);
+			double *cor);
 
 void corbetw2mat_self(int nrow, int ncol, double **X, 
-		      int scaled, double **Cor);
+		      double **Cor);
 
 /* end of corbetw2mat.h */
