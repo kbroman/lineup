@@ -3,7 +3,7 @@
 # pulldiag.R
 #
 # copyright (c) 2011, Karl W Broman
-# last modified Mar, 2011
+# last modified Apr, 2011
 # first written Mar, 2011
 #
 #     This program is free software; you can redistribute it and/or
@@ -31,17 +31,8 @@
 pulldiag <-
 function(d)
 {
-  rn <- rownames(d)
-  cn <- colnames(d)
-  m <- match(rn, cn)
-  self <- rep(NA, sum(!is.na(m)))
-  wh <- which(!is.na(m))
-  names(self) <- rn[wh]
-  m <- m[!is.na(m)]
-  for(i in seq(along=wh)) 
-    self[i] <- d[wh[i],m[i]]
-
-  self
+  ind <- findCommonID(rownames(d), colnames(d))
+  diag(d[ind$first,ind$second])
 }
   
 # end of pulldiag.R
