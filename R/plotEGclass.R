@@ -66,7 +66,7 @@ function(d, eqtl=1, outercol="inferred", innercol="observed",
   if(length(grep("@", eqtlnam)) == 1) {
     spl <- unlist(strsplit(eqtlnam, "@"))
     splnum <- unlist(strsplit(as.character(round(as.numeric(spl[2]),2)), "\\."))
-    if(nchar(splnum[2]) == 0)
+    if(length(splnum)==1 || nchar(splnum[2]) == 0)
       splnum[2] <- "00"
     else if(nchar(splnum[2]) == 1)
       splnum[2] <- paste(splnum[2], "0", sep="")
