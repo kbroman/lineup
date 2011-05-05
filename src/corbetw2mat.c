@@ -4,7 +4,7 @@
  *
  * copyright (c) 2011, Karl W Broman
  *
- * last modified Apr, 2011
+ * last modified May, 2011
  * first written Mar, 2011
  *
  *     This program is free software; you can redistribute it and/or
@@ -135,8 +135,14 @@ void corbetw2mat_unpaired_lr(int nrow, int ncolx, double **X,
       }
 
     } /* end loop over col of y */	  
-    cor[jx] = themax;
-    index[jx] = theindex+1;
+    if(themax == -2 && theindex == NA_INTEGER) {
+      cor[jx] = NA_REAL;
+      index[jx] = NA_INTEGER;
+    }
+    else {
+      cor[jx] = themax;
+      index[jx] = theindex+1;
+    }
 
   } /* end loop over col of x */
 }

@@ -3,7 +3,7 @@
 # corbetw2mat.R
 #
 # copyright (c) 2011, Karl W Broman
-# last modified Apr, 2011
+# last modified May, 2011
 # first written Mar, 2011
 #
 #     This program is free software; you can redistribute it and/or
@@ -64,6 +64,9 @@ function(x, y, what=c("paired", "bestright", "bestpairs", "all"),
   py <- ncol(y)
   what <- match.arg(what)
   
+  if(is.null(colnames(x))) colnames(x) <- paste("V", 1:ncol(x), sep="")
+  if(is.null(colnames(y))) colnames(y) <- paste("V", 1:ncol(y), sep="")
+
   if(what=="paired" && py != px)
     stop("what=\"paired\", but ncol(x)=", px, ", which is not equal to ncol(y)=", py)
 
@@ -90,8 +93,9 @@ function(x, y, what=c("paired", "bestright", "bestpairs", "all"),
               index=as.integer(rep(NA, px)),
               PACKAGE="lineup",
               NAOK=TRUE)
-    res <- cbind(cor=res$cor, yindex=res$index)
+    res <- data.frame(cor=res$cor, yindex=res$index)
     rownames(res) <- colnames(x)
+    res <- cbind(res, ycol=colnames(y)[res[,2]])
   }
   else if(what=="bestpairs") {
     res <- .C("R_corbetw2mat_unpaired_best",
@@ -107,9 +111,11 @@ function(x, y, what=c("paired", "bestright", "bestpairs", "all"),
               as.double(corthresh),
               PACKAGE="lineup",
               NAOK=TRUE)
-    res <- cbind(cor=res$cor[1:res$numpairs],
+    res <- data.frame(cor=res$cor[1:res$numpairs],
                  xindex=res$xindex[1:res$numpairs],
                  yindex=res$yindex[1:res$numpairs])
+    res <- cbind(res, xcol=colnames(x)[res[,2]], ycol=colnames(y)[res[,3]])
+
   }
   else {
     res <- .C("R_corbetw2mat_unpaired_all",

@@ -33,17 +33,18 @@ corbetw2mat(x, y, what=c("paired", "bestright", "bestpairs", "all"),
   between columns of \code{x} and the corresponding column of \code{y}.
   \code{x} and \code{y} must have the same number of columns.
 
-  If \code{what="bestright"}, we return a matrix
-  of size \code{ncol(x)} by \code{2}, with the \eqn{i}th row being the maximum 
+  If \code{what="bestright"}, we return a data frame
+  of size \code{ncol(x)} by \code{3}, with the \eqn{i}th row being the maximum 
   correlation between column \eqn{i} of \code{x} and a column of
-  \code{y}, and then the \code{y}-column index with that correlation.
+  \code{y}, and then the \code{y}-column index and \code{y}-column name with that correlation.
   (In case of ties, we give the first one.)
 
-  If \code{what="bestpairs"}, we return a matrix
-  with three columns, containing all pairs of columns (with one in
+  If \code{what="bestpairs"}, we return a data frame
+  with five columns, containing all pairs of columns (with one in
   \code{x} and one in \code{y}) with correlation \eqn{\ge} \code{corthresh}.
   Each row corresponds to a column pair, and contains the correlation
-  and then the \code{x}- and \code{y}-column indices.
+  and then the \code{x}- and \code{y}-column indices followed by the
+  \code{x}- and \code{y}-column names.
 
   If \code{what="all"}, the output is a matrix of size \code{ncol(x)} by
   \code{ncol(y)}, with all correlations between columns of \code{x} and
