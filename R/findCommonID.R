@@ -3,7 +3,7 @@
 # findCommonID.R
 #
 # copyright (c) 2011, Karl W Broman
-# last modified Mar, 2011
+# last modified May, 2011
 # first written Mar, 2011
 #
 #     This program is free software; you can redistribute it and/or
@@ -47,6 +47,9 @@ function(id1, id2)
     stop("Can't find IDs in id1")
   if(is.null(id2))
     stop("Can't find IDs in id2")
+
+  if(is.factor(id1)) id1 <- as.character(id1)
+  if(is.factor(id2)) id2 <- as.character(id2)
 
   m1 <- match(id2, id1)
   m2 <- match(id1, id2)
