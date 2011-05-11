@@ -10,7 +10,7 @@
 
 \usage{
 disteg(cross, pheno, pmark, min.genoprob=0.99,
-       k=20, min.classprob=0.8, repeatKNN=TRUE,
+       k=20, min.classprob=0.8, classprob2drop=1, repeatKNN=TRUE,
        max.selfd=0.3, phenolabel="phenotype",
        weightByLinkage=FALSE,
        map.function=c("haldane", "kosambi", "c-f", "morgan"),
@@ -34,6 +34,9 @@ disteg(cross, pheno, pmark, min.genoprob=0.99,
  neighbor classifier.}
  \item{min.classprob}{Minimum proportion of neighbors with a common
  class to make a class prediction.}
+ \item{classprob2drop}{If an individual is inferred to have a genotype
+ mismatch with classprob > this value, treat as an outlier and drop from
+ the analysis and then repeat the KNN construction without it.}
  \item{repeatKNN}{If TRUE, repeat k-nearest neighbor a second time,
  after omitting individuals who seem to not be self-self matches}
  \item{max.selfd}{Min distance from self (as proportion of mismatches
@@ -71,7 +74,10 @@ for each individual in \code{cross} and the inferred eQTL genotypes for
 each individual in \code{pheno}, as the proportion of mismatches between
 the observed and inferred eQTL genotypes.
 
-[Explain the use of the weights for \code{weightsByLinkage}.]
+If \code{weightByLinkage} is \code{TRUE}, we use weights on the mismatch
+proportions for the various eQTL, taking into account their linkage.
+Two tightly linked eQTL will each be given half the weight of a single
+isolated eQTL.
 }
 
 \value{

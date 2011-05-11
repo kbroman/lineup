@@ -3,7 +3,7 @@
 # disteg.R
 #
 # copyright (c) 2011, Karl W Broman
-# last modified Mar, 2011
+# last modified May, 2011
 # first written Mar, 2011
 #
 #     This program is free software; you can redistribute it and/or
@@ -42,6 +42,11 @@
 # min.classprob Minimum proportion of neighbors with a common class
 #               to make a class prediction
 #
+# classprob2drop If an individual is inferred to have a genotype
+#                mismatch with classprob > this value, treat as an
+#                outlier and drop from the analysis and then repeat
+#                the KNN construction without it.
+#
 # repeatKNN     If true, repeat k-nearest neighbor a second time,
 #               after omitting individuals who seem to not be
 #               self-self matches
@@ -65,7 +70,7 @@
 
 disteg <-
 function(cross, pheno, pmark, min.genoprob=0.99,
-         k=20, min.classprob=0.8, repeatKNN=TRUE,
+         k=20, min.classprob=0.8, classprob2drop=1, repeatKNN=TRUE,
          max.selfd=0.3, phenolabel="phenotype", 
          weightByLinkage=FALSE,
          map.function=c("haldane", "kosambi", "c-f", "morgan"),
@@ -159,10 +164,19 @@ function(cross, pheno, pmark, min.genoprob=0.99,
     keep <- !is.na(gisub) & (rowSums(is.na(ysub)) == 0) # have genotype and all phenotypes
     keep2 <- rowSums(is.na(y)) == 0 # have all phenotypes
 
-    infg[!keep2,i] <- NA
+    knnout <- knn(ysub[keep,,drop=FALSE], ysub[keep,,drop=FALSE], gisub[keep],
+                  k=k, l=ceiling(k*min.classprob), prob=TRUE)
+    pr <- attr(knnout, "prob")
+    okeep <- keep
+    keep[gisub[keep] != knnout & pr >= classprob2drop] <- FALSE
+    if(verbose && sum(okeep) > sum(keep))
+      cat(" -- Classifier ", i, ": dropping ", sum(okeep) - sum(keep), " outliers.\n", sep="")
+
     infg[keep2,i] <- knn(ysub[keep,,drop=FALSE], y[keep2,,drop=FALSE], gisub[keep],
                          k=k, l=ceiling(k*min.classprob))
+
   }
+
 
   if(repeatKNN) {
     if(verbose) cat("Calculate self-self distances\n")
@@ -189,6 +203,15 @@ function(cross, pheno, pmark, min.genoprob=0.99,
       keep2 <- rowSums(is.na(y)) == 0
 
       infg[!keep2,i] <- NA
+
+      knnout <- knn(ysub[keep,,drop=FALSE], ysub[keep,,drop=FALSE], gisub[keep],
+                    k=k, l=ceiling(k*min.classprob), prob=TRUE)
+      pr <- attr(knnout, "prob")
+      okeep <- keep
+      keep[gisub[keep] != knnout & pr >= 1-classprob2drop] <- FALSE
+      if(verbose && sum(okeep) > sum(keep))
+        cat(" -- Classifier ", i, ": dropping ", sum(okeep) - sum(keep), " outliers.\n", sep="")
+
       infg[keep2,i] <- knn(ysub[keep,,drop=FALSE], y[keep2,,drop=FALSE], gisub[keep],
                            k=k, l=ceiling(k*min.classprob))
     }
