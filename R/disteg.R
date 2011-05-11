@@ -208,7 +208,7 @@ function(cross, pheno, pmark, min.genoprob=0.99,
                     k=k, l=ceiling(k*min.classprob), prob=TRUE)
       pr <- attr(knnout, "prob")
       okeep <- keep
-      keep[gisub[keep] != knnout & pr >= 1-classprob2drop] <- FALSE
+      keep[gisub[keep] != knnout & pr >= classprob2drop] <- FALSE
       if(verbose && sum(okeep) > sum(keep))
         cat(" -- Classifier ", i, ": dropping ", sum(okeep) - sum(keep), " outliers.\n", sep="")
 
