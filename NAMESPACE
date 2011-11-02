@@ -1,0 +1,23 @@
+useDynLib(lineup)
+
+# Export all names
+export(calc.locallod, corbetw2mat, distee,
+       disteg, find.gene.pseudomarker, findCommonID, fscale,
+       lineupversion, omitdiag, plot2dist,
+       plotEGclass, pulldiag)
+
+# Import qtl and class packages
+import(qtl)
+
+# additional imports
+importFrom(class, knn)
+importFrom(graphics, par, rug, hist, smoothScatter, plot, axis, points, pairs)
+
+# S3 methods
+S3method("[", lineupdist)
+S3method(subset, lineupdist)
+S3method(summary, lineupdist)
+S3method(print, lineupdist)
+S3method(plot, lineupdist)
+S3method(print, summary.lineupdist)
+

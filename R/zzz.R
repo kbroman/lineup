@@ -23,7 +23,7 @@
 #
 ######################################################################
 
-
-.First.lib <- function(lib, pkg) library.dynam("lineup", pkg, lib)
+.onUnload <- function(libpath)
+    library.dynam.unload("lineup", libpath)
 
 # end of zzz.R
