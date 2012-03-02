@@ -1,6 +1,6 @@
 Revision history for the R/lineup package
 ----------------------------------------------------------------------
-copyright (c) 2011, Karl W Broman
+copyright (c) 2011-2012, Karl W Broman
 
     The R/lineup package is free software; you can redistribute it
     and/or modify it under the terms of the GNU General Public
@@ -15,9 +15,11 @@ copyright (c) 2011, Karl W Broman
     at http://www.r-project.org/Licenses/GPL-3
 ----------------------------------------------------------------------
 
-Version 0.31, 11/7/2001:
+Version 0.31, 3/2/2012:
 
     Added NAMESPACE.
+
+    Revised lineupversion() to use packageVersion().
 
 
 Version 0.30, 5/11/2011:
