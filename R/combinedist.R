@@ -39,6 +39,9 @@ function(..., method=c("median", "mean"))
 {
   v <- list(...)
 
+  # input is already a list?
+  if(length(v) == 1 && is.list(v[[1]])) v <- v[[1]]
+
   if(!all(sapply(v, function(a) "lineupdist" %in% class(a))))
     stop("Input distance matrices must each be of class \"lineupdist\".")
 
