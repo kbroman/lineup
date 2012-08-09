@@ -2,8 +2,8 @@
 #
 # pulldiag.R
 #
-# copyright (c) 2011, Karl W Broman
-# last modified Apr, 2011
+# copyright (c) 2011-2012, Karl W Broman
+# last modified Aug, 2012
 # first written Mar, 2011
 #
 #     This program is free software; you can redistribute it and/or
@@ -32,7 +32,7 @@ pulldiag <-
 function(d)
 {
   ind <- findCommonID(rownames(d), colnames(d))
-  diag(d[ind$first,ind$second])
+  diag(unclass(d)[ind$first,ind$second])
 }
   
 # end of pulldiag.R
