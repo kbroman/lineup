@@ -80,7 +80,7 @@ function(..., method=c("median", "mean"))
 
   class(ds) <- class(v[[1]])
 
-  possible.attributes <- c("d.method", "labels", "compareWithin")
+  possible.attributes <- c("d.method", "compareWithin")
   for(i in possible.attributes[possible.attributes %in% names(attributes(v[[1]]))]) 
     attr(ds, i) <- attr(v[[1]], i)
 
