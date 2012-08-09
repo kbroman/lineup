@@ -4,7 +4,7 @@ useDynLib(lineup)
 export(calc.locallod, corbetw2mat, distee,
        disteg, find.gene.pseudomarker, findCommonID, fscale,
        lineupversion, omitdiag, plot2dist,
-       plotEGclass, pulldiag)
+       plotEGclass, pulldiag, combinedist)
 
 # Import qtl and class packages
 import(qtl)
@@ -20,4 +20,3 @@ S3method(summary, lineupdist)
 S3method(print, lineupdist)
 S3method(plot, lineupdist)
 S3method(print, summary.lineupdist)
-
