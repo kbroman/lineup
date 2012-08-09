@@ -38,6 +38,10 @@ combinedist <-
 function(..., method=c("median", "mean"))
 {
   v <- list(...)
+
+  if(!all(sapply(v, function(a) "lineupdist" %in% class(a))))
+    stop("Input distance matrices must each be of class \"lineupdist\".")
+
   if(length(unique(sapply(v, function(a) class(a)[1]))) > 1)
     stop("Need all of the distance matrices to be the same type.")
 
