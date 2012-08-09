@@ -10,7 +10,8 @@
 }
 
 \usage{
-calc.locallod(cross, pheno, pmark, verbose=TRUE)
+calc.locallod(cross, pheno, pmark, addcovar=NULL, intcovar=NULL,
+              verbose=TRUE)
 }
 
 \arguments{
@@ -24,6 +25,8 @@ calc.locallod(cross, pheno, pmark, verbose=TRUE)
  individual identifiers.}
  \item{pmark}{Pseudomarkers that are closest to the genes in
  \code{pheno}, as output by \code{\link{find.gene.pseudomarker}}.}
+ \item{addcovar}{Additive covariates passed to \code{\link{scanone}}.}
+ \item{intcovar}{Interactive covariates passed to \code{\link{scanone}}.}
  \item{verbose}{If TRUE, print tracing information.}
 }
 
@@ -35,7 +38,7 @@ calc.locallod(cross, pheno, pmark, verbose=TRUE)
   We consider the expression phenotypes in batches: those whose closest
   pseudomarker is the same.
 
-  We use Haley-Knott regression to calculate the LOD scores.  
+  We use Haley-Knott regression to calculate the LOD scores.
 
   Actually, we use a bit of a contortion of the data to force the
   \code{\link[qtl]{scanone}} function in R/qtl to calculate the LOD
@@ -47,7 +50,7 @@ calc.locallod(cross, pheno, pmark, verbose=TRUE)
 
 \value{
 A vector of LOD scores.  The names indicate the gene names (rows in
-\code{pheno}). 
+\code{pheno}).
 }
 
 \author{Karl W Broman, \email{kbroman@biostat.wisc.edu} }

@@ -2,22 +2,22 @@
 #
 # calc.locallod.R
 #
-# copyright (c) 2011, Karl W Broman
-# last modified Mar, 2011
+# copyright (c) 2011-2012, Karl W Broman
+# last modified Apr, 2012
 # first written Mar, 2011
 #
 #     This program is free software; you can redistribute it and/or
 #     modify it under the terms of the GNU General Public License,
 #     version 3, as published by the Free Software Foundation.
-# 
+#
 #     This program is distributed in the hope that it will be useful,
 #     but without any warranty; without even the implied warranty of
 #     merchantability or fitness for a particular purpose.  See the GNU
 #     General Public License, version 3, for more details.
-# 
+#
 #     A copy of the GNU General Public License, version 3, is available
 #     at http://www.r-project.org/Licenses/GPL-3
-# 
+#
 # Part of the R/lineup package
 # Contains: calc.locallod
 #
@@ -26,21 +26,21 @@
 ######################################################################
 # calc.locallod
 #
-# cross: A cross object 
+# cross: A cross object
 #
 # pheno: gene expression phenotypes (genes are rows)
 #
 # pmark: matrix containing chr and nearest pseudomarker (as from
-#        find.gene.pseudomarker) 
+#        find.gene.pseudomarker)
 #
 #
 ######################################################################
 
 calc.locallod <-
-function(cross, pheno, pmark, verbose=TRUE)
+function(cross, pheno, pmark, addcovar=NULL, intcovar=NULL, verbose=TRUE)
 {
   require(qtl)
-  
+
   if(any(pmark$chr == "X")) {
     warning("Dropping X chr loci; we can only handle autosomes for now.")
     pmark <- pmark[pmark$chr != "X",]
@@ -61,7 +61,7 @@ function(cross, pheno, pmark, verbose=TRUE)
   temp <- cross
   n.ind <- nind(cross)
 
-  # loop over unique pseudomarkers 
+  # loop over unique pseudomarkers
   for(i in seq(along=upmark)) {
     if(verbose && i==round(i,-2)) cat(i, "of", length(upmark), "\n")
     wh <- which(cpmark == upmark[i])
@@ -74,7 +74,8 @@ function(cross, pheno, pmark, verbose=TRUE)
     temp$geno <- list("1"=list(data=cbind("m1"=rep(1, n.ind)), map=c("m1"=1),prob=gp))
     attr(temp$geno[[1]]$prob, "map") <- c("m1"=1)
     class(temp$geno[[1]]) <- "A"
-    lod[wh] <- unlist(scanone(temp, method="hk", pheno.col=1:ncol(y))[-(1:2)])
+    lod[wh] <- unlist(scanone(temp, method="hk", addcovar=addcovar, intcovar=intcovar,
+                              pheno.col=1:ncol(y))[-(1:2)])
   }
 
   names(lod) <- colnames(pheno)
