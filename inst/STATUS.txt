@@ -15,7 +15,7 @@ copyright (c) 2011-2012, Karl W Broman
     at http://www.r-project.org/Licenses/GPL-3
 ----------------------------------------------------------------------
 
-Version 0.32, 4/13/2012:
+Version 0.32, 8/13/2012:
 
     Added addcovar and intcovar arguments to calc.locallod.
 

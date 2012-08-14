@@ -46,8 +46,8 @@ disteg(cross, pheno, pmark, min.genoprob=0.99,
  output distance matrix.}
  \item{weightByLinkage}{If TRUE, weight the eQTL to account for their
 relative positions (for example, two tightly linked eQTL would each
-count about 1/2 of an isolated eQTL)},
- \item{map.function}{Used if \code{weightByLinkage} is TRUE},
+count about 1/2 of an isolated eQTL)}
+ \item{map.function}{Used if \code{weightByLinkage} is TRUE}
  \item{verbose}{if TRUE, give verbose output.}
 }
 
