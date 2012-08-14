@@ -61,9 +61,10 @@ function(..., method=c("median", "mean"))
 
   if(method=="mean" && all(sapply(v, function(a) !is.null(attr(a, "denom"))))) {
     use.denom <- TRUE
-    denom <- d
+    denom <- array(dim=c(length(rn), length(cn), length(v)))
+    dimnames(denom) <- list(rn, cn, names(v))
     for(i in seq(along=v))
-      denom[rownames(v[[i]]), colnames(v[[i]]), i] <- attr(d, "denom")
+      denom[rownames(v[[i]]), colnames(v[[i]]), i] <- attr(v[[i]], "denom")
   }
   else use.denom <- FALSE
 
