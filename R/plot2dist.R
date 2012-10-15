@@ -2,8 +2,8 @@
 #
 # plot2dist.R
 #
-# copyright (c) 2011, Karl W Broman
-# last modified Mar, 2011
+# copyright (c) 2011-2012, Karl W Broman
+# last modified Oct, 2012
 # first written Mar, 2011
 #
 #     This program is free software; you can redistribute it and/or
@@ -27,7 +27,7 @@
 # plot two distances
 ######################################################################
 plot2dist <-
-function(d1, d2, hirow, hicol, xlab, ylab, smoothScatter=TRUE,
+function(d1, d2, hirow, hicol, xlab, ylab, smoothScatter=FALSE,
          colself="black", colnonself="gray", colhirow="green", colhicol="orange", ...)
 {
   xmis <- ymix <- FALSE
@@ -118,8 +118,11 @@ function(d1, d2, hirow, hicol, xlab, ylab, smoothScatter=TRUE,
     if(smoothScatter)
       smoothScatter(d1, d2, xlab=xlab, ylab=ylab, xlim=xl, ylim=yl,
                     colramp=colorRampPalette(c("white","blue")))
-    else 
-      plot(d1, d2, xlab=xlab, ylab=ylab, xlim=xl, ylim=yl, col=colnonself, ...)
+    else {
+      cat("hi\n")
+      plot(unclass(d1), unclass(d2), xlab=xlab, ylab=ylab, xlim=xl, ylim=yl, col=colnonself, ...)
+      cat("done\n")
+    }
   }
   if(!missing(hirow) && !is.null(colhirow)) points(hirowd1, hirowd2, col=colhirow, ...)
   if(!missing(hicol) && !is.null(colhicol)) points(hicold1, hicold2, col=colhicol, ...)
