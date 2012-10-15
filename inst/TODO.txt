@@ -8,6 +8,11 @@ If you any additions or revisions to suggest, please send an email to
 Karl Broman, <kbroman@biostat.wisc.edu>.
 ----------------------------------------------------------------------
 
+o write a vignette
+
+o Write function like corbetw2mat but within a given matrix, with
+  options "bestpairs" or "bestforeach"
+
 o Function for adding the two sets of distance results.  (Say for
   combining the comparisons between genotype and each of multiple
   tissues). 
