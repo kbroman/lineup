@@ -119,9 +119,7 @@ function(d1, d2, hirow, hicol, xlab, ylab, smoothScatter=FALSE,
       smoothScatter(d1, d2, xlab=xlab, ylab=ylab, xlim=xl, ylim=yl,
                     colramp=colorRampPalette(c("white","blue")))
     else {
-      cat("hi\n")
       plot(unclass(d1), unclass(d2), xlab=xlab, ylab=ylab, xlim=xl, ylim=yl, col=colnonself, ...)
-      cat("done\n")
     }
   }
   if(!missing(hirow) && !is.null(colhirow)) points(hirowd1, hirowd2, col=colhirow, ...)
