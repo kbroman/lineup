@@ -106,8 +106,7 @@
 #' }
 #' 
 #' @importFrom graphics plot par hist
-#' @method plot lineupdist
-#' @export plot lineupdist
+#' @export
 plot.lineupdist <-
 function(x, breaks, add.rug=TRUE, what=c("both", "ss", "sn"), ...)
 {

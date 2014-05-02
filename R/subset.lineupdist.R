@@ -46,8 +46,7 @@
 #' @author Karl W Broman, \email{kbroman@@biostat.wisc.edu}
 #' @seealso \code{\link{disteg}}, \code{\link{distee}}, \code{\link{pulldiag}}
 #' @keywords manip
-#' @method subset lineupdist
-#' @export subset lineupdist
+#' @export
 #' @rdname subset.lineupdist
 subset.lineupdist <-
 function(x, rows, cols, ...)
@@ -69,7 +68,7 @@ function(x, rows, cols, ...)
   
 #' @name [.lineupdist
 #' @rdname subset.lineupdist
-#' @export [ lineupdist
+#' @export
 `[.lineupdist` <-
 function(x, rows, cols)
 subset(x, rows, cols)  

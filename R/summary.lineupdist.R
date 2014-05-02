@@ -107,8 +107,9 @@
 #' plot2dist(d1, d2)
 #' }
 #' 
-#' @method summary lineupdist
-#' @export summary lineupdist
+# @method summary lineupdist
+# @S3method summary lineupdist
+#' @export
 summary.lineupdist <-
 function(object, cutoff, dropmatches=TRUE, reorder=c("bydistance", "alignmatches", "no"), ...)
 {
@@ -199,7 +200,9 @@ function(object, cutoff, dropmatches=TRUE, reorder=c("bydistance", "alignmatches
   res
 }
 
-#' @export print summary.lineupdist
+# @method print summary.lineupdist
+# @S3method print summary.lineupdist
+#' @export
 print.summary.lineupdist <-
 function(x, ...)
 {
@@ -219,8 +222,9 @@ function(x, ...)
   }
 }
 
-#' @method print lineupdist
-#' @export print lineupdist
+# @method print lineupdist
+# @S3method print lineupdist
+#' @export
 print.lineupdist <-
 function(x, ...)
 {
