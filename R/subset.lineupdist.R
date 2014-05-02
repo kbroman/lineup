@@ -27,6 +27,27 @@
 # subset.lineupdist
 ##############################
 
+
+
+#' Subsetting distance matrix
+#' 
+#' Pull out a specified set of rows and columns from a distance matrix
+#' calculated by \code{\link{distee}} or \code{\link{disteg}}.
+#' 
+#' 
+#' @aliases subset.lineupdist [.lineupdist
+#' @param x A distance matrix object as obtained from \code{\link{distee}} or
+#' \code{\link{disteg}}.
+#' @param rows Optional vector of selected rows.
+#' @param cols Optional vector of selected columns.
+#' @param \dots Ignored at this point.
+#' @return The input distance matrix object, but with only the specified subset
+#' of the data.
+#' @author Karl W Broman, \email{kbroman@@biostat.wisc.edu}
+#' @seealso \code{\link{disteg}}, \code{\link{distee}}, \code{\link{pulldiag}}
+#' @keywords manip
+#' @method subset lineupdist
+#' @rdname subset.lineupdist
 subset.lineupdist <-
 function(x, rows, cols, ...)
 {
@@ -45,6 +66,8 @@ function(x, rows, cols, ...)
   xnew
 }
   
+#' @name `[.lineupdist`
+#' @rdname subset.lineupdist
 `[.lineupdist` <-
 function(x, rows, cols)
 subset(x, rows, cols)  

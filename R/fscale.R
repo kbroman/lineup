@@ -25,6 +25,33 @@
 
 
 # standardize the columns of a matrix so that they have mean 0 and SD 1
+
+
+#' Standardize the columns of a matrix
+#' 
+#' Standardize each column in a matrix, so that the columns have mean 0 and SD
+#' 1.
+#' 
+#' Missing values (\code{NA}) are ignored and left as is.
+#' 
+#' If there is just 1 non-missing value in a column, it is left as is.
+#' 
+#' This function uses a one-pass algorithm to calculate the mean and SD, which
+#' is fast but can show a bit of round-off error.
+#' 
+#' @param x A numeric matrix.
+#' @return A matrix of the same form as the input, but with columns transformed
+#' to have mean 0 and SD 1.
+#' @author Karl W Broman, \email{kbroman@@biostat.wisc.edu}
+#' @seealso \code{\link[base]{scale}}
+#' @keywords array
+#' @examples
+#' 
+#' x <- matrix(1:10, ncol=2)
+#' y <- fscale(x)
+#' 
+#' @useDynLib lineup
+#' @export fscale
 fscale <-
 function(x)
 {
