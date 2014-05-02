@@ -15,9 +15,14 @@ copyright (c) 2011-2012, Karl W Broman
     at http://www.r-project.org/Licenses/GPL-3
 ----------------------------------------------------------------------
 
+Version 0.36, 5/2/2014:
+
+    Convert documentation to use roxygen2
+
+
 Version 0.35, 10/25/2012:
 
-    No important changes yet.
+    Only minor changes
 
 
 Version 0.34, 10/15/2012:
