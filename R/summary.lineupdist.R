@@ -108,6 +108,7 @@
 #' }
 #' 
 #' @method summary lineupdist
+#' @export summary lineupdist
 summary.lineupdist <-
 function(object, cutoff, dropmatches=TRUE, reorder=c("bydistance", "alignmatches", "no"), ...)
 {
@@ -198,6 +199,7 @@ function(object, cutoff, dropmatches=TRUE, reorder=c("bydistance", "alignmatches
   res
 }
 
+#' @export print summary.lineupdist
 print.summary.lineupdist <-
 function(x, ...)
 {
@@ -218,6 +220,7 @@ function(x, ...)
 }
 
 #' @method print lineupdist
+#' @export print lineupdist
 print.lineupdist <-
 function(x, ...)
 {

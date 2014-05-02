@@ -47,6 +47,7 @@
 #' @seealso \code{\link{disteg}}, \code{\link{distee}}, \code{\link{pulldiag}}
 #' @keywords manip
 #' @method subset lineupdist
+#' @export subset lineupdist
 #' @rdname subset.lineupdist
 subset.lineupdist <-
 function(x, rows, cols, ...)
@@ -66,8 +67,9 @@ function(x, rows, cols, ...)
   xnew
 }
   
-#' @name `[.lineupdist`
+#' @name [.lineupdist
 #' @rdname subset.lineupdist
+#' @export [ lineupdist
 `[.lineupdist` <-
 function(x, rows, cols)
 subset(x, rows, cols)  
