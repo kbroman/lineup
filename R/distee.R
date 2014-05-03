@@ -1,46 +1,8 @@
-######################################################################
-#
-# distee.R
-#
-# copyright (c) 2011, Karl W Broman
-# last modified Apr, 2011
-# first written Mar, 2011
-#
-#     This program is free software; you can redistribute it and/or
-#     modify it under the terms of the GNU General Public License,
-#     version 3, as published by the Free Software Foundation.
-# 
-#     This program is distributed in the hope that it will be useful,
-#     but without any warranty; without even the implied warranty of
-#     merchantability or fitness for a particular purpose.  See the GNU
-#     General Public License, version 3, for more details.
-# 
-#     A copy of the GNU General Public License, version 3, is available
-#     at http://www.r-project.org/Licenses/GPL-3
-# 
-# Part of the R/lineup package
-# Contains: distee
-#
-######################################################################
+## distee.R
+## Karl W Broman
 
-######################################################################
-# distee: for calculating distance between pairs of individuals
-#         with microarray-like data in two conditions (for example,
-#         two tissues)
+# distee
 #
-# e1, e2 = the two data sets (individuals x genes)
-#
-# d.method = calculate inter-individual distance as RMS difference or
-#            as correlation
-#
-# labels = labels to attach to the two data sets
-#
-# verbose = if TRUE, give verbose output
-# 
-######################################################################
-
-
-
 #' Calculate distance between two gene expression data sets
 #' 
 #' Calculate a distance between all pairs of individuals for two gene
@@ -205,5 +167,3 @@ function(e1, e2, d.method=c("rmsd", "cor"), labels=c("e1","e2"),
   attr(d, "compareWithin") <- compareWithin
   d
 }
-
-# end of distee.R

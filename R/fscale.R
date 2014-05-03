@@ -1,32 +1,8 @@
-######################################################################
-#
-# fscale.R
-#
-# copyright (c) 2011, Karl W Broman
-# last modified Mar, 2011
-# first written Mar, 2011
-#
-#     This program is free software; you can redistribute it and/or
-#     modify it under the terms of the GNU General Public License,
-#     version 3, as published by the Free Software Foundation.
-# 
-#     This program is distributed in the hope that it will be useful,
-#     but without any warranty; without even the implied warranty of
-#     merchantability or fitness for a particular purpose.  See the GNU
-#     General Public License, version 3, for more details.
-# 
-#     A copy of the GNU General Public License, version 3, is available
-#     at http://www.r-project.org/Licenses/GPL-3
-# 
-# Part of the R/lineup package
-# Contains: fscale
-#
-######################################################################
+## fscale.R
+## Karl W Broman
 
-
-# standardize the columns of a matrix so that they have mean 0 and SD 1
-
-
+# fnscale
+#
 #' Standardize the columns of a matrix
 #' 
 #' Standardize each column in a matrix, so that the columns have mean 0 and SD
@@ -67,5 +43,3 @@ function(x)
   dimnames(y) <- dimnames(x)
   y
 }
-
-# end of fscale.R

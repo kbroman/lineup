@@ -1,46 +1,7 @@
-######################################################################
-#
-# find.gene.pseudomarker.R
-#
-# copyright (c) 2011, Karl W Broman
-# last modified Mar, 2011
-# first written Mar, 2011
-#
-#     This program is free software; you can redistribute it and/or
-#     modify it under the terms of the GNU General Public License,
-#     version 3, as published by the Free Software Foundation.
-# 
-#     This program is distributed in the hope that it will be useful,
-#     but without any warranty; without even the implied warranty of
-#     merchantability or fitness for a particular purpose.  See the GNU
-#     General Public License, version 3, for more details.
-# 
-#     A copy of the GNU General Public License, version 3, is available
-#     at http://www.r-project.org/Licenses/GPL-3
-# 
-# Part of the R/lineup package
-# Contains: find.gene.pseudomarker
-#
-######################################################################
+## find.gene.pseudomarker.R
+## Karl W Broman
 
-######################################################################
 # find.gene.pseudomarker:
-#         Function for identifying the closest pseudomarker to each
-#         of a set of genes
-#
-# cross: A cross object (containing results of calc.genoprob or sim.geno)
-#
-# pmap:  Map object with physical locations of markers (positions in Mbp)
-#
-# geneloc: data.frame with chr + physical location (in Mbp) of genes
-#          (gene names as row names)
-#
-# where: look in genotype probabilities or imputated genotypes?
-#
-######################################################################
-
-
-
 #' Find nearest peudomarker to each gene
 #' 
 #' Pull out the pseudomarker that is closest to the position of each of a
@@ -175,5 +136,3 @@ function(cross, pmap, geneloc, where=c("prob", "draws"))
 
   res
 }
-
-# end of find.gene.pseudomarker.R

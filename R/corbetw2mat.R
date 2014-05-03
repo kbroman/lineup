@@ -1,56 +1,8 @@
-######################################################################
-#
-# corbetw2mat.R
-#
-# copyright (c) 2011, Karl W Broman
-# last modified May, 2011
-# first written Mar, 2011
-#
-#     This program is free software; you can redistribute it and/or
-#     modify it under the terms of the GNU General Public License,
-#     version 3, as published by the Free Software Foundation.
-# 
-#     This program is distributed in the hope that it will be useful,
-#     but without any warranty; without even the implied warranty of
-#     merchantability or fitness for a particular purpose.  See the GNU
-#     General Public License, version 3, for more details.
-# 
-#     A copy of the GNU General Public License, version 3, is available
-#     at http://www.r-project.org/Licenses/GPL-3
-# 
-# Part of the R/lineup package
-# Contains: corbetw2mat
-#
-######################################################################
+## corbetw2mat.R
+## Karl W Broman
 
-######################################################################
 # corbetw2mat
 #
-# x, y = two matrices with the same number of rows
-#
-# what = 
-#  "paired":    We must have ncol(x) = ncol(y), and we then calculate 
-#               the correlation for each column of x with the 
-#               corresponding column of y
-#
-#  "bestright": We consider each column of x in turn, and find the
-#               most column in y with the highest correlation,
-#               returning a matrix with the max corr and the column 
-#               index in y
-#
-#  "bestpairs": We find all pairs of columns (one in x, one in y)
-#               with correlation >= corthreshold
-#             
-#  "all":       Calculate correlation betwen all pairs of columns
-#               (one in x, one in y)
-#
-# corthresh: threshold on correlations to return; used only if
-#            what="bestpairs"
-#               
-######################################################################
-
-
-
 #' Calculate correlations between columns of two matrices
 #' 
 #' For matrices x and y, calculate the correlation between columns of x and
@@ -209,5 +161,3 @@ function(x, y, what=c("paired", "bestright", "bestpairs", "all"),
 
   res
 }
-
-# end of corbetw2mat.R

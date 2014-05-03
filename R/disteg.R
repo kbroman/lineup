@@ -1,75 +1,8 @@
-######################################################################
-#
-# disteg.R
-#
-# copyright (c) 2011, Karl W Broman
-# last modified May, 2011
-# first written Mar, 2011
-#
-#     This program is free software; you can redistribute it and/or
-#     modify it under the terms of the GNU General Public License,
-#     version 3, as published by the Free Software Foundation.
-# 
-#     This program is distributed in the hope that it will be useful,
-#     but without any warranty; without even the implied warranty of
-#     merchantability or fitness for a particular purpose.  See the GNU
-#     General Public License, version 3, for more details.
-# 
-#     A copy of the GNU General Public License, version 3, is available
-#     at http://www.r-project.org/Licenses/GPL-3
-# 
-# Part of the R/lineup package
-# Contains: disteg
-#
-######################################################################
+## disteg.R
+## Karl W Broman
 
-######################################################################
 # disteg
 #
-# cross: A cross object 
-#
-# pheno: A matrix of expression phenotypes
-#
-# pmark: Pseudomarkers closest to each gene
-#
-# min.genoprob: Threshold on genotype probabilities; if maximum
-#               probability is less than this, observed genotype taken
-#               as NA.
-# 
-# k             Number of nearest neighbors to consider in forming a
-#               k-nearest neighbor classifier
-#
-# min.classprob Minimum proportion of neighbors with a common class
-#               to make a class prediction
-#
-# classprob2drop If an individual is inferred to have a genotype
-#                mismatch with classprob > this value, treat as an
-#                outlier and drop from the analysis and then repeat
-#                the KNN construction without it.
-#
-# repeatKNN     If true, repeat k-nearest neighbor a second time,
-#               after omitting individuals who seem to not be
-#               self-self matches
-#      
-# min.selfd     Min distance from self (as proportion of mismatches
-#               between observed and predicted eQTL genotypes) to be
-#               excluded from the second round of k-nearest neighbor
-#
-# phenolabel    Label for expression phenotypes to place in the output
-#               distance matrix
-#
-# weightByLinkage If TRUE, weight the eQTL to account for their
-#                 relative positions (for example, two tightly linked
-#                 eQTL would each count about 1/2 of an isolated eQTL)
-#
-# map.function    Used if weightByLinkage is TRUE
-#
-# verbose       If TRUE, print tracing information.
-#
-######################################################################
-
-
-
 #' Calculate distance between two gene expression data sets
 #' 
 #' Calculate a distance between all pairs of individuals for two gene
@@ -399,5 +332,3 @@ function(cross, pheno, pmark, min.genoprob=0.99,
 
   d
 }
-
-# end of disteg.R

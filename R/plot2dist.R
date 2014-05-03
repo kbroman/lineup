@@ -1,32 +1,5 @@
-######################################################################
-#
-# plot2dist.R
-#
-# copyright (c) 2011-2012, Karl W Broman
-# last modified Oct, 2012
-# first written Mar, 2011
-#
-#     This program is free software; you can redistribute it and/or
-#     modify it under the terms of the GNU General Public License,
-#     version 3, as published by the Free Software Foundation.
-# 
-#     This program is distributed in the hope that it will be useful,
-#     but without any warranty; without even the implied warranty of
-#     merchantability or fitness for a particular purpose.  See the GNU
-#     General Public License, version 3, for more details.
-# 
-#     A copy of the GNU General Public License, version 3, is available
-#     at http://www.r-project.org/Licenses/GPL-3
-# 
-# Part of the R/lineup package
-# Contains: plot2dist
-#
-######################################################################
-
-######################################################################
-# plot two distances
-######################################################################
-
+## plot2dist.R
+## Karl W Broman
 
 #' Plot two sets of inter-individual distances against one another
 #' 
@@ -214,5 +187,3 @@ function(d1, d2, hirow, hicol, xlab, ylab, smoothScatter=FALSE,
   if(!missing(hicol) && !is.null(colhicol)) points(hicold1, hicold2, col=colhicol, ...)
   if(!is.null(colself)) points(self, col=colself, pch=16, ...)
 }
-
-# end of plot2dist.R

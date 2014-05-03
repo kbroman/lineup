@@ -1,30 +1,8 @@
-######################################################################
-#
-# summary.lineupdist.R
-#
-# copyright (c) 2011, Karl W Broman
-# last modified Apr, 2011
-# first written Mar, 2011
-#
-#     This program is free software; you can redistribute it and/or
-#     modify it under the terms of the GNU General Public License,
-#     version 3, as published by the Free Software Foundation.
-# 
-#     This program is distributed in the hope that it will be useful,
-#     but without any warranty; without even the implied warranty of
-#     merchantability or fitness for a particular purpose.  See the GNU
-#     General Public License, version 3, for more details.
-# 
-#     A copy of the GNU General Public License, version 3, is available
-#     at http://www.r-project.org/Licenses/GPL-3
-# 
-# Part of the R/lineup package
-# Contains: summary.lineupdist, print.summary.lineupdist, print.lineupdist
-#
-######################################################################
+## summary.lineupdist.R
+## Karl W Broman
 
-
-
+# summary.lineupdist
+#
 #' Summarize inter-individual distances
 #' 
 #' Summarize the results of \code{\link{distee}} or \code{\link{disteg}}, with
@@ -107,8 +85,6 @@
 #' plot2dist(d1, d2)
 #' }
 #' 
-# @method summary lineupdist
-# @S3method summary lineupdist
 #' @export
 summary.lineupdist <-
 function(object, cutoff, dropmatches=TRUE, reorder=c("bydistance", "alignmatches", "no"), ...)
@@ -200,8 +176,6 @@ function(object, cutoff, dropmatches=TRUE, reorder=c("bydistance", "alignmatches
   res
 }
 
-# @method print summary.lineupdist
-# @S3method print summary.lineupdist
 #' @export
 print.summary.lineupdist <-
 function(x, ...)
@@ -222,8 +196,6 @@ function(x, ...)
   }
 }
 
-# @method print lineupdist
-# @S3method print lineupdist
 #' @export
 print.lineupdist <-
 function(x, ...)
@@ -235,6 +207,3 @@ function(x, ...)
 
   print(unclass(x))
 }
-
-
-# end of summary.lineupdist.R
