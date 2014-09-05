@@ -1,5 +1,7 @@
 ### R/lineup: detecting and correcting sample mix-ups
 
+[![Build Status](https://travis-ci.org/kbroman/lineup.png?branch=master)](https://travis-ci.org/kbroman/lineup)
+
 [Karl W Broman](http://www.biostat.wisc.edu/~kbroman)
 
 [R/lineup](http://github.com/kbroman/lineup) is an

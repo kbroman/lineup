@@ -1,3 +1,4 @@
 \.git
 Makefile
 ReadMe.md
+^\.travis\.yml$
