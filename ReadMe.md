@@ -11,7 +11,7 @@ between gene expression data on two tissues.
 
 This is particularly aimed at eQTL data for an experimental cross.
 
-#### Liences
+#### License
 
 This package is free software; you can redistribute it and/or modify it
 under the terms of the GNU General Public License, version 3, as
