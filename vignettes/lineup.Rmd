@@ -1,0 +1,126 @@
+---
+title: R/lineup user guide
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{R/lineup user guide}
+  %\VignetteEngine{knitr::rmarkdown}
+  \usepackage[utf8](inputenc)
+---
+
+```{r knitr_options, include=FALSE}
+library(knitr)
+opts_chunk$set(fig.width=7, fig.height=4.5,
+               dev.args=list(pointsize=16))
+```
+
+[R/lineup](https://github.com/kbroman/lineup) is an
+[R](http://www.r-project.org) package with tools for
+detecting and correcting sample mix-ups between two sets of
+measurements, such as between gene expression data on two tissues. The
+package is particularly aimed at eQTL data for an experimental cross,
+and as a companion to [R/qtl](http://rqtl.org).
+
+This document provides a brief tutorial on the use of the package.
+(**Though, as you'll see, I'm not done with this.**)
+
+We first load the R/qtl and R/lineup packages.
+
+```{r load_libraries}
+library(qtl)
+library(lineup)
+```
+
+We will consider a set of example data, of an F~2~ intercross with 100
+individuals genotyped at 1000 autosomal markers, and with gene
+expression data on 10,000 genes in two tissues.
+
+Let's load the data.
+
+```{r load_data}
+data(f2cross)
+data(expr1)
+data(expr2)
+data(pmap)
+data(genepos)
+```
+
+The dataset `f2cross` is the experimental cross, in the form used by
+[R/qtl](http://rqtl.org) (that is, an object of class `"cross"`).  The
+datasets `expr1` and `expr2` are matrices with the gene expression
+data, individuals as rows and genes as columns. The object `pmap` is a
+physical map of the markers in `f2cross` (with positions in Mbp), and
+`genepos` is a data frame with the genomic positions (in Mbp) of the
+genes in `expr1` and `expr2`.
+
+
+## Lining up expression data
+
+We'll first look at the gene expression data in `expr1` and `expr2`
+and look for possible sample mix-ups. To start, note that there are
+just 98 individuals in each data set, and they're not the same individuals.
+
+```{r summary_expr}
+nrow(expr1)
+nrow(expr2)
+all(rownames(expr1) == rownames(expr2))
+```
+
+We can use `findCommonID()` to find the individuals that are in
+common between the two matrices. For matrices, the default is to use
+the row names as identifiers.
+
+```{r find_commond_ind_expr}
+eid <- findCommonID(expr1, expr2)
+length(eid$first)
+```
+
+In the returned object, `eid$first` and `eid$second` contain indicies
+for `expr1` and `expr2`, respectively, to get them to line up.
+
+Now let's look for at the correlation between tissues for each gene,
+to identify genes that are highly correlated between the two tissues.
+
+```{r find_correlated_genes}
+cor_ee <- corbetw2mat(expr1[eid$first,], expr2[eid$second,], what="paired")
+hist(cor_ee, breaks=seq(-1, 1, len=101),
+     main="", las=1, xlab="Correlation in gene expression between tissues")
+```
+
+This is totally contrived data. There are basically no negative
+correlations.
+
+Let's focus on genes that have bewteen-tissue correlation > 0.9, and
+then look at the correlation, across these genes, between samples in
+tissue 1 and samples in tissue 2. This is done with the `distee()` function.
+
+```{r distee, fig.height=9}
+dee <- distee(expr1[,cor_ee>0.8], expr2[,cor_ee>0.8], d.method="cor")
+plot(dee)
+summary(dee)
+```
+
+
+
+
+```{r more_to_do, eval=FALSE}
+findCommonID # get samples in both data sets
+corbetw2mat  # find genes that are correlated between the two
+distee       # calculate distance between individuals
+             # use both d.method="rmsd" and d.method="cor"
+plot(distee) # plot the results
+plot2dist    # compare distee with rmsd and with cor
+summary(, reorder="alignmatches", cutoff=0.55) #
+pulldiag(d2il) #
+```
+
+# Lining up expression and genotype data
+
+```{r, lineup_geno, eval=FALSE}
+calc.locallod
+combinedist
+disteg
+find.gene.pseudomarker
+fscale
+omitdiag
+plotEGclass
+```
