@@ -1,7 +1,7 @@
 Package: lineup
 Version: 0.36-3
 Date: 2015-06-23
-Title: Lining up two sets of measurements
+Title: Lining Up Two Sets of Measurements
 Author: Karl W Broman <kbroman@biostat.wisc.edu>
 Maintainer: Karl W Broman <kbroman@biostat.wisc.edu>
 Depends:
