@@ -16,8 +16,9 @@ opts_chunk$set(fig.width=7, fig.height=4.5,
 [R/lineup](https://github.com/kbroman/lineup) is an
 [R](http://www.r-project.org) package with tools for
 detecting and correcting sample mix-ups between two sets of
-measurements, such as between gene expression data on two tissues. The
-package is particularly aimed at eQTL data for an experimental cross,
+measurements, such as between gene expression data on two tissues, and
+between gene expression data and marker genotype data. The
+package is particularly aimed at eQTL data for an experimental cross
 and as a companion to [R/qtl](http://rqtl.org).
 
 This document provides a brief tutorial on the use of the package.
@@ -30,13 +31,23 @@ library(qtl)
 library(lineup)
 ```
 
-We will consider a set of example data, of an F~2~ intercross with 100
-individuals genotyped at 1000 autosomal markers, and with gene
-expression data on 10,000 genes in two tissues.
+```{r load_data_hidden, include=FALSE}
+data(f2cross)
+data(expr1)
+data(expr2)
+data(pmap)
+data(genepos)
+```
+
+
+We will consider a set of simulated data as an example. This is an
+F~2~ intercross with `r nind(f2cross)` individuals genotyped at `r
+totmar(f2cross)` autosomal markers, and with gene expression data on
+`r ncol(expr1)` genes in two tissues.
 
 Let's load the data.
 
-```{r load_data}
+```{r load_data_shown, eval=FALSE}
 data(f2cross)
 data(expr1)
 data(expr2)
@@ -47,7 +58,7 @@ data(genepos)
 The dataset `f2cross` is the experimental cross, in the form used by
 [R/qtl](http://rqtl.org) (that is, an object of class `"cross"`).  The
 datasets `expr1` and `expr2` are matrices with the gene expression
-data, individuals as rows and genes as columns. The object `pmap` is a
+data, with individuals as rows and genes as columns. The object `pmap` is a
 physical map of the markers in `f2cross` (with positions in Mbp), and
 `genepos` is a data frame with the genomic positions (in Mbp) of the
 genes in `expr1` and `expr2`.
@@ -56,7 +67,13 @@ genes in `expr1` and `expr2`.
 ## Lining up expression data
 
 We'll first look at the gene expression data in `expr1` and `expr2`
-and look for possible sample mix-ups. To start, note that there are
+and look for possible sample mix-ups. The basic scheme (see
+[Broman et al. 2014](http://arxiv.org/abs/1402.2633)) is to identify a
+set of genes with highly correlated expression between the two
+tissues, and then use these genes to measure the association between
+each sample in the first tissue with each sample in the second tissue.
+
+To start, note that there are
 just 98 individuals in each data set, and they're not the same individuals.
 
 ```{r summary_expr}
@@ -65,7 +82,7 @@ nrow(expr2)
 all(rownames(expr1) == rownames(expr2))
 ```
 
-We can use `findCommonID()` to find the individuals that are in
+The function `findCommonID()` helps to find individuals that are in
 common between the two matrices. For matrices, the default is to use
 the row names as identifiers.
 
@@ -79,48 +96,103 @@ for `expr1` and `expr2`, respectively, to get them to line up.
 
 Now let's look for at the correlation between tissues for each gene,
 to identify genes that are highly correlated between the two tissues.
+We subset the rows with the IDs in `eid`, so that the rows
+correspond.
+
+The function `corbetw2mat()` can be used to calculate portions of the
+correlations between columns of two different matrices . With
+`what="paired"`, we assume that the two matrices have the same number
+of columns (say $p$), and that column $i$ in the first matrix corresponds to
+column $i$ in the second matrix, and we calculate just the $p$
+correlation values, for the paired columns.
 
 ```{r find_correlated_genes}
 cor_ee <- corbetw2mat(expr1[eid$first,], expr2[eid$second,], what="paired")
+```
+
+Here's a histogram of these `r length(cor_ee)` correlations.
+
+```{r hist_corr_betw_tissues}
+par(mar=c(5,4,1,1))
 hist(cor_ee, breaks=seq(-1, 1, len=101),
      main="", las=1, xlab="Correlation in gene expression between tissues")
 ```
 
-This is totally contrived data. There are basically no negative
-correlations.
+You can see that this is totally contrived data. Most genes have a
+positive correlation between the two tissues, with a bunch in the
+0&ndash;0.5 range, and then a bunch more approaching 1. But then
+`r round(mean(cor_ee < 0)*100)`% of genes are negatively correlated,
+again with the pattern that most are in the range -0.5&ndash;0 and
+then with a bunch near -1.
 
-Let's focus on genes that have bewteen-tissue correlation > 0.9, and
-then look at the correlation, across these genes, between samples in
-tissue 1 and samples in tissue 2. This is done with the `distee()` function.
+Let's focus on genes that have bewteen-tissue correlation > 0.8 in
+absolute value, and then look at the correlation, across these genes,
+between samples in tissue 1 and samples in tissue 2. This is done with
+the `distee()` function.
 
-```{r distee, fig.height=9}
-dee <- distee(expr1[,cor_ee>0.8], expr2[,cor_ee>0.8], d.method="cor")
-plot(dee)
-summary(dee)
+```{r distee}
+d_ee <- distee(expr1[,abs(cor_ee)>0.8], expr2[,abs(cor_ee)>0.8], d.method="cor")
+```
+
+The result is an object of class `"lineupdist"`. If you plot the
+result, you'll get two histograms: one of the self-self correlations,
+and another of the self-nonself correlations.
+
+```{r plot_distee, fig.height=9}
+par(mar=c(5,4,2,1))
+plot(d_ee)
+```
+
+For most individuals, the self-self correlation is near 1, but there
+is a group of `r sum(pulldiag(d_ee) < 0.5)` individuals where the
+self-self correlation is < 0.5.  Similarly, most of the self-nonself
+correlations are between -0.5 and 0.5, but there's a group of
+`r sum(!is.na(omitdiag(d_ee)) & omitdiag(d_ee) > 0.5)` correlations where the
+self-nonself correlation is near 1.
+
+You can use the helper functions `pulldiag()` and `omitdiag()` to do
+these sorts of counts: `pulldiag()` pulls out the "diagonal" of the
+correlation matrix (the self-self cases), and `omitdiag()` sets those
+diagonal values to `NA`.
+
+So to count the number of self-self correlations that are < 0.5, we
+do the following.
+
+```{r count_small_selfself}
+sum(pulldiag(d_ee) < 0.5)
+```
+
+To count the number of self-nonself correlations that are > 0.5, we do
+the following.
+
+```{r count_large_selfnonself}
+d_ee_nodiag <- omitdiag(d_ee)
+sum( !is.na(d_ee_nodiag) & d_ee_nodiag > 0.5)
 ```
 
 
 
+Applying the `summary()` function to the output of `distee()` gives a
+table of samples that are potential mix-ups.
 
-```{r more_to_do, eval=FALSE}
-findCommonID # get samples in both data sets
-corbetw2mat  # find genes that are correlated between the two
-distee       # calculate distance between individuals
-             # use both d.method="rmsd" and d.method="cor"
-plot(distee) # plot the results
-plot2dist    # compare distee with rmsd and with cor
-summary(, reorder="alignmatches", cutoff=0.55) #
-pulldiag(d2il) #
+```{r summary_distee}
+summary(d_ee)
 ```
+
+- Explain the results
+- Look for the sample duplicate
+- Make some plots of the mix-ups
+
+
 
 # Lining up expression and genotype data
 
 ```{r, lineup_geno, eval=FALSE}
+plot2dist    # compare distee with rmsd and with cor
 calc.locallod
 combinedist
 disteg
 find.gene.pseudomarker
 fscale
-omitdiag
 plotEGclass
 ```
