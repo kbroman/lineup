@@ -16,5 +16,5 @@ Suggests:
 Description: Tools for detecting and correcting sample mix-ups between two sets
     of measurements, such as between gene expression data on two tissues.
 License: GPL-3
-URL: http://www.biostat.wisc.edu/~kbroman/software
+URL: https://github.com/kbroman/lineup
 Roxygen: list(wrap = FALSE)
