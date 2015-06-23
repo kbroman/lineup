@@ -4,10 +4,10 @@
 # disteg
 #
 #' Calculate distance between two gene expression data sets
-#' 
+#'
 #' Calculate a distance between all pairs of individuals for two gene
 #' expression data sets
-#' 
+#'
 #' We consider the expression phenotypes in batches, by which pseudomarker they
 #' are closest to.  For each batch, we pull the genotype probabilities at the
 #' corresponding pseudomarker and use the individuals that are in common
@@ -18,22 +18,22 @@
 #' expression data, to give a predicted eQTL genotype. (If the proportion of
 #' the k nearest neighbors with a common class is less than
 #' \code{min.classprob}, the predicted eQTL genotype is left as \code{NA}.)
-#' 
+#'
 #' If \code{repeatKNN} is TRUE, we repeat the construction of the k-nearest
 #' neighbor classifier after first omitting individuals whose proportion of
 #' mismatches between observed and inferred eQTL genotypes is greater than
 #' \code{max.selfd}.
-#' 
+#'
 #' Finally, we calculate the distance between the observed eQTL genotypes for
 #' each individual in \code{cross} and the inferred eQTL genotypes for each
 #' individual in \code{pheno}, as the proportion of mismatches between the
 #' observed and inferred eQTL genotypes.
-#' 
+#'
 #' If \code{weightByLinkage} is \code{TRUE}, we use weights on the mismatch
 #' proportions for the various eQTL, taking into account their linkage. Two
 #' tightly linked eQTL will each be given half the weight of a single isolated
 #' eQTL.
-#' 
+#'
 #' @param cross An object of class \code{"cross"} containing data for a QTL
 #' experiment.  See the help file for \code{\link[qtl]{read.cross}} in the
 #' R/qtl package (\url{http://www.rqtl.org}).  There must be a phenotype named
@@ -67,13 +67,13 @@
 #' @return A matrix with \code{nind(cross)} rows and \code{nrow(pheno)}
 #' columns, containing the distances.  The individual IDs are in the row and
 #' column names.  The matrix is assigned class \code{"lineupdist"}.
-#' 
+#'
 #' The names of the genes that were used to construct the classifier are saved
 #' in an attribute \code{"retained"}.
-#' 
+#'
 #' The observed and inferred eQTL genotypes are saved as attributes
 #' \code{"obsg"} and \code{"infg"}.
-#' 
+#'
 #' The denominators of the proportions that form the inter-individual distances
 #' are in the attribute \code{"denom"}.
 #' @author Karl W Broman, \email{kbroman@@biostat.wisc.edu}
@@ -84,75 +84,76 @@
 #' \code{\link{plotEGclass}}
 #' @keywords utilities
 #' @examples
-#' 
+#' library(qtl)
+#'
 #' ##############################
 #' # simulate an eQTL data set
 #' ##############################
 #' # genetic map
 #' L <- seq(120, length=8, by=-10)
 #' map <- sim.map(L, n.mar=L/10+1, include.x=FALSE, eq.spacing=TRUE)
-#' 
+#'
 #' # physical map: make all intervals 2x longer
 #' pmap <- rescalemap(map, 2)
-#' 
+#'
 #' # arbitrary locations of 40 local eQTL
 #' thepos <- unlist(map)
 #' theppos <- unlist(pmap)
 #' thechr <- rep(seq(along=map), sapply(map, length))
 #' eqtl.loc <- sort(sample(seq(along=thepos), 40))
-#' 
+#'
 #' x <- sim.cross(map, n.ind=250, type="f2",
 #'                model=cbind(thechr[eqtl.loc], thepos[eqtl.loc], 0, 0))
 #' x$pheno$id <- factor(paste("Mouse", 1:250, sep=""))
-#' 
+#'
 #' # first 20 have eQTL with huge effects
 #' # second 20 have essentially no effect
 #' edata <- cbind((x$qtlgeno[,1:20] - 2)*10+rnorm(prod(dim(x$qtlgeno[,1:20]))),
 #'                (x$qtlgeno[,21:40] - 2)*0.1+rnorm(prod(dim(x$qtlgeno[,21:40]))))
 #' dimnames(edata) <- list(x$pheno$id, paste("e", 1:ncol(edata), sep=""))
-#' 
+#'
 #' # gene locations
 #' theloc <- data.frame(chr=thechr[eqtl.loc], pos=theppos[eqtl.loc])
 #' rownames(theloc) <- colnames(edata)
-#' 
+#'
 #' # mix up 5 individuals in expression data
 #' edata[1:3,] <- edata[c(2,3,1),]
 #' edata[4:5,] <- edata[5:4,]
-#' 
+#'
 #' ##############################
 #' # now, the start of the analysis
 #' ##############################
 #' x <- calc.genoprob(x, step=1)
-#' 
+#'
 #' # find nearest pseudomarkers
 #' pmark <- find.gene.pseudomarker(x, pmap, theloc, "prob")
-#' 
+#'
 #' # calculate LOD score for local eQTL
 #' locallod <- calc.locallod(x, edata, pmark)
-#' 
+#'
 #' # take those with LOD > 100 [which will be the first 20]
 #' edatasub <- edata[,locallod>100,drop=FALSE]
-#' 
+#'
 #' # calculate distance between individuals
 #' #     (prop'n mismatches between obs and inferred eQTL geno)
 #' d <- disteg(x, edatasub, pmark)
-#' 
+#'
 #' # plot distances
 #' plot(d)
-#' 
+#'
 #' # summary of apparent mix-ups
 #' summary(d)
-#' 
+#'
 #' # plot of classifier for first eQTL
 #' plotEGclass(d)
-#' 
+#'
 #' @importFrom class knn
 #' @useDynLib lineup
 #' @export disteg
 disteg <-
 function(cross, pheno, pmark, min.genoprob=0.99,
          k=20, min.classprob=0.8, classprob2drop=1, repeatKNN=TRUE,
-         max.selfd=0.3, phenolabel="phenotype", 
+         max.selfd=0.3, phenolabel="phenotype",
          weightByLinkage=FALSE,
          map.function=c("haldane", "kosambi", "c-f", "morgan"),
          verbose=TRUE)
@@ -166,7 +167,7 @@ function(cross, pheno, pmark, min.genoprob=0.99,
   m <- findCommonID(colnames(pheno), rownames(pmark))
   pheno <- pheno[,m$first,drop=FALSE]
   pmark <- pmark[m$second,,drop=FALSE]
-  
+
   # drop X chromosome from cross
   chrtype <- sapply(cross$geno, class)
   if(any(chrtype=="X")) {
@@ -200,10 +201,10 @@ function(cross, pheno, pmark, min.genoprob=0.99,
 
     map.function <- match.arg(map.function)
     mf <- switch(map.function,
-                 "haldane" = mf.h,
-                 "kosambi" = mf.k,
-                 "c-f" = mf.cf,
-                 "morgan" = mf.m)
+                 "haldane" = qtl::mf.h,
+                 "kosambi" = qtl::mf.k,
+                 "c-f" = qtl::mf.cf,
+                 "morgan" = qtl::mf.m)
 
     for(i in uchr) {
       if(sum(thechr==i)==1) next # just one eQTL on this chromosome
@@ -219,9 +220,9 @@ function(cross, pheno, pmark, min.genoprob=0.99,
   infg <- matrix(ncol=length(upmark), nrow=nrow(pheno))
   colnames(obsg) <- colnames(infg) <-
     apply(pmark[match(upmark, cpmark),c(1,3)], 1, paste, collapse="@")
-  rownames(obsg) <- getid(cross)
+  rownames(obsg) <- qtl::getid(cross)
   rownames(infg) <- rownames(pheno)
-  
+
   # loop over eQTL; use k-nearest neighbor to classify
   if(verbose) cat("First pass through knn\n")
   ysave <- vector("list", length(upmark))
@@ -230,7 +231,7 @@ function(cross, pheno, pmark, min.genoprob=0.99,
     wh <- which(cpmark == upmark[i])
     pmarkchr <- pmark$chr[wh[1]]
     pmarkpmark <- pmark$pmark[wh[1]]
-    
+
     ysave[[i]] <- y <- pheno[,wh,drop=FALSE]
     gp <- cross$geno[[pmarkchr]]$prob[,pmarkpmark,,drop=FALSE]
     gi <- apply(gp, 1, function(a) which(a==max(a, na.rm=TRUE)))
@@ -272,13 +273,13 @@ function(cross, pheno, pmark, min.genoprob=0.99,
     if(verbose) cat("Second pass through knn\n")
     for(i in seq(along=upmark)) {
       wh <- which(cpmark == upmark[i])
-      
+
       y <- pheno[,wh,drop=FALSE]
       gi <- obsg[,i]
-  
+
       ysub <- y[theids$second,,drop=FALSE]
       gisub <- gi[theids$first]
-      keep <- !is.na(gisub) & (rowSums(is.na(ysub)) == 0) & is.na(match(rownames(ysub), bad))  
+      keep <- !is.na(gisub) & (rowSums(is.na(ysub)) == 0) & is.na(match(rownames(ysub), bad))
       keep2 <- rowSums(is.na(y)) == 0
 
       infg[!keep2,i] <- NA
@@ -295,7 +296,7 @@ function(cross, pheno, pmark, min.genoprob=0.99,
                            k=k, l=ceiling(k*min.classprob))
     }
   }
-  
+
   # calculate final distance
   if(verbose) cat("Calculate distance matrix\n")
 
@@ -326,8 +327,8 @@ function(cross, pheno, pmark, min.genoprob=0.99,
   attr(d, "y") <- ysave
   attr(d, "denom") <- denom
   attr(d, "linkwts") <- linkwts
-  attr(d, "genonames") <- getgenonames(class(cross)[1], "A", "simple",
-                                       getsex(cross), attributes(cross))
+  attr(d, "genonames") <- qtl::getgenonames(class(cross)[1], "A", "simple",
+                                            qtl::getsex(cross), attributes(cross))
   class(d) <- c("eg.lineupdist", "lineupdist")
 
   d

@@ -99,6 +99,8 @@ tightly linked eQTL will each be given half the weight of a single isolated
 eQTL.
 }
 \examples{
+library(qtl)
+
 ##############################
 # simulate an eQTL data set
 ##############################
