@@ -133,7 +133,7 @@ calc.locallod <-
 
     # loop over unique pseudomarkers
     for(i in seq(along=upmark)) {
-        if(verbose && i==round(i,-2)) cat(i, "of", length(upmark), "\n")
+        if(verbose && i==round(i,-2)) message(i, " of ", length(upmark))
         wh <- which(cpmark == upmark[i])
 
         y <- pheno[,wh,drop=FALSE]
