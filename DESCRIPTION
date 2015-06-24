@@ -1,5 +1,5 @@
 Package: lineup
-Version: 0.36-3
+Version: 0.36-4
 Date: 2015-06-23
 Title: Lining Up Two Sets of Measurements
 Author: Karl W Broman <kbroman@biostat.wisc.edu>
@@ -15,7 +15,8 @@ Suggests:
     roxygen2,
     knitr,
     rmarkdown,
-    devtools
+    devtools,
+    testthat
 Description: Tools for detecting and correcting sample mix-ups between two sets
     of measurements, such as between gene expression data on two tissues.
 License: GPL-3
