@@ -1,6 +1,6 @@
 context("corbetw2mat")
 
-test_that("corbetw2mat works with paired=TRUE", {
+test_that('corbetw2mat works with what="paired"', {
 
     n_ind <- 20
     n_col <- 3
