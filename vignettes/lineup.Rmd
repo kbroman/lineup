@@ -63,6 +63,14 @@ physical map of the markers in `f2cross` (with positions in Mbp), and
 `genepos` is a data frame with the genomic positions (in Mbp) of the
 genes in `expr1` and `expr2`.
 
+The expression datasets were stored as integers; let's divide all
+values by 1000, to simplify some later plots.
+
+```{r scale_expr}
+expr1 <- expr1/1000
+expr2 <- expr2/1000
+```
+
 
 ## Lining up expression data
 
@@ -91,7 +99,7 @@ eid <- findCommonID(expr1, expr2)
 length(eid$first)
 ```
 
-In the returned object, `eid$first` and `eid$second` contain indicies
+In the returned object, `eid$first` and `eid$second` contain indices
 for `expr1` and `expr2`, respectively, to get them to line up.
 
 Now let's look for at the correlation between tissues for each gene,
@@ -125,10 +133,12 @@ positive correlation between the two tissues, with a bunch in the
 again with the pattern that most are in the range -0.5&ndash;0 and
 then with a bunch near -1.
 
-Let's focus on genes that have bewteen-tissue correlation > 0.8 in
-absolute value, and then look at the correlation, across these genes,
+Let's focus on genes that have between-tissue correlation > 0.8 in
+absolute value (of which there are `r sum(abs(cor_ee)>0.8)`), and then
+look at the correlation, across these genes,
 between samples in tissue 1 and samples in tissue 2. This is done with
-the `distee()` function.
+the `distee()` function ("dist" for distance and "ee" for expression
+vs. expression).
 
 ```{r distee}
 d_ee <- distee(expr1[,abs(cor_ee)>0.8], expr2[,abs(cor_ee)>0.8], d.method="cor")
@@ -171,21 +181,75 @@ sum( !is.na(d_ee_nodiag) & d_ee_nodiag > 0.5)
 ```
 
 
-
 Applying the `summary()` function to the output of `distee()` gives a
-table of samples that are potential mix-ups.
+set of tables of samples that are potential mix-ups.
 
 ```{r summary_distee}
 summary(d_ee)
 ```
 
-- Explain the results
-- Look for the sample duplicate
-- Make some plots of the mix-ups
+The first table is for samples in the first dataset: each row is a
+sample. The first column is the maximum correlation between that
+sample and the different samples in the second dataset, the second
+column is the next-highest correlation, and the third column is the
+self-self correlation. For the rows where the `selfc` (for self-correlation) value
+is low but `maxc` is high, a sample mix-up is indicated. The last
+column is the sample in the second dataset that has the highest
+correlation.
+
+In the second table, the rows correspond to samples in the second
+dataset.
+
+The rows with `NA` in the `selfc` column are cases where a sample
+appears in one dataset but not the other. In these cases, we expect
+the maximum correlation to be small, and it is.
+
+However, there appear to be three pairs of sample mix-ups: (80,85),
+(86,91), and (9,88). The have low values for `selfc` and high values
+for `maxc`, consistently between the two datasets.  But we don't know
+whether the mix-ups are in the first or second dataset.
+
+In addition, sample 43 in the first dataset appears to be much sample
+53 in the second dataset, but sample 43 in the second data set doesn't
+look like any of the samples in the first dataset. This is the sort of
+thing you see when there is a sample duplicate...where sample 43 in
+the first data set is perhaps a copy of sample 53 in the first dataset.
+
+If we make a scatterplot those two samples, which have correlation
+`r round(cor(expr1["43",], expr1["53",]),2)` across all genes, it's
+pretty clear that they're duplicates.
+
+```{r plot_expr_dup, fig.width=7}
+par(mar=c(5,4,1,1))
+plot(expr1["43",], expr1["53",],
+     xlab="Sample 43, expr1", ylab="Sample 53, expr1",
+     las=1, pch=21, bg="slateblue", cex=0.7)
+```
+
+
+Let's drop sample 43 from the first dataset.
+
+```{r drop_expr1_sample43}
+expr1 <- expr1[rownames(expr1) != "43",]
+```
 
 
 
-# Lining up expression and genotype data
+## Lining up expression and genotype data
+
+Let's turn now to lining up the expression data with the genotype
+data. We'll consider one expression data set at a time.
+
+The procedure is a bit like that above, in lining up the two
+expression datasets. We first find gene/genotype pairs that are
+highly associated; we'll look at the association be the expression of
+a gene and the genotype at its genomic position (that is, genes with a
+strong local-eQTL). We select genes with very strong local-eQTL, and
+use them to form classifiers, of genotype from expression
+phenotype. We then compare the predicted genotypes at the eQTL to the
+observed marker genotypes.
+
+
 
 ```{r, lineup_geno, eval=FALSE}
 plot2dist    # compare distee with rmsd and with cor
@@ -196,3 +260,5 @@ find.gene.pseudomarker
 fscale
 plotEGclass
 ```
+
+#
