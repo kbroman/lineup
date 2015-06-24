@@ -13,7 +13,7 @@ data(expr2)
 }
 \description{
 Matrices of simulated gene expression data, each for 98 individuals
-at 10,000 genes. Think of \code{expr1} and \code{expr2} as
+at 5,000 genes. Think of \code{expr1} and \code{expr2} as
 expression data on two different tissues.
 }
 \examples{
