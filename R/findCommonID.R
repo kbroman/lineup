@@ -42,44 +42,44 @@
 #'
 #' @export findCommonID
 findCommonID <-
-function(id1, id2)
+    function(id1, id2)
 {
-  if("cross" %in% class(id1))
-    id1 <- qtl::getid(id1)
-  else if(!is.null(rownames(id1)))
-    id1 <- rownames(id1)
+    if("cross" %in% class(id1))
+        id1 <- qtl::getid(id1)
+    else if(!is.null(rownames(id1)))
+        id1 <- rownames(id1)
 
-  if("cross" %in% class(id2))
-    id2 <- qtl::getid(id2)
-  else if(!is.null(rownames(id2)))
-    id2 <- rownames(id2)
+    if("cross" %in% class(id2))
+        id2 <- qtl::getid(id2)
+    else if(!is.null(rownames(id2)))
+        id2 <- rownames(id2)
 
-  if(is.null(id1))
-    stop("Can't find IDs in id1")
-  if(is.null(id2))
-    stop("Can't find IDs in id2")
+    if(is.null(id1))
+        stop("Can't find IDs in id1")
+    if(is.null(id2))
+        stop("Can't find IDs in id2")
 
-  if(is.factor(id1)) id1 <- as.character(id1)
-  if(is.factor(id2)) id2 <- as.character(id2)
+    if(is.factor(id1)) id1 <- as.character(id1)
+    if(is.factor(id2)) id2 <- as.character(id2)
 
-  m1 <- match(id2, id1)
-  m2 <- match(id1, id2)
+    m1 <- match(id2, id1)
+    m2 <- match(id1, id2)
 
-  totind <- length(id1) + sum(is.na(m1))
-  allID <- list(mat=data.frame(indexInFirst=rep(0, totind),
+    totind <- length(id1) + sum(is.na(m1))
+    allID <- list(mat=data.frame(indexInFirst=rep(0, totind),
                   indexInSecond=rep(0, totind),
                   inBoth=rep(FALSE,totind)),
-                first=rep(NA, totind),
-                second=rep(NA, totind))
+                  first=rep(NA, totind),
+                  second=rep(NA, totind))
 
-  rownames(allID$mat) <- c(id1, id2[is.na(m1)])
+    rownames(allID$mat) <- c(id1, id2[is.na(m1)])
 
-  allID$mat[,1] <- match(rownames(allID$mat), id1)
-  allID$mat[,2] <- match(rownames(allID$mat), id2)
-  allID$mat[,3] <- !is.na(allID$mat[,1]) & !is.na(allID$mat[,2])
+    allID$mat[,1] <- match(rownames(allID$mat), id1)
+    allID$mat[,2] <- match(rownames(allID$mat), id2)
+    allID$mat[,3] <- !is.na(allID$mat[,1]) & !is.na(allID$mat[,2])
 
-  allID$first <- allID$mat[allID$mat[,3],1]
-  allID$second <- allID$mat[allID$mat[,3],2]
+    allID$first <- allID$mat[allID$mat[,3],1]
+    allID$second <- allID$mat[allID$mat[,3],2]
 
-  allID
+    allID
 }
