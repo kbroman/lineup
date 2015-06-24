@@ -147,9 +147,8 @@
 #' # plot of classifier for first eQTL
 #' plotEGclass(d)
 #'
-#' @importFrom class knn
 #' @useDynLib lineup
-#' @export disteg
+#' @export
 disteg <-
     function(cross, pheno, pmark, min.genoprob=0.99,
              k=20, min.classprob=0.8, classprob2drop=1, repeatKNN=TRUE,
@@ -216,7 +215,7 @@ disteg <-
     }
 
     # to contain observed and inferred eQTL genotypes
-    obsg <- matrix(ncol=length(upmark), nrow=nind(cross))
+    obsg <- matrix(ncol=length(upmark), nrow=qtl::nind(cross))
     infg <- matrix(ncol=length(upmark), nrow=nrow(pheno))
     colnames(obsg) <- colnames(infg) <-
         apply(pmark[match(upmark, cpmark),c(1,3)], 1, paste, collapse="@")
@@ -244,16 +243,16 @@ disteg <-
         keep <- !is.na(gisub) & (rowSums(is.na(ysub)) == 0) # have genotype and all phenotypes
         keep2 <- rowSums(is.na(y)) == 0 # have all phenotypes
 
-        knnout <- knn(ysub[keep,,drop=FALSE], ysub[keep,,drop=FALSE], gisub[keep],
-                      k=k, l=ceiling(k*min.classprob), prob=TRUE)
+        knnout <- class::knn(ysub[keep,,drop=FALSE], ysub[keep,,drop=FALSE], gisub[keep],
+                             k=k, l=ceiling(k*min.classprob), prob=TRUE)
         pr <- attr(knnout, "prob")
         okeep <- keep
         keep[gisub[keep] != knnout & pr >= classprob2drop] <- FALSE
         if(verbose && sum(okeep) > sum(keep))
             cat(" -- Classifier ", i, ": dropping ", sum(okeep) - sum(keep), " outliers.\n", sep="")
 
-        infg[keep2,i] <- knn(ysub[keep,,drop=FALSE], y[keep2,,drop=FALSE], gisub[keep],
-                             k=k, l=ceiling(k*min.classprob))
+        infg[keep2,i] <- class::knn(ysub[keep,,drop=FALSE], y[keep2,,drop=FALSE], gisub[keep],
+                                    k=k, l=ceiling(k*min.classprob))
 
     }
 
@@ -284,16 +283,16 @@ disteg <-
 
             infg[!keep2,i] <- NA
 
-            knnout <- knn(ysub[keep,,drop=FALSE], ysub[keep,,drop=FALSE], gisub[keep],
-                          k=k, l=ceiling(k*min.classprob), prob=TRUE)
+            knnout <- class::knn(ysub[keep,,drop=FALSE], ysub[keep,,drop=FALSE], gisub[keep],
+                                 k=k, l=ceiling(k*min.classprob), prob=TRUE)
             pr <- attr(knnout, "prob")
             okeep <- keep
             keep[gisub[keep] != knnout & pr >= classprob2drop] <- FALSE
             if(verbose && sum(okeep) > sum(keep))
                 cat(" -- Classifier ", i, ": dropping ", sum(okeep) - sum(keep), " outliers.\n", sep="")
 
-            infg[keep2,i] <- knn(ysub[keep,,drop=FALSE], y[keep2,,drop=FALSE], gisub[keep],
-                                 k=k, l=ceiling(k*min.classprob))
+            infg[keep2,i] <- class::knn(ysub[keep,,drop=FALSE], y[keep2,,drop=FALSE], gisub[keep],
+                                        k=k, l=ceiling(k*min.classprob))
         }
     }
 

@@ -102,8 +102,7 @@
 #' plotEGclass(d)
 #' }
 #'
-#' @importFrom qtl replacemap find.pseudomarkerpos
-#' @export find.gene.pseudomarker
+#' @export
 find.gene.pseudomarker <-
     function(cross, pmap, geneloc, where=c("prob", "draws"))
 {
@@ -111,7 +110,7 @@ find.gene.pseudomarker <-
     if(!(where %in% names(cross$geno[[1]])))
         stop("You first need to run ", ifelse(where=="prob", "calc.genoprob", "sim.geno"), ".")
 
-    cross <- replacemap(cross, pmap)
+    cross <- qtl::replacemap(cross, pmap)
     res <- data.frame(chr=geneloc$chr,
                       pmark=qtl::find.pseudomarker(cross, geneloc$chr, geneloc$pos, where, addchr=FALSE),
                       stringsAsFactors=FALSE)
