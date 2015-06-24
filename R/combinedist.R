@@ -56,7 +56,7 @@
 #'
 #' summary(d)
 #'
-#' @export combinedist
+#' @export
 combinedist <-
     function(..., method=c("median", "mean"))
 {

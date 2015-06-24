@@ -68,7 +68,7 @@
 #' plot2dist(d1, d2)
 #' }
 #'
-#' @export pulldiag
+#' @export
 pulldiag <-
     function(d)
 {

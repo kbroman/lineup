@@ -105,7 +105,7 @@
 #' }
 #'
 #' @importFrom graphics plot par pairs points
-#' @export plotEGclass
+#' @export
 plotEGclass <-
     function(d, eqtl=1, outercol="inferred", innercol="observed",
              thecolors=c("blue","green","red","orange"), ...)

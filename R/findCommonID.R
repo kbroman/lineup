@@ -40,7 +40,7 @@
 #' rownames(x) <- id2
 #' findCommonID(id1, x)
 #'
-#' @export findCommonID
+#' @export
 findCommonID <-
     function(id1, id2)
 {

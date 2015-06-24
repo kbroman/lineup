@@ -82,7 +82,7 @@
 #' plot2dist(d1, d2)
 #'
 #' @useDynLib lineup
-#' @export distee
+#' @export
 distee <-
     function(e1, e2, d.method=c("rmsd", "cor"), labels=c("e1","e2"),
              verbose=TRUE)

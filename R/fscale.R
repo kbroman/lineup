@@ -27,7 +27,7 @@
 #' y <- fscale(x)
 #'
 #' @useDynLib lineup
-#' @export fscale
+#' @export
 fscale <-
     function(x)
 {

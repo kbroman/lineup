@@ -14,7 +14,7 @@
 #'
 #'   lineupversion()
 #'
-#' @export lineupversion
+#' @export
 lineupversion <-
     function()
 {

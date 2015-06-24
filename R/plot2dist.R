@@ -86,7 +86,7 @@
 #'
 #' @importFrom graphics plot smoothScatter points
 #' @importFrom grDevices colorRampPalette
-#' @export plot2dist
+#' @export
 plot2dist <-
     function(d1, d2, hirow, hicol, xlab, ylab, smoothScatter=FALSE,
              colself="black", colnonself="gray", colhirow="green", colhicol="orange", ...)

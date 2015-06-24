@@ -71,7 +71,7 @@
 #' plot2dist(d1, d2)
 #' }
 #'
-#' @export omitdiag
+#' @export
 omitdiag <-
     function(d)
 {

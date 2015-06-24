@@ -76,7 +76,7 @@
 #' corbetw2mat(x, y, what="all")
 #'
 #' @useDynLib lineup
-#' @export corbetw2mat
+#' @export
 corbetw2mat <-
     function(x, y, what=c("paired", "bestright", "bestpairs", "all"),
              corthresh=0.9)
