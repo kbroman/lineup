@@ -130,18 +130,18 @@ You can see that this is totally contrived data. Most genes have a
 positive correlation between the two tissues, with a bunch in the
 0&ndash;0.5 range, and then a bunch more approaching 1. But then
 `r round(mean(cor_ee < 0)*100)`% of genes are negatively correlated,
-again with the pattern that most are in the range -0.5&ndash;0 and
-then with a bunch near -1.
+again with the pattern that a bunch are in the range -0.5&ndash;0 and
+then a bunch more near -1.
 
-Let's focus on genes that have between-tissue correlation > 0.8 in
-absolute value (of which there are `r sum(abs(cor_ee)>0.8)`), and then
+Let's focus on genes that have between-tissue correlation > 0.9 in
+absolute value (of which there are `r sum(abs(cor_ee)>0.9)`), and then
 look at the correlation, across these genes,
 between samples in tissue 1 and samples in tissue 2. This is done with
 the `distee()` function ("dist" for distance and "ee" for expression
 vs. expression).
 
 ```{r distee}
-d_ee <- distee(expr1[,abs(cor_ee)>0.8], expr2[,abs(cor_ee)>0.8], d.method="cor")
+d_ee <- distee(expr1[,abs(cor_ee)>0.9], expr2[,abs(cor_ee)>0.9], d.method="cor")
 ```
 
 The result is an object of class `"lineupdist"`. If you plot the
@@ -204,33 +204,32 @@ The rows with `NA` in the `selfc` column are cases where a sample
 appears in one dataset but not the other. In these cases, we expect
 the maximum correlation to be small, and it is.
 
-However, there appear to be three pairs of sample mix-ups: (80,85),
-(86,91), and (9,88). The have low values for `selfc` and high values
+However, there appear to be two pairs of sample mix-ups: (44,66)
+and (24,92). The have low values for `selfc` and high values
 for `maxc`, consistently between the two datasets.  But we don't know
 whether the mix-ups are in the first or second dataset.
 
-In addition, sample 43 in the first dataset appears to be much sample
-53 in the second dataset, but sample 43 in the second data set doesn't
+In addition, sample 48 in the first dataset appears to be much sample
+76 in the second dataset, but sample 48 in the second data set doesn't
 look like any of the samples in the first dataset. This is the sort of
-thing you see when there is a sample duplicate...where sample 43 in
-the first data set is perhaps a copy of sample 53 in the first dataset.
+thing you see when there is a sample duplicate...where sample 48 in
+the first data set is perhaps a copy of sample 76 in the first dataset.
 
-If we make a scatterplot those two samples, which have correlation
-`r round(cor(expr1["43",], expr1["53",]),2)` across all genes, it's
-pretty clear that they're duplicates.
+If we make a scatterplot those two samples, which have correlation >
+0.99 across all genes, it's pretty clear that they're duplicates.
 
 ```{r plot_expr_dup, fig.width=7}
 par(mar=c(5,4,1,1))
-plot(expr1["43",], expr1["53",],
-     xlab="Sample 43, expr1", ylab="Sample 53, expr1",
+plot(expr1["48",], expr1["76",],
+     xlab="Sample 48, expr1", ylab="Sample 76, expr1",
      las=1, pch=21, bg="slateblue", cex=0.7)
 ```
 
 
-Let's drop sample 43 from the first dataset.
+Let's drop sample 48 from the first dataset.
 
-```{r drop_expr1_sample43}
-expr1 <- expr1[rownames(expr1) != "43",]
+```{r drop_expr1_sample48}
+expr1 <- expr1[rownames(expr1) != "48",]
 ```
 
 
@@ -249,16 +248,68 @@ use them to form classifiers, of genotype from expression
 phenotype. We then compare the predicted genotypes at the eQTL to the
 observed marker genotypes.
 
+We first calculate QTL genotype probabilities at a grid along the
+genome, for the QTL analysis (to assess genotype/expression
+association). We assume a 0.2% genotyping error rate.
 
-
-```{r, lineup_geno, eval=FALSE}
-plot2dist    # compare distee with rmsd and with cor
-calc.locallod
-combinedist
-disteg
-find.gene.pseudomarker
-fscale
-plotEGclass
+```{r calc_genoprob}
+f2cross <- calc.genoprob(f2cross, step=1, error.prob=0.002)
 ```
 
-#
+We then need to find, for each gene, the marker or pseudomarker that
+is closest to its position. We can use `find.gene.pseudomarker()` to
+do so, interpolating between the physical and genetic marker maps.
+
+```{r find_pseudomarkers, warning=FALSE}
+pmar <- find.gene.pseudomarker(f2cross, pmap, genepos)
+```
+
+This gives us a warning about a small number of genes being > 2 Mbp
+from any pseudomarker, but we can ignore this.
+
+We now use `calc.locallod()` to perform a QTL analysis for each
+expression trait. For each gene, we just look at the one location that
+is closest to its genomic position.  We use `findCommonID()` again to
+identify the individuals in common between the cross and the
+expression datasets, and do the analysis with matching individuals.
+
+```{r calc_locallod, message=FALSE}
+id1 <- findCommonID(f2cross, expr1)
+lod1 <- calc.locallod(f2cross[,id1$first], expr1[id1$second,], pmar)
+id2 <- findCommonID(f2cross, expr2)
+lod2 <- calc.locallod(f2cross[,id2$first], expr2[id2$second,], pmar)
+```
+
+```{r disteg}
+d_eg_1 <- disteg(f2cross, expr1[, lod1>25], pmar[lod1>25,])
+d_eg_2 <- disteg(f2cross, expr2[, lod2>25], pmar[lod2>25,])
+```
+
+```{r summary_g_vs_expr1}
+summary(d_eg_1)
+```
+
+Mix-ups are (31,84), (65,68), and (24,92).
+
+Recall that (24,92) was a mix-up between expr1 and expr2.
+
+
+
+
+```{r summary_g_vs_expr2}
+summary(d_eg_2)
+```
+
+Mix-ups are (31,84), (65,68), and (44,66).
+
+Recall that (44,66) was a mix-up between expr1 and expr2.
+
+
+## Conclusions
+
+In `expr1`, samples (24,92) were swapped. Also, 48 was a duplicate of
+76.
+
+In `expr2`, samples (44,66) were swapped.
+
+In the genotype data, (31,84) were swapped, as were (65,68).
