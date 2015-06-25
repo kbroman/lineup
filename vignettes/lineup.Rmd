@@ -26,6 +26,8 @@ This document provides a brief tutorial on the use of the package.
 ## Example data
 
 ```{r load_data_hidden, include=FALSE}
+library(qtl)
+library(lineup)
 data(f2cross)
 data(expr1)
 data(expr2)
@@ -35,13 +37,13 @@ data(genepos)
 
 
 We will consider a set of simulated data as an example. This is an
-F~2~ intercross with `r qtl::nind(f2cross)` individuals genotyped at
-`r qtl::totmar(f2cross)` autosomal markers, and with gene expression data on
+F~2~ intercross with `r nind(f2cross)` individuals genotyped at
+`r totmar(f2cross)` autosomal markers, and with gene expression data on
 `r ncol(expr1)` genes in two tissues.
 
 We first load the R/qtl and R/lineup packages.
 
-```{r load_libraries}
+```{r load_libraries, eval=FALSE}
 library(qtl)
 library(lineup)
 ```
