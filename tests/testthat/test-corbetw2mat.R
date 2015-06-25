@@ -21,7 +21,7 @@ test_that('corbetw2mat works with what="paired"', {
 
 })
 
-test_that('corbetw2mat works with bestright and bestpairs', {
+test_that('corbetw2mat works in the other cases', {
 
     n_ind <- 20
     n_col <- 3
@@ -53,5 +53,9 @@ test_that('corbetw2mat works with bestright and bestpairs', {
                             ycol=c("4","7","2","6"))
     rownames(expected2) <- 1:nrow(expected2)
     expect_equal(result2, expected2)
+
+    result3 <- corbetw2mat(x, y, what="all")
+    expected3 <- cor(cbind(x,y))[1:ncol(x), ncol(x) + 1:ncol(y)]
+    expect_equal(result3, expected3)
 
 })
