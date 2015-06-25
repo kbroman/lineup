@@ -303,8 +303,8 @@ from expression phenotype, and then we'll calculate a distance measure
 genotypes) between each genotype sample and each expression array.
 
 ```{r disteg}
-d_eg_1 <- disteg(f2cross, expr1[, lod1>25], pmar[lod1>25,], verbose=FALSE)
-d_eg_2 <- disteg(f2cross, expr2[, lod2>25], pmar[lod2>25,], verbose=FALSE)
+d_eg_1 <- disteg(f2cross, expr1[, lod1>25], pmar, verbose=FALSE)
+d_eg_2 <- disteg(f2cross, expr2[, lod2>25], pmar, verbose=FALSE)
 ```
 
 When we use `summary()` with these results, we get tables much like
