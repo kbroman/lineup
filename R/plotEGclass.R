@@ -108,7 +108,7 @@
 #' @export
 plotEGclass <-
     function(d, eqtl=1, outercol="inferred", innercol="observed",
-             thecolors=c("blue","green","red","orange"), ...)
+             thecolors=c("#7B68ED", "#1B9E78", "#CA3767", "#E59E00"), ...)
 {
     if(!("eg.lineupdist" %in% class(d)))
         stop("Input d must be as produced by disteg().")
@@ -174,11 +174,11 @@ plotEGclass <-
         u <- runif(length(gobs.sub), -xjit, xjit)
 
         # point colors
-        obscol <- rep("", length(gobs.sub))
+        obscol <- rep(NA, length(gobs.sub))
         gobs.sub[is.na(gobs.sub)] <- 4
         for(i in seq(along=gnames))
             obscol[gobs.sub==i] <- thecolors[i]
-        infcol <- rep("", length(ginf.sub))
+        infcol <- rep(NA, length(ginf.sub))
         ginf.sub[is.na(ginf.sub)] <- 4
         for(i in seq(along=gnames))
             infcol[ginf.sub==i] <- thecolors[i]
@@ -189,14 +189,15 @@ plotEGclass <-
         plot(gobs.sub+u, y.sub, xlab="Observed genotype", ylab=colnames(y),
              main=eqtlnam, xaxt="n", xlim=c(0.5, length(gnames)+0.5),
              pch=21, col=col, bg=bg, ylim=range(y, na.rm=TRUE), type="n", ...)
+        abline(v=seq(along=gnames), lty=2, col="gray60")
         axis(side=1, at=seq(along=gnames), gnames)
 
         # make sure the mismatches are on top
         wh <- !is.na(gobs.sub) & !is.na(ginf.sub) & gobs.sub==ginf.sub
         points((gobs.sub+u)[wh], y.sub[wh],
-               pch=21, col=col[wh], bg=bg[wh], ...)
+               pch=21, col=col[wh], bg=bg[wh], lwd=2, ...)
         points((gobs.sub+u)[!wh], y.sub[!wh],
-               pch=21, col=col[!wh], bg=bg[!wh], ...)
+               pch=21, col=col[!wh], bg=bg[!wh], lwd=2, ...)
 
         if(nrow(ynog) > 0) { # phenotype no genotype
             theinf <- ginf[rownames(ynog)]
@@ -211,7 +212,7 @@ plotEGclass <-
             bg <- switch(innercol, "observed"=obscol, "inferred"=infcol, rep(innercol, length(obscol)))
 
             points(runif(nrow(ynog), 4-xjit, 4+xjit), ynog,
-                   pch=21, col=col, bg=bg, ...)
+                   pch=21, col=col, bg=bg, lwd=2, ...)
         }
 
     }
@@ -239,9 +240,9 @@ plotEGclass <-
         # make sure the mismatches are on top
         wh <- !is.na(gobs.sub) & !is.na(ginf.sub) & gobs.sub==ginf.sub
         points(y.sub[wh,1], y.sub[wh,2],
-               pch=21, col=col[wh], bg=bg[wh], ...)
+               pch=21, col=col[wh], bg=bg[wh], lwd=2, ...)
         points(y.sub[!wh,1], y.sub[!wh,2],
-               pch=21, col=col[!wh], bg=bg[!wh], ...)
+               pch=21, col=col[!wh], bg=bg[!wh], lwd=2, ...)
 
         if(nrow(ynog) > 0) { # phenotype no genotype
             theinf <- ginf[rownames(ynog)]
@@ -256,7 +257,7 @@ plotEGclass <-
             bg <- switch(innercol, "observed"=obscol, "inferred"=infcol, rep(innercol, length(obscol)))
 
             points(ynog[,1], ynog[,2],
-                   pch=21, col=col, bg=bg, ...)
+                   pch=21, col=col, bg=bg, lwd=2, ...)
         }
     }
     else { # pairs plot

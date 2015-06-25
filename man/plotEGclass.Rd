@@ -5,7 +5,7 @@
 \title{Plot classifier of eQTL genotype from expression data}
 \usage{
 plotEGclass(d, eqtl = 1, outercol = "inferred", innercol = "observed",
-  thecolors = c("blue", "green", "red", "orange"), ...)
+  thecolors = c("#7B68ED", "#1B9E78", "#CA3767", "#E59E00"), ...)
 }
 \arguments{
 \item{d}{Output of \code{\link{disteg}}.}
