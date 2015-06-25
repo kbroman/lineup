@@ -5,7 +5,7 @@
 \title{Summarize inter-individual distances}
 \usage{
 \method{summary}{lineupdist}(object, cutoff, dropmatches = TRUE,
-  reorder = c("bydistance", "alignmatches", "no"), ...)
+  reorder = c("alignmatches", "bydistance", "no"), ...)
 }
 \arguments{
 \item{object}{Output of \code{\link{distee}} or \code{\link{disteg}}.}
@@ -72,12 +72,12 @@ d2 <- distee(xs, ys, d.method="cor", labels=c("x", "y"))
 # pull out the smallest 8 self-self correlations
 sort(pulldiag(d2))[1:8]
 
-# summary of results
+# summary of results, putting apparent matches together
 summary(d1)
 summary(d2)
 
-# order to put matches together
-summary(d2, reorder="alignmatches")
+# order by correlations
+summary(d2, reorder="bydistance")
 
 # plot histograms of RMS distances
 plot(d1)

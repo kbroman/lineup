@@ -68,12 +68,12 @@
 #' # pull out the smallest 8 self-self correlations
 #' sort(pulldiag(d2))[1:8]
 #'
-#' # summary of results
+#' # summary of results, putting apparent matches together
 #' summary(d1)
 #' summary(d2)
 #'
-#' # order to put matches together
-#' summary(d2, reorder="alignmatches")
+#' # order by correlations
+#' summary(d2, reorder="bydistance")
 #'
 #' # plot histograms of RMS distances
 #' plot(d1)
@@ -87,7 +87,7 @@
 #'
 #' @export
 summary.lineupdist <-
-    function(object, cutoff, dropmatches=TRUE, reorder=c("bydistance", "alignmatches", "no"), ...)
+    function(object, cutoff, dropmatches=TRUE, reorder=c("alignmatches", "bydistance", "no"), ...)
 {
     d.method <- attr(object, "d.method")
     if(is.null(d.method)) d.method <- "rmsd"
