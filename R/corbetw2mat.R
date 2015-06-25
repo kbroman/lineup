@@ -65,7 +65,6 @@
 #' # the same with y columns shuffled
 #' corbetw2mat(x, z, what="bestright")
 #'
-#'
 #' # all pairs of columns with correlation >= 0.6
 #' corbetw2mat(x, y, what="bestpairs", corthresh=0.6)
 #'
