@@ -27,7 +27,7 @@ output by \code{\link{find.gene.pseudomarker}}.}
 \item{verbose}{If TRUE, print tracing information.}
 }
 \value{
-A vector of LOD scores.  The names indicate the gene names (rows in
+A vector of LOD scores.  The names indicate the gene names (columns in
 \code{pheno}).
 }
 \description{

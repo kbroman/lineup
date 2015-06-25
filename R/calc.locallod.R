@@ -35,7 +35,7 @@
 #' @param addcovar Additive covariates passed to \code{\link{scanone}}.
 #' @param intcovar Interactive covariates passed to \code{\link{scanone}}.
 #' @param verbose If TRUE, print tracing information.
-#' @return A vector of LOD scores.  The names indicate the gene names (rows in
+#' @return A vector of LOD scores.  The names indicate the gene names (columns in
 #' \code{pheno}).
 #' @author Karl W Broman, \email{kbroman@@biostat.wisc.edu}
 #' @seealso \code{\link{find.gene.pseudomarker}}, \code{\link{plotEGclass}},
