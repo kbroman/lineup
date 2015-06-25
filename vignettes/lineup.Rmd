@@ -83,14 +83,12 @@ set of genes with highly correlated expression between the two
 tissues, and then use these genes to measure the association between
 each sample in the first tissue with each sample in the second tissue.
 
-To start, note that there are
-98 individuals in each data set; there are two individuals missing
-from each.
+To start, note that there are 98 individuals in each data set; there
+are two individuals missing from each.
 
 ```{r summary_expr}
 nrow(expr1)
 nrow(expr2)
-all(rownames(expr1) == rownames(expr2))
 ```
 
 The function `findCommonID()` helps to find individuals that are in
@@ -196,10 +194,11 @@ In the first table, each row is a sample from the first data set.  The
 first column (`maxc`) is the maximum correlation between that sample
 and the different samples in the second data set, the second column
 (`nextc`) is the next-highest correlation, and the third column
-(`selfc`) is the self-self correlation. For the rows where `selfc`
-is low but `maxc` is high, a sample
-mix-up is indicated. The last column is the sample in the second data
-set that has the highest correlation.
+(`selfc`) is the self-self correlation. For the rows where `selfc` is
+low but `maxc` is high, a sample mix-up is indicated. The last column
+is the sample in the second data set that has the highest correlation.
+The rows are ordered by the value in `maxc`, but with some re-ordering
+to bring apparent matches adjacent to each other.
 
 In the second table, the rows correspond to samples in the second
 data set.
