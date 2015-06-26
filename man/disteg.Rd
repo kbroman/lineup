@@ -135,8 +135,10 @@ plot(d)
 # summary of apparent mix-ups
 summary(d)
 
-# plot of classifier for first eQTL
+# plot of classifier for and second eQTL
+par(mfrow=c(2,1), las=1)
 plotEGclass(d)
+plotEGclass(d, 2)
 }
 \author{
 Karl W Broman, \email{kbroman@biostat.wisc.edu}
