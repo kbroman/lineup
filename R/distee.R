@@ -116,7 +116,7 @@ distee <-
 
     if(compareWithin) {
         if(d.method=="cor") {
-            d <- cor(t(e1), use="pairwise.complete.obs")
+            d <- stats::cor(t(e1), use="pairwise.complete.obs")
             diag(d) <- NA
         }
         else

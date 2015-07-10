@@ -174,16 +174,16 @@ plot2dist <-
         d1[,hicol] <- d2[,hicol] <- NA
     }
     if(is.null(colnonself))
-        plot(0,0,type="n", xlab=xlab, ylab=ylab, xlim=xl, ylim=yl, ...)
+        graphics::plot(0,0,type="n", xlab=xlab, ylab=ylab, xlim=xl, ylim=yl, ...)
     else {
         if(smoothScatter)
-            smoothScatter(d1, d2, xlab=xlab, ylab=ylab, xlim=xl, ylim=yl,
-                          colramp=colorRampPalette(c("white","blue")))
+            graphics::smoothScatter(d1, d2, xlab=xlab, ylab=ylab, xlim=xl, ylim=yl,
+                                    colramp=grDevices::colorRampPalette(c("white","blue")))
         else {
-            plot(unclass(d1), unclass(d2), xlab=xlab, ylab=ylab, xlim=xl, ylim=yl, col=colnonself, ...)
+            graphics::plot(unclass(d1), unclass(d2), xlab=xlab, ylab=ylab, xlim=xl, ylim=yl, col=colnonself, ...)
         }
     }
-    if(!missing(hirow) && !is.null(colhirow)) points(hirowd1, hirowd2, col=colhirow, ...)
-    if(!missing(hicol) && !is.null(colhicol)) points(hicold1, hicold2, col=colhicol, ...)
-    if(!is.null(colself)) points(self, col=colself, pch=16, ...)
+    if(!missing(hirow) && !is.null(colhirow)) graphics::points(hirowd1, hirowd2, col=colhirow, ...)
+    if(!missing(hicol) && !is.null(colhicol)) graphics::points(hicold1, hicold2, col=colhicol, ...)
+    if(!is.null(colself)) graphics::points(self, col=colself, pch=16, ...)
 }

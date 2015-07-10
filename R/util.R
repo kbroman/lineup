@@ -18,7 +18,7 @@
 lineupversion <-
     function()
 {
-    version <- unlist(packageVersion("lineup"))
+    version <- unlist(utils::packageVersion("lineup"))
 
     # make it like #.#-#
     paste(c(version,".","-")[c(1,4,2,5,3)], collapse="")
