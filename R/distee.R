@@ -69,6 +69,7 @@
 #' plot2dist(d1, d2)
 #'
 #' @useDynLib lineup
+#' @importFrom stats cor
 #' @export
 distee <-
     function(e1, e2, d.method=c("rmsd", "cor"), labels=c("e1","e2"),
@@ -116,7 +117,7 @@ distee <-
 
     if(compareWithin) {
         if(d.method=="cor") {
-            d <- stats::cor(t(e1), use="pairwise.complete.obs")
+            d <- cor(t(e1), use="pairwise.complete.obs")
             diag(d) <- NA
         }
         else

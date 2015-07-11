@@ -56,6 +56,7 @@
 #'
 #' summary(d)
 #'
+#' @importFrom stats median
 #' @export
 combinedist <-
     function(..., method=c("median", "mean"))
@@ -93,7 +94,7 @@ combinedist <-
 
     # summarize
     if(method=="median")
-        ds <- apply(d, 1:2, stats::median, na.rm=TRUE)
+        ds <- apply(d, 1:2, median, na.rm=TRUE)
     else if(use.denom) {
         denom.sum <- apply(denom, 1:2, sum, na.rm=TRUE)
         ds <- apply(d*denom, 1:2, sum, na.rm=TRUE)/denom.sum

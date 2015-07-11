@@ -104,7 +104,8 @@
 #' plotEGclass(d)
 #' }
 #'
-#' @importFrom graphics plot par pairs points
+#' @importFrom graphics plot par pairs points mtext abline axis
+#' @importFrom stats runif
 #' @export
 plotEGclass <-
     function(d, eqtl=1, outercol="inferred", innercol="observed",
@@ -171,7 +172,7 @@ plotEGclass <-
         if(nrow(ynog) > 0) gnames <- c(gnames, "NA")
 
         xjit <- 0.2
-        u <- stats::runif(length(gobs.sub), -xjit, xjit)
+        u <- runif(length(gobs.sub), -xjit, xjit)
 
         # point colors
         obscol <- rep(NA, length(gobs.sub))
@@ -186,18 +187,18 @@ plotEGclass <-
         col <- switch(outercol, "observed"=obscol, "inferred"=infcol, rep(outercol, length(obscol)))
         bg <- switch(innercol, "observed"=obscol, "inferred"=infcol, rep(innercol, length(obscol)))
 
-        graphics::plot(gobs.sub+u, y.sub, xlab="Observed genotype", ylab=colnames(y),
+        plot(gobs.sub+u, y.sub, xlab="Observed genotype", ylab=colnames(y),
              main=eqtlnam, xaxt="n", xlim=c(0.5, length(gnames)+0.5),
              pch=21, col=col, bg=bg, ylim=range(y, na.rm=TRUE), type="n", ...)
-        graphics::abline(v=seq(along=gnames), lty=2, col="gray60")
-        graphics::axis(side=1, at=seq(along=gnames), gnames)
+        abline(v=seq(along=gnames), lty=2, col="gray60")
+        axis(side=1, at=seq(along=gnames), gnames)
 
         # make sure the mismatches are on top
         wh <- !is.na(gobs.sub) & !is.na(ginf.sub) & gobs.sub==ginf.sub
-        graphics::points((gobs.sub+u)[wh], y.sub[wh],
-                         pch=21, col=col[wh], bg=bg[wh], lwd=2, ...)
-        graphics::points((gobs.sub+u)[!wh], y.sub[!wh],
-                         pch=21, col=col[!wh], bg=bg[!wh], lwd=2, ...)
+        points((gobs.sub+u)[wh], y.sub[wh],
+               pch=21, col=col[wh], bg=bg[wh], lwd=2, ...)
+        points((gobs.sub+u)[!wh], y.sub[!wh],
+               pch=21, col=col[!wh], bg=bg[!wh], lwd=2, ...)
 
         if(nrow(ynog) > 0) { # phenotype no genotype
             theinf <- ginf[rownames(ynog)]
@@ -211,8 +212,8 @@ plotEGclass <-
             col <- switch(outercol, "observed"=obscol, "inferred"=infcol, rep(outercol, length(obscol)))
             bg <- switch(innercol, "observed"=obscol, "inferred"=infcol, rep(innercol, length(obscol)))
 
-            graphics::points(stats::runif(nrow(ynog), 4-xjit, 4+xjit), ynog,
-                             pch=21, col=col, bg=bg, lwd=2, ...)
+            points(runif(nrow(ynog), 4-xjit, 4+xjit), ynog,
+                   pch=21, col=col, bg=bg, lwd=2, ...)
         }
 
     }
@@ -233,16 +234,16 @@ plotEGclass <-
         col <- switch(outercol, "observed"=obscol, "inferred"=infcol, rep(outercol, length(obscol)))
         bg <- switch(innercol, "observed"=obscol, "inferred"=infcol, rep(innercol, length(obscol)))
 
-        graphics::plot(y.sub[,1], y.sub[,2], xlab=colnames(y)[1], ylab=colnames(y)[2],
+        plot(y.sub[,1], y.sub[,2], xlab=colnames(y)[1], ylab=colnames(y)[2],
              main=eqtlnam, pch=21, col=col, bg=bg,
              xlim=range(y[,1], na.rm=TRUE), ylim=range(y[,2], na.rm=TRUE), type="n", ...)
 
         # make sure the mismatches are on top
         wh <- !is.na(gobs.sub) & !is.na(ginf.sub) & gobs.sub==ginf.sub
-        graphics::points(y.sub[wh,1], y.sub[wh,2],
-                         pch=21, col=col[wh], bg=bg[wh], lwd=2, ...)
-        graphics::points(y.sub[!wh,1], y.sub[!wh,2],
-                         pch=21, col=col[!wh], bg=bg[!wh], lwd=2, ...)
+        points(y.sub[wh,1], y.sub[wh,2],
+               pch=21, col=col[wh], bg=bg[wh], lwd=2, ...)
+        points(y.sub[!wh,1], y.sub[!wh,2],
+               pch=21, col=col[!wh], bg=bg[!wh], lwd=2, ...)
 
         if(nrow(ynog) > 0) { # phenotype no genotype
             theinf <- ginf[rownames(ynog)]
@@ -256,8 +257,8 @@ plotEGclass <-
             col <- switch(outercol, "observed"=obscol, "inferred"=infcol, rep(outercol, length(obscol)))
             bg <- switch(innercol, "observed"=obscol, "inferred"=infcol, rep(innercol, length(obscol)))
 
-            graphics::points(ynog[,1], ynog[,2],
-                             pch=21, col=col, bg=bg, lwd=2, ...)
+            points(ynog[,1], ynog[,2],
+                   pch=21, col=col, bg=bg, lwd=2, ...)
         }
     }
     else { # pairs plot
@@ -295,9 +296,9 @@ plotEGclass <-
         col <- col[o]
         bg <- bg[o]
 
-        graphics::par(oma=c(0,0,1.5,0))
-        graphics::pairs(y.sub, pch=21, col=col, bg=bg, ...)
-        graphics::mtext(side=3, outer=TRUE, eqtlnam)
+        par(oma=c(0,0,1.5,0))
+        pairs(y.sub, pch=21, col=col, bg=bg, ...)
+        mtext(side=3, outer=TRUE, eqtlnam)
         wh <- (col == bg)
     }
 }

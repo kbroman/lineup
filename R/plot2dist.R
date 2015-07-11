@@ -84,7 +84,7 @@
 #' plot2dist(d1, d2)
 #' }
 #'
-#' @importFrom graphics plot smoothScatter points
+#' @importFrom graphics plot points
 #' @importFrom grDevices colorRampPalette
 #' @export
 plot2dist <-
@@ -174,16 +174,16 @@ plot2dist <-
         d1[,hicol] <- d2[,hicol] <- NA
     }
     if(is.null(colnonself))
-        graphics::plot(0,0,type="n", xlab=xlab, ylab=ylab, xlim=xl, ylim=yl, ...)
+        plot(0,0,type="n", xlab=xlab, ylab=ylab, xlim=xl, ylim=yl, ...)
     else {
         if(smoothScatter)
             graphics::smoothScatter(d1, d2, xlab=xlab, ylab=ylab, xlim=xl, ylim=yl,
-                                    colramp=grDevices::colorRampPalette(c("white","blue")))
+                                    colramp=colorRampPalette(c("white","blue")))
         else {
-            graphics::plot(unclass(d1), unclass(d2), xlab=xlab, ylab=ylab, xlim=xl, ylim=yl, col=colnonself, ...)
+            plot(unclass(d1), unclass(d2), xlab=xlab, ylab=ylab, xlim=xl, ylim=yl, col=colnonself, ...)
         }
     }
-    if(!missing(hirow) && !is.null(colhirow)) graphics::points(hirowd1, hirowd2, col=colhirow, ...)
-    if(!missing(hicol) && !is.null(colhicol)) graphics::points(hicold1, hicold2, col=colhicol, ...)
-    if(!is.null(colself)) graphics::points(self, col=colself, pch=16, ...)
+    if(!missing(hirow) && !is.null(colhirow)) points(hirowd1, hirowd2, col=colhirow, ...)
+    if(!missing(hicol) && !is.null(colhicol)) points(hicold1, hicold2, col=colhicol, ...)
+    if(!is.null(colself)) points(self, col=colself, pch=16, ...)
 }

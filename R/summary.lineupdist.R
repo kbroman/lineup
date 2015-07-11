@@ -85,6 +85,7 @@
 #' plot2dist(d1, d2)
 #' }
 #'
+#' @importFrom stats sd
 #' @export
 summary.lineupdist <-
     function(object, cutoff, dropmatches=TRUE, reorder=c("alignmatches", "bydistance", "no"), ...)
@@ -105,7 +106,7 @@ summary.lineupdist <-
                         nextd=apply(object, 1, function(a) sort(a)[2]),
                         selfd=rep(NA, nrow(object)),
                         mean=rowMeans(object, na.rm=TRUE),
-                        sd=apply(object, 1, stats::sd, na.rm=TRUE),
+                        sd=apply(object, 1, sd, na.rm=TRUE),
                         best=apply(object, 1, function(a, b)
                         paste(b[!is.na(a) & a==min(a, na.rm=TRUE)], collapse=":"), colnames(object)))
     m <- match(rownames(object), colnames(object))
@@ -118,7 +119,7 @@ summary.lineupdist <-
                             nextd=apply(object, 2, function(a) sort(a)[2]),
                             selfd=rep(NA, ncol(object)),
                             mean=colMeans(object, na.rm=TRUE),
-                            sd=apply(object, 2, stats::sd, na.rm=TRUE),
+                            sd=apply(object, 2, sd, na.rm=TRUE),
                             best=apply(object, 2, function(a, b)
                             paste(b[!is.na(a) & a==min(a, na.rm=TRUE)], collapse=":"), rownames(object)))
         m <- match(colnames(object), rownames(object))
