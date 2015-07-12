@@ -81,7 +81,7 @@
 #' plot2dist(d1, d2)
 #' }
 #'
-#' @importFrom graphics plot par hist
+#' @importFrom graphics plot par hist rug
 #' @export
 plot.lineupdist <-
     function(x, breaks, add.rug=TRUE, what=c("both", "ss", "sn"), ...)
