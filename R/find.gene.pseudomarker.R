@@ -38,69 +38,19 @@
 #' \code{\link{disteg}}, \code{\link{calc.locallod}}
 #' @keywords utilities
 #' @examples
-#'
-#' \dontrun{
-#' ##############################
-#' # simulate an eQTL data set
-#' ##############################
-#' # genetic map
-#' L <- seq(120, length=8, by=-10)
-#' map <- sim.map(L, n.mar=L/10+1, include.x=FALSE, eq.spacing=TRUE)
-#'
-#' # physical map: make all intervals 2x longer
-#' pmap <- rescalemap(map, 2)
-#'
-#' # arbitrary locations of 40 local eQTL
-#' thepos <- unlist(map)
-#' theppos <- unlist(pmap)
-#' thechr <- rep(seq(along=map), sapply(map, length))
-#' eqtl.loc <- sort(sample(seq(along=thepos), 40))
-#'
-#' x <- sim.cross(map, n.ind=250, type="f2",
-#'                model=cbind(thechr[eqtl.loc], thepos[eqtl.loc], 0, 0))
-#' x$pheno$id <- factor(paste("Mouse", 1:250, sep=""))
-#'
-#' # first 20 have eQTL with huge effects
-#' # second 20 have essentially no effect
-#' edata <- cbind((x$qtlgeno[,1:20] - 2)*10+rnorm(prod(dim(x$qtlgeno[,1:20]))),
-#'                (x$qtlgeno[,21:40] - 2)*0.1+rnorm(prod(dim(x$qtlgeno[,21:40]))))
-#' dimnames(edata) <- list(x$pheno$id, paste("e", 1:ncol(edata), sep=""))
-#'
-#' # gene locations
-#' theloc <- data.frame(chr=thechr[eqtl.loc], pos=theppos[eqtl.loc])
-#' rownames(theloc) <- colnames(edata)
-#'
-#' # mix up 5 individuals in expression data
-#' edata[1:3,] <- edata[c(2,3,1),]
-#' edata[4:5,] <- edata[5:4,]
-#'
-#' ##############################
-#' # now, the start of the analysis
-#' ##############################
-#' x <- calc.genoprob(x, step=1)
+#' data(f2cross, expr1, genepos, pmap)
+#' library(qtl)
+#' \dontshow{
+#' n_ind <- 20
+#' n_genes <- 5
+#' f2cross <- f2cross[,1:n_ind]
+#' expr1 <- expr1[1:n_ind,1:n_genes]
+#' genepos <- genepos[1:n_genes,]}
+#' # calc QTL genotype probabilities
+#' f2cross <- calc.genoprob(f2cross, step=1)
 #'
 #' # find nearest pseudomarkers
-#' pmark <- find.gene.pseudomarker(x, pmap, theloc, "prob")
-#'
-#' # calculate LOD score for local eQTL
-#' locallod <- calc.locallod(x, edata, pmark)
-#'
-#' # take those with LOD > 100 [which will be the first 20]
-#' edatasub <- edata[,locallod>100,drop=FALSE]
-#'
-#' # calculate distance between individuals
-#' #     (prop'n mismatches between obs and inferred eQTL geno)
-#' d <- disteg(x, edatasub, pmark)
-#'
-#' # plot distances
-#' plot(d)
-#'
-#' # summary of apparent mix-ups
-#' summary(d)
-#'
-#' # plot of classifier for first eQTL
-#' plotEGclass(d)
-#' }
+#' pmark <- find.gene.pseudomarker(f2cross, pmap, genepos, "prob")
 #'
 #' @export
 find.gene.pseudomarker <-

@@ -25,35 +25,45 @@
 #' \code{\link{summary.lineupdist}}
 #' @keywords utilities
 #' @examples
+#' library(qtl)
 #'
-#' # simulate MVN, 100 individuals, 40 measurements (of which 20 are just noise)
-#' V <- matrix(0.3, ncol=20, nrow=20) + diag(rep(0.5, 20))
-#' D <- chol(V)
-#' z <- matrix(rnorm(20*100), ncol=20) %*% D
+#' # load example data
+#' data(f2cross, expr1, expr2, pmap, genepos)
+#' \dontshow{
+#' keep <- c(1:20, 197, 553, 573, 740, 794, 822, 1474, 1522,
+#'           1591, 1645, 2080, 2643, 2984, 3089, 3672, 4010, 4039,
+#'           4159, 4191, 4198, 4213, 4401, 4544, 4593, 4925)
+#' expr1 <- expr1[,keep]
+#' expr2 <- expr2[,keep]
+#' genepos <- genepos[keep,]}
 #'
-#' # create three data matrices as z + noise
-#' x <- cbind(z + rnorm(20*100, 0, 0.2), matrix(rnorm(20*100), ncol=20))
-#' y <- cbind(z + rnorm(20*100, 0, 0.2), matrix(rnorm(20*100), ncol=20))
-#' w <- cbind(z + rnorm(20*100, 0, 0.2), matrix(rnorm(20*100), ncol=20))
+#' # calculate QTL genotype probabilities
+#' f2cross <- calc.genoprob(f2cross, step=1)
 #'
-#' # permute some rows of x
-#' x[51:53,] <- x[c(52,53,51),]
+#' # find nearest pseudomarkers
+#' pmark <- find.gene.pseudomarker(f2cross, pmap, genepos)
 #'
-#' # add column and row names
-#' dimnames(x) <- dimnames(y) <- dimnames(w) <-
-#'    list(paste("ind", 1:100, sep=""), paste("gene", 1:40, sep=""))
+#' # line up individuals
+#' id1 <- findCommonID(f2cross, expr1)
+#' id2 <- findCommonID(f2cross, expr2)
 #'
-#' # calculate correlations between cols of x and of the other two matrices
-#' corxy <- corbetw2mat(x, y)
-#' corxw <- corbetw2mat(x, w)
+#' # calculate LOD score for local eQTL
+#' locallod1 <- calc.locallod(f2cross[,id1$first], expr1[id1$second,], pmark)
+#' locallod2 <- calc.locallod(f2cross[,id2$first], expr2[id2$second,], pmark)
 #'
-#' # using columns with corr > 0.75,
-#' # calculate distance (using "correlation" as a measure...really similarity)
-#' dxy <- distee(x[,corxy>0.75], y[,corxy>0.75], d.method="cor", labels=c("x", "y"))
-#' dxw <- distee(x[,corxw>0.75], w[,corxw>0.75], d.method="cor", labels=c("x", "w"))
+#' # take those with LOD > 25
+#' expr1s <- expr1[,locallod1>25,drop=FALSE]
+#' expr2s <- expr2[,locallod2>25,drop=FALSE]
 #'
-#' d <- combinedist(dxy, dxw)
+#' # calculate distance between individuals
+#' #     (prop'n mismatches between obs and inferred eQTL geno)
+#' d1 <- disteg(f2cross, expr1s, pmark)
+#' d2 <- disteg(f2cross, expr2s, pmark)
 #'
+#' # combine distances
+#' d <- combinedist(d1, d2)
+#'
+#' # summary of problem samples
 #' summary(d)
 #'
 #' @importFrom stats median

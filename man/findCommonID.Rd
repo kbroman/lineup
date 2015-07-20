@@ -34,13 +34,14 @@ Identify which individuals are in common between a QTL mapping data set and
 a matrix of phenotypes, series of genes.
 }
 \examples{
-id1 <- sample(LETTERS[1:5])
-id2 <- LETTERS[3:8]
-findCommonID(id1, id2)
+data(f2cross, expr1)
 
-x <- matrix(0, nrow=length(id2), ncol=3)
-rownames(x) <- id2
-findCommonID(id1, x)
+# align IDs
+id <- findCommonID(f2cross, expr1)
+
+# aligned data
+f2cross_aligned <- f2cross[,id$first]
+expr1_aligned <- expr1[id$second,]
 }
 \author{
 Karl W Broman, \email{kbroman@biostat.wisc.edu}

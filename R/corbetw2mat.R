@@ -41,38 +41,20 @@
 #' @keywords array univar multivariate
 #' @examples
 #'
-#' # a variance matrix
-#' V <- diag(rep(0.5, 5)) + 0.5
-#' D <- chol(V)
-#'
-#' # simulate two correlated matrices
-#' x <- matrix(rnorm(100), ncol=5) %*% D
-#' y <- matrix(rnorm(100), ncol=5) %*% D + x
-#'
-#' # create shuffled version of the second matrix
-#' u <- sample(1:ncol(y))
-#' z <- y[,u]
+#' data(expr1, expr2)
+#' \dontshow{expr1 <- expr1[,1:100]
+#' expr2 <- expr2[,1:100]}
 #'
 #' # correlations with paired columns
-#' corbetw2mat(x, y)
+#' r <- corbetw2mat(expr1, expr2)
+#' # top 10, by absolute value
+#' r[order(abs(r), decreasing=TRUE)[1:10]]
 #'
-#' # the same with y columns shuffled
-#' corbetw2mat(x, z)
+#' # all pairs of columns with correlation >= 0.8
+#' r_allpairs <- corbetw2mat(expr1, expr2, what="bestpairs", corthresh=0.6)
 #'
-#' # for each column x, find column of y with max correlation
-#' corbetw2mat(x, y, what="bestright")
-#'
-#' # the same with y columns shuffled
-#' corbetw2mat(x, z, what="bestright")
-#'
-#' # all pairs of columns with correlation >= 0.6
-#' corbetw2mat(x, y, what="bestpairs", corthresh=0.6)
-#'
-#' # the same with y columns shuffled
-#' corbetw2mat(x, z, what="bestpairs", corthresh=0.6)
-#'
-#' # all correlations
-#' corbetw2mat(x, y, what="all")
+#' # for each column in left matrix, most-correlated column in right matrix
+#' r_bestright <- corbetw2mat(expr1, expr2, what="bestright")
 #'
 #' @useDynLib lineup
 #' @export
