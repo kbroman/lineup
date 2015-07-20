@@ -5,7 +5,7 @@
 \title{Calculate LOD score at physical position of each gene}
 \usage{
 calc.locallod(cross, pheno, pmark, addcovar = NULL, intcovar = NULL,
-  verbose = TRUE)
+  verbose = TRUE, n.cores = 1)
 }
 \arguments{
 \item{cross}{An object of class \code{"cross"} containing data for a QTL
@@ -25,6 +25,10 @@ output by \code{\link{find.gene.pseudomarker}}.}
 \item{intcovar}{Interactive covariates passed to \code{\link{scanone}}.}
 
 \item{verbose}{If TRUE, print tracing information.}
+
+\item{n.cores}{Number of CPU cores to use in the calculations. With
+\code{n.cores=0}, \code{\link[parallel]{detectCores}} is used to
+detect the number of available cores.}
 }
 \value{
 A vector of LOD scores.  The names indicate the gene names (columns in

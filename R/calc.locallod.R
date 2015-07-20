@@ -35,6 +35,10 @@
 #' @param addcovar Additive covariates passed to \code{\link{scanone}}.
 #' @param intcovar Interactive covariates passed to \code{\link{scanone}}.
 #' @param verbose If TRUE, print tracing information.
+#' @param n.cores Number of CPU cores to use in the calculations. With
+#' \code{n.cores=0}, \code{\link[parallel]{detectCores}} is used to
+#' detect the number of available cores.
+#'
 #' @return A vector of LOD scores.  The names indicate the gene names (columns in
 #' \code{pheno}).
 #' @author Karl W Broman, \email{kbroman@@biostat.wisc.edu}
@@ -64,7 +68,8 @@
 #'
 #' @export
 calc.locallod <-
-    function(cross, pheno, pmark, addcovar=NULL, intcovar=NULL, verbose=TRUE)
+    function(cross, pheno, pmark, addcovar=NULL, intcovar=NULL, verbose=TRUE,
+             n.cores=1)
 {
     if(any(pmark$chr == "X")) {
         warning("Dropping X chr loci; we can only handle autosomes for now.")
@@ -86,9 +91,8 @@ calc.locallod <-
     temp <- cross
     n.ind <- qtl::nind(cross)
 
-    # loop over unique pseudomarkers
-    for(i in seq(along=upmark)) {
-        if(verbose && i==round(i,-2)) message(i, " of ", length(upmark))
+    # function to do calculation at unique pseudomarkers
+    tmpf <- function(i) {
         wh <- which(cpmark == upmark[i])
 
         y <- pheno[,wh,drop=FALSE]
@@ -101,6 +105,27 @@ calc.locallod <-
         class(temp$geno[[1]]) <- "A"
         lod[wh] <- unlist(qtl::scanone(temp, method="hk", addcovar=addcovar, intcovar=intcovar,
                                        pheno.col=1:ncol(y))[-(1:2)])
+    }
+
+    # if n.cores == 0, detect available cores
+    if(n.cores == 0) n.cores <- parallel::detectCores()
+
+    if(n.cores > 1) {
+        if(Sys.info()[1] == "Windows") { # Windows doesn't support mclapply
+            cl <- parallel::makeCluster(n.cores)
+            on.exit(parallel::stopCluster(cl))
+            result <- parallel::clusterApply(cl, seq(along=upmark), tmpf)
+        } else {
+            result <- parallel::mclapply(seq(along=upmark), tmpf, mc.cores=n.cores)
+        }
+    } else {
+        result <- lapply(seq(along=upmark), tmpf)
+    }
+
+    # fill in results
+    for(i in seq(along=upmark)) {
+        wh <- which(cpmark == upmark[i])
+        lod[wh] <- result[[i]]
     }
 
     names(lod) <- colnames(pheno)

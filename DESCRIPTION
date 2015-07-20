@@ -1,6 +1,6 @@
 Package: lineup
-Version: 0.37-5
-Date: 2015-07-12
+Version: 0.37-6
+Date: 2015-07-20
 Title: Lining Up Two Sets of Measurements
 Description: Tools for detecting and correcting sample mix-ups between two sets
     of measurements, such as between gene expression data on two tissues.
@@ -15,7 +15,8 @@ Imports:
     graphics,
     grDevices,
     utils,
-    stats
+    stats,
+    parallel
 Suggests:
     roxygen2,
     knitr,
