@@ -344,6 +344,23 @@ tie in which expression arrays were closest, in terms of proportion of
 mismatches between observed and predicted eQTL genotypes. (Note that
 `mind` and `nextd` are the same in this case.)
 
+The function `combinedist()` can be used to combine the two sets of
+distances, useful for the cases where the problem is in the genotype
+data, as with more genotype:phenotype comparisons, there will be
+greater separation, in terms of proportion mismatches, between the
+correct and incorrect pairs.
+
+```{r combinedist}
+d_eg <- combinedist(d_eg_1, d_eg_2)
+summary(d_eg)
+```
+
+The cases with mix-ups in one or the other expression data set become
+a bit muddled, but the two mix-ups in the genotype data, (31,84) and
+(65,68), remain clear.
+
+
+
 
 ## Conclusions
 
