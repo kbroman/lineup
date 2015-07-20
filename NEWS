@@ -1,0 +1,16 @@
+R/lineup 0.37-6
+---------------
+
+NEW FEATURES
+
+* Add example data
+
+* Add vignette
+
+* calc.locallod can do calculations in parallel
+
+
+R/lineup 0.34-1
+---------------
+
+* Initial release to CRAN
