@@ -94,7 +94,7 @@ nrow(expr2)
 ```
 
 The function `findCommonID()` helps to find individuals that are in
-common between the two matrices. For matrices, the default is to use
+common between the two data sets. For matrices, the default is to use
 the row names as identifiers.
 
 ```{r find_commond_ind_expr}
@@ -103,7 +103,8 @@ length(eid$first)
 ```
 
 In the returned object, `eid$first` and `eid$second` contain indices
-for `expr1` and `expr2`, respectively, to get them to line up.
+for `expr1` and `expr2`, respectively, to get them to line up (and
+omitting individuals that appear in one data set but not the other).
 
 Now let's look at the correlation between tissues for each gene,
 to identify genes that are highly correlated between the two tissues.
@@ -113,7 +114,7 @@ identified those yet).
 
 The function `corbetw2mat()` can be used to calculate portions of the
 correlations between columns of two different matrices . With
-`what="paired"`, we assume that the two matrices have the same number
+`what="paired"` (the default), we assume that the two matrices have the same number
 of columns (say _p_), and that column _i_ in the first matrix corresponds to
 column _i_ in the second matrix, and we calculate just the _p_
 correlation values, for the paired columns.
@@ -158,8 +159,8 @@ plot(d_ee)
 ```
 
 For most individuals, the self-self correlation (top panel) is near 1, but there
-is a group of `r sum(pulldiag(d_ee) < 0.5)` individuals where the
-self-self correlation is < 0.5.  Similarly, most of the self-nonself
+are `r sum(pulldiag(d_ee) < 0.5)` individuals with
+self-self correlation < 0.5.  Similarly, most of the self-nonself
 correlations (bottom panel) are between -0.5 and 0.5, but there's a group of
 `r sum(!is.na(omitdiag(d_ee)) & omitdiag(d_ee) > 0.5)` correlations where the
 self-nonself correlation is near 1.
@@ -207,7 +208,7 @@ data set.
 
 The rows with `NA` in the `selfc` column are cases where a sample
 appears in one data set but not the other. In these cases, we expect
-the maximum correlation to be small, and these cases it is.
+the maximum correlation to be small, and for these cases it is.
 
 However, there appear to be two pairs of sample mix-ups: (44,66) and
 (24,92). They have low values for `selfc` and high values for `maxc`,
@@ -276,12 +277,12 @@ in the expression data.
 pmar <- find.gene.pseudomarker(f2cross, pmap, genepos)
 ```
 
-This gives us a warning that a small number of genes being > 2 Mbp
+This gives us a warning that a small number of genes are > 2 Mbp
 from any pseudomarker, but we can ignore this.
 
 We now use `calc.locallod()` to perform a QTL analysis for each
 expression trait. (With the argument `n.cores`, these calculations
-will be performed in parallel with that many CPU cores. Use
+can be performed in parallel with that many CPU cores. Use
 `n.cores=0` to automatically detect the number of available cores.)
 For each gene, we just look at the one location that
 is closest to its genomic position.  We use `findCommonID()` again to
@@ -327,7 +328,7 @@ Between the genotype data and the first expression data set, we see
 three mix-ups: (31,84), (65,68), and (24,92).  Recall that (24,92) was
 a mix-up between expr1 and expr2.  The minimum distances (`mind`) are
 a bit high, but this is likely because the sample sizes are small and
-the QTL effects not huge.
+the QTL effects are not huge.
 
 Here is the summary for the second data set.
 
