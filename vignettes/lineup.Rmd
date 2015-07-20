@@ -280,7 +280,10 @@ This gives us a warning that a small number of genes being > 2 Mbp
 from any pseudomarker, but we can ignore this.
 
 We now use `calc.locallod()` to perform a QTL analysis for each
-expression trait. For each gene, we just look at the one location that
+expression trait. (With the argument `n.cores`, these calculations
+will be performed in parallel with that many CPU cores. Use
+`n.cores=0` to automatically detect the number of available cores.)
+For each gene, we just look at the one location that
 is closest to its genomic position.  We use `findCommonID()` again to
 identify the individuals in common between the cross and the
 expression data sets, and to line up these assumed-to-be-matching
