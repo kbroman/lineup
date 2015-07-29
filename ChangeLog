@@ -15,9 +15,11 @@ copyright (c) 2011-2015, Karl W Broman
     at http://www.r-project.org/Licenses/GPL-3
 ----------------------------------------------------------------------
 
-Version 0.37, 2015-06-24:
+Version 0.37, 2015-07-20:
 
     Add a vignette and example data.
+
+    calc.locallod can do calculations in parallel
 
 
 Version 0.36, 2014-05-02:
