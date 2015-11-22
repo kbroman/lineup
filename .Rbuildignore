@@ -1,4 +1,5 @@
 \.git
 Makefile
-ReadMe.md
+^ReadMe\.md$
+^LICENSE\.txt$
 ^\.travis\.yml$
