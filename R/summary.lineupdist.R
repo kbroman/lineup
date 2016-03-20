@@ -47,7 +47,7 @@
 #' @importFrom stats sd
 #' @export
 summary.lineupdist <-
-    function(object, cutoff, dropmatches=TRUE, reorder=c("alignmatches", "bydistance", "no"), ...)
+    function(object, cutoff=NULL, dropmatches=TRUE, reorder=c("alignmatches", "bydistance", "no"), ...)
 {
     d.method <- attr(object, "d.method")
     if(is.null(d.method)) d.method <- "rmsd"
@@ -121,7 +121,7 @@ summary.lineupdist <-
         for(i in 1:2) colnames(res[[i]])[1:3] <- c("maxc","nextc","selfc")
     }
 
-    if(!missing(cutoff)) {
+    if(!is.null(cutoff)) {
         if(d.method=="cor")
             res <- lapply(res, function(a,cut) a[a[,1]>=cut | (!is.na(a[,3]) & a[,3]>=cut),,drop=FALSE],cutoff)
         else

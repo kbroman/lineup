@@ -42,12 +42,14 @@
 #' @export
 #' @rdname subset.lineupdist
 subset.lineupdist <-
-    function(x, rows, cols, ...)
+    function(x, rows=NULL, cols=NULL, ...)
 {
-    if(missing(cols) && !missing(rows) && length(rows)==prod(dim(x)))
+    if(is.null(cols) && !is.null(rows) && length(rows)==prod(dim(x)))
         return(unclass(x)[rows])
 
-    xnew <- unclass(x)[rows,cols]
+    xnew <- unclass(x)
+    if(!is.null(rows)) xnew <- xnew[rows,,drop=FALSE]
+    if(!is.null(cols)) xnew <- xnew[,cols,drop=FALSE]
 
     class(xnew) <- class(x)
 
@@ -63,5 +65,5 @@ subset.lineupdist <-
 #' @rdname subset.lineupdist
 #' @export
 `[.lineupdist` <-
-    function(x, rows, cols)
+    function(x, rows=NULL, cols=NULL)
     subset(x, rows, cols)

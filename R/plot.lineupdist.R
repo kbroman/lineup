@@ -43,7 +43,7 @@
 #' @importFrom graphics plot par hist rug
 #' @export
 plot.lineupdist <-
-    function(x, breaks, add.rug=TRUE, what=c("both", "ss", "sn"), ...)
+    function(x, breaks=NULL, add.rug=TRUE, what=c("both", "ss", "sn"), ...)
 {
     what <- match.arg(what)
     if(what=="ns") what <- "sn"
@@ -55,7 +55,7 @@ plot.lineupdist <-
 
     if(diff(ra)==0) ra <- ra+c(-0.001, 0.001)
 
-    if(missing(breaks)) breaks <- seq(ra[1], ra[2], len=sqrt(prod(dim(x))))
+    if(is.null(breaks)) breaks <- seq(ra[1], ra[2], len=sqrt(prod(dim(x))))
     if(length(breaks)==1) breaks <- seq(ra[1], ra[2], len=breaks)
     d.method <- switch(attr(x, "d.method"), "cor"="correlation", "rmsd"="RMS distance")
     main <- paste(c("Self-self", "Self-nonself"), switch(attr(x, "d.method"), "cor"="correlation", "rmsd"="distance"))

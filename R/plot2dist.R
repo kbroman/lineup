@@ -48,11 +48,11 @@
 #' @importFrom grDevices colorRampPalette
 #' @export
 plot2dist <-
-    function(d1, d2, hirow, hicol, xlab, ylab, smoothScatter=FALSE,
+    function(d1, d2, hirow=NULL, hicol=NULL, xlab=NULL, ylab=NULL, smoothScatter=FALSE,
              colself="black", colnonself="gray", colhirow="green", colhicol="orange", ...)
 {
     xmis <- ymix <- FALSE
-    if(missing(xlab)) {
+    if(is.null(xlab)) {
         xmis <- TRUE
         meth <- attr(d1, "d.method")
         if(is.null(meth)) xlab <- "d1"
@@ -61,7 +61,7 @@ plot2dist <-
         else if(meth=="prop.mismatch") xlab <- "Proportion mismatches"
         else xlab <- "d1"
     }
-    if(missing(ylab)) {
+    if(is.null(ylab)) {
         ymis <- TRUE
         meth <- attr(d2, "d.method")
         if(is.null(meth)) ylab <- "d2"
@@ -123,12 +123,12 @@ plot2dist <-
         self[i,] <- c(d1[wh[i],m[i]], d2[wh[i],m[i]])
         d1[wh[i],m[i]] <- d2[wh[i],m[i]] <- NA
     }
-    if(!missing(hirow)) {
+    if(!is.null(hirow)) {
         hirowd1 <- d1[hirow,]
         hirowd2 <- d2[hirow,]
         d1[hirow,] <- d2[hirow,] <- NA
     }
-    if(!missing(hicol)) {
+    if(!is.null(hicol)) {
         hicold1 <- d1[,hicol]
         hicold2 <- d2[,hicol]
         d1[,hicol] <- d2[,hicol] <- NA
@@ -143,7 +143,7 @@ plot2dist <-
             plot(unclass(d1), unclass(d2), xlab=xlab, ylab=ylab, xlim=xl, ylim=yl, col=colnonself, ...)
         }
     }
-    if(!missing(hirow) && !is.null(colhirow)) points(hirowd1, hirowd2, col=colhirow, ...)
-    if(!missing(hicol) && !is.null(colhicol)) points(hicold1, hicold2, col=colhicol, ...)
+    if(!is.null(hirow) && !is.null(colhirow)) points(hirowd1, hirowd2, col=colhirow, ...)
+    if(!is.null(hicol) && !is.null(colhicol)) points(hicold1, hicold2, col=colhicol, ...)
     if(!is.null(colself)) points(self, col=colself, pch=16, ...)
 }

@@ -72,7 +72,7 @@
 #' @importFrom stats cor
 #' @export
 distee <-
-    function(e1, e2, d.method=c("rmsd", "cor"), labels=c("e1","e2"),
+    function(e1, e2=NULL, d.method=c("rmsd", "cor"), labels=c("e1","e2"),
              verbose=TRUE)
 {
     if(length(labels) != 2) {
@@ -83,7 +83,7 @@ distee <-
         stop("e1 is missing column names")
     if(is.null(rownames(e1)))
         stop("e1 is missing row names")
-    if(!missing(e2)) {
+    if(!is.null(e2)) {
         if(is.null(colnames(e2)))
             stop("e2 is missing column names")
         if(is.null(rownames(e2)))
@@ -92,7 +92,7 @@ distee <-
 
     d.method <- match.arg(d.method)
 
-    if(missing(e2)) {
+    if(is.null(e2)) {
         e2 <- e1
         compareWithin <- TRUE
     }
