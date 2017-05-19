@@ -61,12 +61,11 @@ d_cor <- distee(expr1, expr2, "cor")
 plot2dist(d_rmsd, d_cor)
 
 }
-\author{
-Karl W Broman, \email{kbroman@biostat.wisc.edu}
-}
 \seealso{
 \code{\link{pulldiag}}, \code{\link{distee}},
 \code{\link{summary.lineupdist}}
 }
+\author{
+Karl W Broman, \email{kbroman@biostat.wisc.edu}
+}
 \keyword{graphics}
-

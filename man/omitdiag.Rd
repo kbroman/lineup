@@ -36,13 +36,12 @@ d <- distee(expr1, expr2)
 d_selfnonself <- omitdiag(d)
 
 }
-\author{
-Karl W Broman, \email{kbroman@biostat.wisc.edu}
-}
 \seealso{
 \code{\link{pulldiag}}, \code{\link{distee}}, \code{\link{disteg}},
 \code{\link{summary.lineupdist}}, \code{\link{plot2dist}},
 \code{\link{plot.lineupdist}}
 }
+\author{
+Karl W Broman, \email{kbroman@biostat.wisc.edu}
+}
 \keyword{array}
-

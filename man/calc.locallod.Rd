@@ -76,12 +76,11 @@ id <- findCommonID(f2cross, expr1)
 locallod <- calc.locallod(f2cross[,id$first], expr1[id$second,], pmark)
 
 }
-\author{
-Karl W Broman, \email{kbroman@biostat.wisc.edu}
-}
 \seealso{
 \code{\link{find.gene.pseudomarker}}, \code{\link{plotEGclass}},
 \code{\link{findCommonID}}, \code{\link{disteg}}
 }
+\author{
+Karl W Broman, \email{kbroman@biostat.wisc.edu}
+}
 \keyword{utilities}
-

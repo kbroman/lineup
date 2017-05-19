@@ -31,4 +31,3 @@ hist(rho, breaks=100)
 \code{\link{genepos}}, \code{\link{f2cross}}, \code{\link{pmap}}
 }
 \keyword{datasets}
-

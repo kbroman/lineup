@@ -65,13 +65,12 @@ r_allpairs <- corbetw2mat(expr1, expr2, what="bestpairs", corthresh=0.6)
 r_bestright <- corbetw2mat(expr1, expr2, what="bestright")
 
 }
-\author{
-Karl W Broman, \email{kbroman@biostat.wisc.edu}
-}
 \seealso{
 \code{\link{distee}}, \code{\link{findCommonID}}
+}
+\author{
+Karl W Broman, \email{kbroman@biostat.wisc.edu}
 }
 \keyword{array}
 \keyword{multivariate}
 \keyword{univar}
-

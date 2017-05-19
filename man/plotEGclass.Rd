@@ -85,12 +85,11 @@ plotEGclass(d)
 plotEGclass(d, 2)
 
 }
-\author{
-Karl W Broman, \email{kbroman@biostat.wisc.edu}
-}
 \seealso{
 \code{\link{disteg}}, \code{\link{plot.lineupdist}},
 \code{\link{plot2dist}}, \code{\link[class]{knn}}
 }
+\author{
+Karl W Broman, \email{kbroman@biostat.wisc.edu}
+}
 \keyword{graphics}
-

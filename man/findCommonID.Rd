@@ -45,11 +45,10 @@ f2cross_aligned <- f2cross[,id$first]
 expr1_aligned <- expr1[id$second,]
 
 }
-\author{
-Karl W Broman, \email{kbroman@biostat.wisc.edu}
-}
 \seealso{
 \code{\link{calc.locallod}}, \code{\link{corbetw2mat}}
 }
+\author{
+Karl W Broman, \email{kbroman@biostat.wisc.edu}
+}
 \keyword{utilities}
-

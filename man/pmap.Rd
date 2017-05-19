@@ -21,4 +21,3 @@ plot(pmap)
 \code{\link{expr1}}, \code{\link{expr2}}, \code{\link{f2cross}}, \code{\link{genepos}}
 }
 \keyword{datasets}
-

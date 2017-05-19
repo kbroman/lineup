@@ -7,10 +7,10 @@
 combinedist(..., method = c("median", "mean"))
 }
 \arguments{
-\item{method}{Indicates whether to summarize using the median or the mean.}
-
 \item{\dots}{Set of distance matrices, as calculated by \code{\link{distee}}
 or \code{\link{disteg}}.}
+
+\item{method}{Indicates whether to summarize using the median or the mean.}
 }
 \value{
 A distance matrix, with class \code{"lineupdist"}.  The individual
@@ -71,12 +71,11 @@ d <- combinedist(d1, d2)
 summary(d)
 
 }
-\author{
-Karl W Broman, \email{kbroman@biostat.wisc.edu}
-}
 \seealso{
 \code{\link{distee}}, \code{\link{disteg}},
 \code{\link{summary.lineupdist}}
 }
+\author{
+Karl W Broman, \email{kbroman@biostat.wisc.edu}
+}
 \keyword{utilities}
-

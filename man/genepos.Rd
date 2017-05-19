@@ -26,4 +26,3 @@ genepos[1:5,] # 'newpos' column is the interpolated cM position
 \code{\link{expr1}}, \code{\link{expr2}}, \code{\link{f2cross}}, \code{\link{pmap}}
 }
 \keyword{datasets}
-

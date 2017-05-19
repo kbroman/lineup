@@ -23,4 +23,3 @@ summary(f2cross)
 \code{\link{expr1}}, \code{\link{expr2}}, \code{\link{genepos}}, \code{\link{pmap}}
 }
 \keyword{datasets}
-

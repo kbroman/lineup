@@ -59,13 +59,12 @@ f2cross <- calc.genoprob(f2cross, step=1)
 pmark <- find.gene.pseudomarker(f2cross, pmap, genepos, "prob")
 
 }
-\author{
-Karl W Broman, \email{kbroman@biostat.wisc.edu}
-}
 \seealso{
 \code{\link[qtl]{find.pseudomarker}},
 \code{\link[qtl]{find.pseudomarkerpos}}, \code{\link{plotEGclass}},
 \code{\link{disteg}}, \code{\link{calc.locallod}}
 }
+\author{
+Karl W Broman, \email{kbroman@biostat.wisc.edu}
+}
 \keyword{utilities}
-

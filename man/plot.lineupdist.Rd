@@ -51,12 +51,11 @@ d <- distee(expr1, expr2, "cor")
 plot(d)
 
 }
-\author{
-Karl W Broman, \email{kbroman@biostat.wisc.edu}
-}
 \seealso{
 \code{\link{pulldiag}}, \code{\link{distee}},
 \code{\link{plot2dist}}
 }
+\author{
+Karl W Broman, \email{kbroman@biostat.wisc.edu}
+}
 \keyword{utilities}
-

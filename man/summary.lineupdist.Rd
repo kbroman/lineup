@@ -50,13 +50,12 @@ d <- distee(expr1, expr2, "cor")
 summary(d)
 
 }
-\author{
-Karl W Broman, \email{kbroman@biostat.wisc.edu}
-}
 \seealso{
 \code{\link{pulldiag}}, \code{\link{omitdiag}},
 \code{\link{distee}}, \code{\link{disteg}}, \code{\link{plot2dist}},
 \code{\link{plot.lineupdist}}
 }
+\author{
+Karl W Broman, \email{kbroman@biostat.wisc.edu}
+}
 \keyword{utilities}
-

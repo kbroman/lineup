@@ -22,4 +22,3 @@ Print the version number of the currently installed version of R/lineup.
 Karl W Broman, \email{kbroman@biostat.wisc.edu}
 }
 \keyword{print}
-

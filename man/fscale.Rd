@@ -31,11 +31,10 @@ x <- matrix(1:10, ncol=2)
 y <- fscale(x)
 
 }
-\author{
-Karl W Broman, \email{kbroman@biostat.wisc.edu}
-}
 \seealso{
 \code{\link[base]{scale}}
 }
+\author{
+Karl W Broman, \email{kbroman@biostat.wisc.edu}
+}
 \keyword{array}
-

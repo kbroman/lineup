@@ -141,9 +141,6 @@ plotEGclass(d)
 plotEGclass(d, 2)
 
 }
-\author{
-Karl W Broman, \email{kbroman@biostat.wisc.edu}
-}
 \seealso{
 \code{\link{distee}}, \code{\link{summary.lineupdist}},
 \code{\link{pulldiag}}, \code{\link{omitdiag}}, \code{\link{findCommonID}},
@@ -151,5 +148,7 @@ Karl W Broman, \email{kbroman@biostat.wisc.edu}
 \code{\link{plot.lineupdist}}, \code{\link[class]{knn}},
 \code{\link{plotEGclass}}
 }
+\author{
+Karl W Broman, \email{kbroman@biostat.wisc.edu}
+}
 \keyword{utilities}
-

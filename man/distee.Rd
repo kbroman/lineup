@@ -76,13 +76,12 @@ plot(d2)
 plot2dist(d1, d2)
 
 }
-\author{
-Karl W Broman, \email{kbroman@biostat.wisc.edu}
-}
 \seealso{
 \code{\link{pulldiag}}, \code{\link{omitdiag}},
 \code{\link{summary.lineupdist}}, \code{\link{plot2dist}},
 \code{\link{disteg}}, \code{\link{corbetw2mat}}
 }
+\author{
+Karl W Broman, \email{kbroman@biostat.wisc.edu}
+}
 \keyword{utilities}
-
