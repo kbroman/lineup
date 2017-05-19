@@ -14,7 +14,7 @@ options(digits=4, scipen=5)
 ```
 
 [R/lineup](https://github.com/kbroman/lineup) is an
-[R](http://www.r-project.org) package with tools for
+[R](https://www.r-project.org) package with tools for
 detecting and correcting sample mix-ups between two sets of
 measurements, such as between gene expression data on two tissues, and
 between gene expression and marker genotype data in an experimental cross. The
@@ -80,7 +80,7 @@ expr2 <- expr2/1000
 
 We'll first consider the gene expression data in `expr1` and `expr2`
 and look for possible sample mix-ups. The basic scheme (see
-[Broman et al. 2014](http://arxiv.org/abs/1402.2633)) is to identify a
+[Broman et al. 2014](https://arxiv.org/abs/1402.2633)) is to identify a
 set of genes with highly correlated expression between the two
 tissues, and then use these genes to measure the association between
 each sample in the first tissue with each sample in the second tissue.
