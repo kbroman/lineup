@@ -125,7 +125,7 @@
 #' plotEGclass(d)
 #' plotEGclass(d, 2)
 #'
-#' @useDynLib lineup
+#' @useDynLib lineup, .registration=TRUE
 #' @export
 disteg <-
     function(cross, pheno, pmark, min.genoprob=0.99,

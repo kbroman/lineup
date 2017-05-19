@@ -56,7 +56,7 @@
 #' # for each column in left matrix, most-correlated column in right matrix
 #' r_bestright <- corbetw2mat(expr1, expr2, what="bestright")
 #'
-#' @useDynLib lineup
+#' @useDynLib lineup, .registration=TRUE
 #' @export
 corbetw2mat <-
     function(x, y, what=c("paired", "bestright", "bestpairs", "all"),

@@ -68,7 +68,7 @@
 #' # plot distances against one another
 #' plot2dist(d1, d2)
 #'
-#' @useDynLib lineup
+#' @useDynLib lineup, .registration=TRUE
 #' @importFrom stats cor
 #' @export
 distee <-
