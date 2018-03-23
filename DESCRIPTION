@@ -1,12 +1,13 @@
 Package: lineup
-Version: 0.37-9
-Date: 2017-05-19
+Version: 0.37-10
+Date: 2018-03-23
 Title: Lining Up Two Sets of Measurements
 Description: Tools for detecting and correcting sample mix-ups between two sets
     of measurements, such as between gene expression data on two tissues.
 Author: Karl W Broman <kbroman@biostat.wisc.edu>
 Maintainer: Karl W Broman <kbroman@biostat.wisc.edu>
 URL: https://github.com/kbroman/lineup
+BugReports: https://github.com/kbroman/lineup/issues
 Depends:
     R (>= 2.10.1)
 Imports:
@@ -27,4 +28,5 @@ License: GPL-3
 Roxygen: list(wrap = FALSE)
 VignetteBuilder: knitr
 LazyData: true
+ByteCompile: true
 RoxygenNote: 6.0.1
