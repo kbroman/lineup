@@ -101,7 +101,7 @@ distee <-
 
         # line up columns
         if(!compareWithin && ((ncol(e1) != ncol(e2)) ||
-                              (colnames(e1) != colnames(e2)))) {
+                              !all(colnames(e1) == colnames(e2)))) {
             cnmatch <- findCommonID(colnames(e1), colnames(e2))
 
             if(ncol(e1) != length(cnmatch$first)) {

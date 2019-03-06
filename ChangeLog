@@ -15,9 +15,11 @@ copyright (c) 2011-2019, Karl W Broman
     at https://www.r-project.org/Licenses/GPL-3
 ----------------------------------------------------------------------
 
-Version 0.37-11, 2019-03-05
+Version 0.37-11, 2019-03-06
 
-    Fix test for corbetw2mat(), due to upcoming change in
+    Fixed a bug in distee()
+
+    Fixed test for corbetw2mat(), due to upcoming change in
     sample(), in R 3.6
 
 
