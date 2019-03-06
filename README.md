@@ -3,7 +3,7 @@
 [![Build Status](https://travis-ci.org/kbroman/lineup.svg?branch=master)](https://travis-ci.org/kbroman/lineup)
 [![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/lineup)](https://cran.r-project.org/package=lineup)
 
-[Karl W Broman](http://kbroman.org)
+[Karl W Broman](https://kbroman.org)
 
 [R/lineup](https://github.com/kbroman/lineup) is an
 [R](https://www.r-project.org) package with tools for detecting and
