@@ -27,7 +27,7 @@
 #' next-smallest distance, the self-self distance, the mean and SD of the
 #' distances to others, and finally indicate the individual (or individuals)
 #' that is closest.
-#' @author Karl W Broman, \email{kbroman@@biostat.wisc.edu}
+#' @author Karl W Broman, \email{broman@@wisc.edu}
 #' @seealso \code{\link{pulldiag}}, \code{\link{omitdiag}},
 #' \code{\link{distee}}, \code{\link{disteg}}, \code{\link{plot2dist}},
 #' \code{\link{plot.lineupdist}}

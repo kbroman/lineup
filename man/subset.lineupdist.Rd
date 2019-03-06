@@ -3,7 +3,6 @@
 \name{subset.lineupdist}
 \alias{subset.lineupdist}
 \alias{[.lineupdist}
-\alias{[.lineupdist}
 \title{Subsetting distance matrix}
 \usage{
 \method{subset}{lineupdist}(x, rows = NULL, cols = NULL, ...)
@@ -53,6 +52,6 @@ d[samp, samp]
 \code{\link{disteg}}, \code{\link{distee}}, \code{\link{pulldiag}}
 }
 \author{
-Karl W Broman, \email{kbroman@biostat.wisc.edu}
+Karl W Broman, \email{broman@wisc.edu}
 }
 \keyword{manip}

@@ -36,7 +36,7 @@
 #' If \code{what="all"}, the output is a matrix of size \code{ncol(x)} by
 #' \code{ncol(y)}, with all correlations between columns of \code{x} and
 #' columns of \code{y}.
-#' @author Karl W Broman, \email{kbroman@@biostat.wisc.edu}
+#' @author Karl W Broman, \email{broman@@wisc.edu}
 #' @seealso \code{\link{distee}}, \code{\link{findCommonID}}
 #' @keywords array univar multivariate
 #' @examples

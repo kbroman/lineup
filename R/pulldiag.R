@@ -10,7 +10,7 @@
 #'
 #' @param d A distance matrix calculated by \code{\link{distee}}.
 #' @return A vector with the self-self distances.
-#' @author Karl W Broman, \email{kbroman@@biostat.wisc.edu}
+#' @author Karl W Broman, \email{broman@@wisc.edu}
 #' @seealso \code{\link{omitdiag}}, \code{\link{distee}}, \code{\link{disteg}},
 #' \code{\link{summary.lineupdist}}, \code{\link{plot2dist}},
 #' \code{\link{plot.lineupdist}}

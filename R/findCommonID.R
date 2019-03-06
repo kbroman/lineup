@@ -27,7 +27,7 @@
 #' The second and third components are vectors of indices in \code{id1} and
 #' \code{id2}, respectively, indicating the paired locations of the individuals
 #' that are in common.
-#' @author Karl W Broman, \email{kbroman@@biostat.wisc.edu}
+#' @author Karl W Broman, \email{broman@@wisc.edu}
 #' @seealso \code{\link{calc.locallod}}, \code{\link{corbetw2mat}}
 #' @keywords utilities
 #' @examples

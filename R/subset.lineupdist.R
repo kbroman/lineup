@@ -15,7 +15,7 @@
 #' @param \dots Ignored at this point.
 #' @return The input distance matrix object, but with only the specified subset
 #' of the data.
-#' @author Karl W Broman, \email{kbroman@@biostat.wisc.edu}
+#' @author Karl W Broman, \email{broman@@wisc.edu}
 #' @seealso \code{\link{disteg}}, \code{\link{distee}}, \code{\link{pulldiag}}
 #' @keywords manip
 #'

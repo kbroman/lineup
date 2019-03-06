@@ -4,9 +4,9 @@
 \alias{plot2dist}
 \title{Plot two sets of inter-individual distances against one another}
 \usage{
-plot2dist(d1, d2, hirow = NULL, hicol = NULL, xlab = NULL, ylab = NULL,
-  smoothScatter = FALSE, colself = "black", colnonself = "gray",
-  colhirow = "green", colhicol = "orange", ...)
+plot2dist(d1, d2, hirow = NULL, hicol = NULL, xlab = NULL,
+  ylab = NULL, smoothScatter = FALSE, colself = "black",
+  colnonself = "gray", colhirow = "green", colhicol = "orange", ...)
 }
 \arguments{
 \item{d1}{Output of \code{\link{distee}}.}
@@ -66,6 +66,6 @@ plot2dist(d_rmsd, d_cor)
 \code{\link{summary.lineupdist}}
 }
 \author{
-Karl W Broman, \email{kbroman@biostat.wisc.edu}
+Karl W Broman, \email{broman@wisc.edu}
 }
 \keyword{graphics}

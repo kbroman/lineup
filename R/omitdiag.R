@@ -13,7 +13,7 @@
 #' \code{\link{disteg}}.
 #' @return A matrix of the same form as the input, but with self-self distances
 #' replaced with \code{NA}.
-#' @author Karl W Broman, \email{kbroman@@biostat.wisc.edu}
+#' @author Karl W Broman, \email{broman@@wisc.edu}
 #' @seealso \code{\link{pulldiag}}, \code{\link{distee}}, \code{\link{disteg}},
 #' \code{\link{summary.lineupdist}}, \code{\link{plot2dist}},
 #' \code{\link{plot.lineupdist}}

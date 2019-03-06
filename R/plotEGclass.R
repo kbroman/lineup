@@ -35,7 +35,7 @@
 #' @param \dots Passed to \code{\link[graphics]{plot}} and
 #' \code{\link[graphics]{points}}.
 #' @return None.
-#' @author Karl W Broman, \email{kbroman@@biostat.wisc.edu}
+#' @author Karl W Broman, \email{broman@@wisc.edu}
 #' @seealso \code{\link{disteg}}, \code{\link{plot.lineupdist}},
 #' \code{\link{plot2dist}}, \code{\link[class]{knn}}
 #' @keywords graphics

@@ -56,6 +56,6 @@ plot(d)
 \code{\link{plot2dist}}
 }
 \author{
-Karl W Broman, \email{kbroman@biostat.wisc.edu}
+Karl W Broman, \email{broman@wisc.edu}
 }
 \keyword{utilities}

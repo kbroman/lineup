@@ -18,7 +18,7 @@
 #' @param x A numeric matrix.
 #' @return A matrix of the same form as the input, but with columns transformed
 #' to have mean 0 and SD 1.
-#' @author Karl W Broman, \email{kbroman@@biostat.wisc.edu}
+#' @author Karl W Broman, \email{broman@@wisc.edu}
 #' @seealso \code{\link[base]{scale}}
 #' @keywords array
 #' @examples

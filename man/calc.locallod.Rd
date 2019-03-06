@@ -81,6 +81,6 @@ locallod <- calc.locallod(f2cross[,id$first], expr1[id$second,], pmark)
 \code{\link{findCommonID}}, \code{\link{disteg}}
 }
 \author{
-Karl W Broman, \email{kbroman@biostat.wisc.edu}
+Karl W Broman, \email{broman@wisc.edu}
 }
 \keyword{utilities}

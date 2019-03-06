@@ -25,7 +25,7 @@
 #' @return A matrix with \code{nrow(e1)} rows and \code{nrow(e2)} columns,
 #' containing the distances.  The individual IDs are in the row and column
 #' names.  The matrix is assigned class \code{"lineupdist"}.
-#' @author Karl W Broman, \email{kbroman@@biostat.wisc.edu}
+#' @author Karl W Broman, \email{broman@@wisc.edu}
 #' @seealso \code{\link{pulldiag}}, \code{\link{omitdiag}},
 #' \code{\link{summary.lineupdist}}, \code{\link{plot2dist}},
 #' \code{\link{disteg}}, \code{\link{corbetw2mat}}

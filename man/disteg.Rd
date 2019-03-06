@@ -7,7 +7,8 @@
 disteg(cross, pheno, pmark, min.genoprob = 0.99, k = 20,
   min.classprob = 0.8, classprob2drop = 1, repeatKNN = TRUE,
   max.selfd = 0.3, phenolabel = "phenotype", weightByLinkage = FALSE,
-  map.function = c("haldane", "kosambi", "c-f", "morgan"), verbose = TRUE)
+  map.function = c("haldane", "kosambi", "c-f", "morgan"),
+  verbose = TRUE)
 }
 \arguments{
 \item{cross}{An object of class \code{"cross"} containing data for a QTL
@@ -149,6 +150,6 @@ plotEGclass(d, 2)
 \code{\link{plotEGclass}}
 }
 \author{
-Karl W Broman, \email{kbroman@biostat.wisc.edu}
+Karl W Broman, \email{broman@wisc.edu}
 }
 \keyword{utilities}

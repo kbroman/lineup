@@ -65,6 +65,6 @@ pmark <- find.gene.pseudomarker(f2cross, pmap, genepos, "prob")
 \code{\link{disteg}}, \code{\link{calc.locallod}}
 }
 \author{
-Karl W Broman, \email{kbroman@biostat.wisc.edu}
+Karl W Broman, \email{broman@wisc.edu}
 }
 \keyword{utilities}

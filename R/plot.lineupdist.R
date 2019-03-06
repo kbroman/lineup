@@ -24,7 +24,7 @@
 #' indicates self-self and \code{"sn"} indicates self-nonself.)
 #' @param \dots Ignored at this point.
 #' @return None.
-#' @author Karl W Broman, \email{kbroman@@biostat.wisc.edu}
+#' @author Karl W Broman, \email{broman@@wisc.edu}
 #' @seealso \code{\link{pulldiag}}, \code{\link{distee}},
 #' \code{\link{plot2dist}}
 #' @keywords utilities

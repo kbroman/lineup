@@ -4,8 +4,8 @@
 \alias{distee}
 \title{Calculate distance between two gene expression data sets}
 \usage{
-distee(e1, e2 = NULL, d.method = c("rmsd", "cor"), labels = c("e1", "e2"),
-  verbose = TRUE)
+distee(e1, e2 = NULL, d.method = c("rmsd", "cor"), labels = c("e1",
+  "e2"), verbose = TRUE)
 }
 \arguments{
 \item{e1}{Numeric matrix of gene expression data, as individuals x genes.
@@ -82,6 +82,6 @@ plot2dist(d1, d2)
 \code{\link{disteg}}, \code{\link{corbetw2mat}}
 }
 \author{
-Karl W Broman, \email{kbroman@biostat.wisc.edu}
+Karl W Broman, \email{broman@wisc.edu}
 }
 \keyword{utilities}

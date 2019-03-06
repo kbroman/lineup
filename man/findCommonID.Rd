@@ -49,6 +49,6 @@ expr1_aligned <- expr1[id$second,]
 \code{\link{calc.locallod}}, \code{\link{corbetw2mat}}
 }
 \author{
-Karl W Broman, \email{kbroman@biostat.wisc.edu}
+Karl W Broman, \email{broman@wisc.edu}
 }
 \keyword{utilities}

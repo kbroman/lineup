@@ -76,6 +76,6 @@ summary(d)
 \code{\link{summary.lineupdist}}
 }
 \author{
-Karl W Broman, \email{kbroman@biostat.wisc.edu}
+Karl W Broman, \email{broman@wisc.edu}
 }
 \keyword{utilities}

@@ -69,7 +69,7 @@ r_bestright <- corbetw2mat(expr1, expr2, what="bestright")
 \code{\link{distee}}, \code{\link{findCommonID}}
 }
 \author{
-Karl W Broman, \email{kbroman@biostat.wisc.edu}
+Karl W Broman, \email{broman@wisc.edu}
 }
 \keyword{array}
 \keyword{multivariate}

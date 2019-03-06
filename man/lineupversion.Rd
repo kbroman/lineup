@@ -19,6 +19,6 @@ Print the version number of the currently installed version of R/lineup.
 
 }
 \author{
-Karl W Broman, \email{kbroman@biostat.wisc.edu}
+Karl W Broman, \email{broman@wisc.edu}
 }
 \keyword{print}

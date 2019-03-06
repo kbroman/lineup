@@ -41,7 +41,7 @@
 #'
 #' @return A vector of LOD scores.  The names indicate the gene names (columns in
 #' \code{pheno}).
-#' @author Karl W Broman, \email{kbroman@@biostat.wisc.edu}
+#' @author Karl W Broman, \email{broman@@wisc.edu}
 #' @seealso \code{\link{find.gene.pseudomarker}}, \code{\link{plotEGclass}},
 #' \code{\link{findCommonID}}, \code{\link{disteg}}
 #' @keywords utilities

@@ -20,7 +20,7 @@
 #' @param method Indicates whether to summarize using the median or the mean.
 #' @return A distance matrix, with class \code{"lineupdist"}.  The individual
 #' IDs are in the row and column names.
-#' @author Karl W Broman, \email{kbroman@@biostat.wisc.edu}
+#' @author Karl W Broman, \email{broman@@wisc.edu}
 #' @seealso \code{\link{distee}}, \code{\link{disteg}},
 #' \code{\link{summary.lineupdist}}
 #' @keywords utilities

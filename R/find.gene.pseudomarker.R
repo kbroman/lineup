@@ -32,7 +32,7 @@
 #' contains the Mbp position of the pseudomarker.  The final column is the
 #' signed distance between the gene and the pseudomarker.  The rownames
 #' indicate the gene names.
-#' @author Karl W Broman, \email{kbroman@@biostat.wisc.edu}
+#' @author Karl W Broman, \email{broman@@wisc.edu}
 #' @seealso \code{\link[qtl]{find.pseudomarker}},
 #' \code{\link[qtl]{find.pseudomarkerpos}}, \code{\link{plotEGclass}},
 #' \code{\link{disteg}}, \code{\link{calc.locallod}}

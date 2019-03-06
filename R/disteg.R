@@ -76,7 +76,7 @@
 #'
 #' The denominators of the proportions that form the inter-individual distances
 #' are in the attribute \code{"denom"}.
-#' @author Karl W Broman, \email{kbroman@@biostat.wisc.edu}
+#' @author Karl W Broman, \email{broman@@wisc.edu}
 #' @seealso \code{\link{distee}}, \code{\link{summary.lineupdist}},
 #' \code{\link{pulldiag}}, \code{\link{omitdiag}}, \code{\link{findCommonID}},
 #' \code{\link{find.gene.pseudomarker}}, \code{\link{calc.locallod}},

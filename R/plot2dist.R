@@ -27,7 +27,7 @@
 #' @param \dots Passed to \code{\link[graphics]{plot}} and
 #' \code{\link[graphics]{points}}.
 #' @return None.
-#' @author Karl W Broman, \email{kbroman@@biostat.wisc.edu}
+#' @author Karl W Broman, \email{broman@@wisc.edu}
 #' @seealso \code{\link{pulldiag}}, \code{\link{distee}},
 #' \code{\link{summary.lineupdist}}
 #' @keywords graphics

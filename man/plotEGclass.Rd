@@ -4,8 +4,9 @@
 \alias{plotEGclass}
 \title{Plot classifier of eQTL genotype from expression data}
 \usage{
-plotEGclass(d, eqtl = 1, outercol = "inferred", innercol = "observed",
-  thecolors = c("#7B68ED", "#1B9E78", "#CA3767", "#E59E00"), ...)
+plotEGclass(d, eqtl = 1, outercol = "inferred",
+  innercol = "observed", thecolors = c("#7B68ED", "#1B9E78", "#CA3767",
+  "#E59E00"), ...)
 }
 \arguments{
 \item{d}{Output of \code{\link{disteg}}.}
@@ -90,6 +91,6 @@ plotEGclass(d, 2)
 \code{\link{plot2dist}}, \code{\link[class]{knn}}
 }
 \author{
-Karl W Broman, \email{kbroman@biostat.wisc.edu}
+Karl W Broman, \email{broman@wisc.edu}
 }
 \keyword{graphics}
