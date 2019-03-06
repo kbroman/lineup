@@ -27,13 +27,12 @@ test_that('corbetw2mat works in the other cases', {
     n_col <- 3
     n_col_extra <- 5
 
-    suppressWarnings(RNGversion("3.5.0")) # used because sample() changes in R 3.6.0
     set.seed(7490138)
 
     x <- matrix(rnorm(n_ind*n_col), ncol=n_col)
     y <- cbind(x + rnorm(n_ind*n_col, 0, 0.5),
                matrix(rnorm(n_ind*n_col_extra, 0, 0.5), ncol=n_col_extra))
-    y <- y[,sample(ncol(y))]
+    y <- y[,c(6,2,5,4,7,3,1,8)] # shuffled columns
     colnames(x) <- 1:ncol(x)
     colnames(y) <- 1:ncol(y)
     rownames(x) <- rownames(y) <- 1:n_ind
