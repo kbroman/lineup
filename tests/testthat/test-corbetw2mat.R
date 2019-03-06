@@ -27,6 +27,7 @@ test_that('corbetw2mat works in the other cases', {
     n_col <- 3
     n_col_extra <- 5
 
+    suppressWarnings(RNGversion("3.5.0")) # used because sample() changes in R 3.6.0
     set.seed(7490138)
 
     x <- matrix(rnorm(n_ind*n_col), ncol=n_col)
