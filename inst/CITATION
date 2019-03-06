@@ -1,0 +1,25 @@
+citHeader("To cite R/lineup in publications use:")
+
+citEntry(entry="article",
+         title = "Identification and correction of sample mix-ups in expression genetic data: A case study",
+         author = personList(person(c("Karl", "W."), "Broman"),
+                             person(c("Mark", "P."), "Keller"),
+                             person(c("Aimee", "Teo"), "Broman"),
+                             person("Christina", "Kendziorski"),
+                             person(c("Brian", "S."), "Yandell"),
+                             person("Śaunak", "Sen"),
+                             person(c("Alan", "D."), "Attie")),
+         journal = "G3",
+         year = 2015,
+         volume = 5,
+         pages = "2177-2186",
+         key = "Broman2015",
+         doi = "10.1534/g3.115.019778",
+         url = "https://doi.org/10.1534/g3.115.019778",
+         eprint = "http://www.g3journal.org/content/ggg/5/10/2177.full.pdf",
+         textVersion =
+             paste("Broman et al. (2015) Identification and correction of",
+                   "sample mix-ups in expression genetic data: A case study.",
+                   "G3 5:2177-2186",
+                   "doi:10.1534/g3.115.019778")
+         )
