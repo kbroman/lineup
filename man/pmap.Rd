@@ -10,7 +10,7 @@
 data(pmap)
 }
 \description{
-Physical map (Mbp positions) of the markers in \code{\link{f2cross}}
+Physical map (Mbp positions) of the markers in \code{\link[=f2cross]{f2cross()}}
 }
 \examples{
 data(pmap)
@@ -18,6 +18,6 @@ summary(pmap)
 plot(pmap)
 }
 \seealso{
-\code{\link{expr1}}, \code{\link{expr2}}, \code{\link{f2cross}}, \code{\link{genepos}}
+\code{\link[=expr1]{expr1()}}, \code{\link[=expr2]{expr2()}}, \code{\link[=f2cross]{f2cross()}}, \code{\link[=genepos]{genepos()}}
 }
 \keyword{datasets}

@@ -8,8 +8,8 @@ findCommonID(id1, id2)
 }
 \arguments{
 \item{id1}{A character vector of individual IDs.  This can also be a QTL
-cross object (see \code{\link[qtl]{read.cross}}), in which case
-\code{\link[qtl]{getid}} is used to grab individual IDs, or a matrix or data
+cross object (see \code{\link[qtl:read.cross]{qtl::read.cross()}}), in which case
+\code{\link[qtl:getid]{qtl::getid()}} is used to grab individual IDs, or a matrix or data
 frame, in which case the rownames are taken to be IDs.}
 
 \item{id2}{Like \code{id1}, can be a character vector, a cross or a
@@ -46,7 +46,7 @@ expr1_aligned <- expr1[id$second,]
 
 }
 \seealso{
-\code{\link{calc.locallod}}, \code{\link{corbetw2mat}}
+\code{\link[=calc.locallod]{calc.locallod()}}, \code{\link[=corbetw2mat]{corbetw2mat()}}
 }
 \author{
 Karl W Broman, \email{broman@wisc.edu}

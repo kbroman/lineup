@@ -7,14 +7,14 @@
 pulldiag(d)
 }
 \arguments{
-\item{d}{A distance matrix calculated by \code{\link{distee}}.}
+\item{d}{A distance matrix calculated by \code{\link[=distee]{distee()}}.}
 }
 \value{
 A vector with the self-self distances.
 }
 \description{
 Pull out the diagonal from a distance matrix calculated by
-\code{\link{distee}} (that is, self-self distances).
+\code{\link[=distee]{distee()}} (that is, self-self distances).
 }
 \details{
 We use the row and column names to identify which entries are self-self.
@@ -36,9 +36,9 @@ sort(d_selfself)[1:10]
 
 }
 \seealso{
-\code{\link{omitdiag}}, \code{\link{distee}}, \code{\link{disteg}},
-\code{\link{summary.lineupdist}}, \code{\link{plot2dist}},
-\code{\link{plot.lineupdist}}
+\code{\link[=omitdiag]{omitdiag()}}, \code{\link[=distee]{distee()}}, \code{\link[=disteg]{disteg()}},
+\code{\link[=summary.lineupdist]{summary.lineupdist()}}, \code{\link[=plot2dist]{plot2dist()}},
+\code{\link[=plot.lineupdist]{plot.lineupdist()}}
 }
 \author{
 Karl W Broman, \email{broman@wisc.edu}

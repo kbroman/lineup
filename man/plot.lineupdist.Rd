@@ -8,14 +8,14 @@
   what = c("both", "ss", "sn"), ...)
 }
 \arguments{
-\item{x}{Output of \code{\link{distee}} or \code{\link{disteg}}.}
+\item{x}{Output of \code{\link[=distee]{distee()}} or \code{\link[=disteg]{disteg()}}.}
 
 \item{breaks}{Optional vector of breaks, passed to
-\code{\link[graphics]{hist}}, though if it is length 1, we interpret it as
+\code{\link[graphics:hist]{graphics::hist()}}, though if it is length 1, we interpret it as
 the number of breaks and ensure that both histograms use the same set of
 breaks.}
 
-\item{add.rug}{If true, also include \code{\link[graphics]{rug}} below
+\item{add.rug}{If true, also include \code{\link[graphics:rug]{graphics::rug()}} below
 histograms.}
 
 \item{what}{Indicates whether to plot both self-self and self-nonself
@@ -29,10 +29,10 @@ None.
 }
 \description{
 Plot histograms of self-self and self-nonself distances from a distance
-matrix calculated by \code{\link{distee}} or \code{\link{disteg}}.
+matrix calculated by \code{\link[=distee]{distee()}} or \code{\link[=disteg]{disteg()}}.
 }
 \details{
-We call \code{\link{pulldiag}} and \code{\link{omitdiag}} to get the
+We call \code{\link[=pulldiag]{pulldiag()}} and \code{\link[=omitdiag]{omitdiag()}} to get the
 self-self and self-nonself distances.
 
 If all of the self-self distances are missing, we plot just the self-nonself
@@ -52,8 +52,8 @@ plot(d)
 
 }
 \seealso{
-\code{\link{pulldiag}}, \code{\link{distee}},
-\code{\link{plot2dist}}
+\code{\link[=pulldiag]{pulldiag()}}, \code{\link[=distee]{distee()}},
+\code{\link[=plot2dist]{plot2dist()}}
 }
 \author{
 Karl W Broman, \email{broman@wisc.edu}

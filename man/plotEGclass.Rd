@@ -9,7 +9,7 @@ plotEGclass(d, eqtl = 1, outercol = "inferred",
   "#E59E00"), ...)
 }
 \arguments{
-\item{d}{Output of \code{\link{disteg}}.}
+\item{d}{Output of \code{\link[=disteg]{disteg()}}.}
 
 \item{eqtl}{Numeric index or a character vector (of the form "1@102.35")
 indicating the eQTL to consider.}
@@ -25,20 +25,20 @@ points.}
 \item{thecolors}{The colors to use in the plot.  The last element (after the
 number of genotypes) indicates the color to use for missing values.}
 
-\item{\dots}{Passed to \code{\link[graphics]{plot}} and
-\code{\link[graphics]{points}}.}
+\item{\dots}{Passed to \code{\link[graphics:plot]{graphics::plot()}} and
+\code{\link[graphics:points]{graphics::points()}}.}
 }
 \value{
 None.
 }
 \description{
 Diagnostic plot of one of the eQTL classifiers from the results of
-\code{\link{disteg}}: generally expression phenotype against observed eQTL
+\code{\link[=disteg]{disteg()}}: generally expression phenotype against observed eQTL
 genotype, colored by inferred eQTL genotype.
 }
 \details{
 The function produces a diagnostic plot for studying one of the k-nearest
-neighbor classifiers underlying the output from \code{\link{disteg}}.
+neighbor classifiers underlying the output from \code{\link[=disteg]{disteg()}}.
 
 In the case of one expression phenotype attached to the selected eQTL, the
 plot is a dot plot of gene expression against observed eQTL genotype.
@@ -47,7 +47,7 @@ In the case of two expression phenotypes, the plot is a scatterplot of the
 two expression phenotypes against each other.
 
 In the case of more than two expression phenotypes, we use
-\code{\link[graphics]{pairs}} to produce a matrix of scatterplots.
+\code{\link[graphics:pairs]{graphics::pairs()}} to produce a matrix of scatterplots.
 }
 \examples{
 library(qtl)
@@ -87,8 +87,8 @@ plotEGclass(d, 2)
 
 }
 \seealso{
-\code{\link{disteg}}, \code{\link{plot.lineupdist}},
-\code{\link{plot2dist}}, \code{\link[class]{knn}}
+\code{\link[=disteg]{disteg()}}, \code{\link[=plot.lineupdist]{plot.lineupdist()}},
+\code{\link[=plot2dist]{plot2dist()}}, \code{\link[class:knn]{class::knn()}}
 }
 \author{
 Karl W Broman, \email{broman@wisc.edu}

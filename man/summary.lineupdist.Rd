@@ -8,7 +8,7 @@
   reorder = c("alignmatches", "bydistance", "no"), ...)
 }
 \arguments{
-\item{object}{Output of \code{\link{distee}} or \code{\link{disteg}}.}
+\item{object}{Output of \code{\link[=distee]{distee()}} or \code{\link[=disteg]{disteg()}}.}
 
 \item{cutoff}{(Optional) Cutoff on correlation/distance, with rows in the
 results only being kept if the best distance/correlation is above this
@@ -22,7 +22,7 @@ is itself.}
 distance (or decreasing correlation) to self; if \code{"alignmatches"},
 group related errors together; if \code{"no"}, leave as is.}
 
-\item{\dots}{Passed to \code{\link[base]{print.data.frame}}.}
+\item{\dots}{Passed to \code{\link[base:print.data.frame]{base::print.data.frame()}}.}
 }
 \value{
 A list with two components: the distances summarized by row and the
@@ -34,7 +34,7 @@ distances to others, and finally indicate the individual (or individuals)
 that is closest.
 }
 \description{
-Summarize the results of \code{\link{distee}} or \code{\link{disteg}}, with
+Summarize the results of \code{\link[=distee]{distee()}} or \code{\link[=disteg]{disteg()}}, with
 inter-individual distances between two sets of gene expression data.
 }
 \examples{
@@ -51,9 +51,9 @@ summary(d)
 
 }
 \seealso{
-\code{\link{pulldiag}}, \code{\link{omitdiag}},
-\code{\link{distee}}, \code{\link{disteg}}, \code{\link{plot2dist}},
-\code{\link{plot.lineupdist}}
+\code{\link[=pulldiag]{pulldiag()}}, \code{\link[=omitdiag]{omitdiag()}},
+\code{\link[=distee]{distee()}}, \code{\link[=disteg]{disteg()}}, \code{\link[=plot2dist]{plot2dist()}},
+\code{\link[=plot.lineupdist]{plot.lineupdist()}}
 }
 \author{
 Karl W Broman, \email{broman@wisc.edu}

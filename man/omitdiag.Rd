@@ -7,8 +7,8 @@
 omitdiag(d)
 }
 \arguments{
-\item{d}{A distance matrix calculated by \code{\link{distee}} or
-\code{\link{disteg}}.}
+\item{d}{A distance matrix calculated by \code{\link[=distee]{distee()}} or
+\code{\link[=disteg]{disteg()}}.}
 }
 \value{
 A matrix of the same form as the input, but with self-self distances
@@ -16,7 +16,7 @@ replaced with \code{NA}.
 }
 \description{
 Replace the diagonal (that is, self-self distances) from a distance matrix
-calculated by \code{\link{distee}} or \code{\link{disteg}} with missing
+calculated by \code{\link[=distee]{distee()}} or \code{\link[=disteg]{disteg()}} with missing
 values (so that only self-nonself distances are left).
 }
 \details{
@@ -37,9 +37,9 @@ d_selfnonself <- omitdiag(d)
 
 }
 \seealso{
-\code{\link{pulldiag}}, \code{\link{distee}}, \code{\link{disteg}},
-\code{\link{summary.lineupdist}}, \code{\link{plot2dist}},
-\code{\link{plot.lineupdist}}
+\code{\link[=pulldiag]{pulldiag()}}, \code{\link[=distee]{distee()}}, \code{\link[=disteg]{disteg()}},
+\code{\link[=summary.lineupdist]{summary.lineupdist()}}, \code{\link[=plot2dist]{plot2dist()}},
+\code{\link[=plot.lineupdist]{plot.lineupdist()}}
 }
 \author{
 Karl W Broman, \email{broman@wisc.edu}
