@@ -11,40 +11,40 @@
 #' We consider the expression phenotypes in batches, by which pseudomarker they
 #' are closest to.  For each batch, we pull the genotype probabilities at the
 #' corresponding pseudomarker and use the individuals that are in common
-#' between \code{cross} and \code{pheno} and whose maximum genotype probability
-#' is above \code{min.genoprob}, to form a classifier of eQTL genotype from
+#' between `cross` and `pheno` and whose maximum genotype probability
+#' is above `min.genoprob`, to form a classifier of eQTL genotype from
 #' expression values, using k-nearest neighbor (the function
-#' \code{\link[class]{knn}}). The classifier is applied to all individuals with
+#' [class::knn()]). The classifier is applied to all individuals with
 #' expression data, to give a predicted eQTL genotype. (If the proportion of
 #' the k nearest neighbors with a common class is less than
-#' \code{min.classprob}, the predicted eQTL genotype is left as \code{NA}.)
+#' `min.classprob`, the predicted eQTL genotype is left as `NA`.)
 #'
-#' If \code{repeatKNN} is TRUE, we repeat the construction of the k-nearest
+#' If `repeatKNN` is TRUE, we repeat the construction of the k-nearest
 #' neighbor classifier after first omitting individuals whose proportion of
 #' mismatches between observed and inferred eQTL genotypes is greater than
-#' \code{max.selfd}.
+#' `max.selfd`.
 #'
 #' Finally, we calculate the distance between the observed eQTL genotypes for
-#' each individual in \code{cross} and the inferred eQTL genotypes for each
-#' individual in \code{pheno}, as the proportion of mismatches between the
+#' each individual in `cross` and the inferred eQTL genotypes for each
+#' individual in `pheno`, as the proportion of mismatches between the
 #' observed and inferred eQTL genotypes.
 #'
-#' If \code{weightByLinkage} is \code{TRUE}, we use weights on the mismatch
+#' If `weightByLinkage` is `TRUE`, we use weights on the mismatch
 #' proportions for the various eQTL, taking into account their linkage. Two
 #' tightly linked eQTL will each be given half the weight of a single isolated
 #' eQTL.
 #'
-#' @param cross An object of class \code{"cross"} containing data for a QTL
-#' experiment.  See the help file for \code{\link[qtl]{read.cross}} in the
-#' R/qtl package (\url{http://www.rqtl.org}).  There must be a phenotype named
-#' \code{"id"} or \code{"ID"} that contains the individual identifiers.
+#' @param cross An object of class `"cross"` containing data for a QTL
+#' experiment.  See the help file for [qtl::read.cross()] in the
+#' R/qtl package (<http://www.rqtl.org>).  There must be a phenotype named
+#' `"id"` or `"ID"` that contains the individual identifiers.
 #' @param pheno A data frame of phenotypes (generally gene expression data),
 #' stored as individuals x phenotypes.  The row names must contain individual
 #' identifiers.
-#' @param pmark Pseudomarkers that are closest to the genes in \code{pheno}, as
-#' output by \code{\link{find.gene.pseudomarker}}.
+#' @param pmark Pseudomarkers that are closest to the genes in `pheno`, as
+#' output by [find.gene.pseudomarker()].
 #' @param min.genoprob Threshold on genotype probabilities; if maximum
-#' probability is less than this, observed genotype taken as \code{NA}.
+#' probability is less than this, observed genotype taken as `NA`.
 #' @param k Number of nearest neighbors to consider in forming a k-nearest
 #' neighbor classifier.
 #' @param min.classprob Minimum proportion of neighbors with a common class to
@@ -62,26 +62,26 @@
 #' @param weightByLinkage If TRUE, weight the eQTL to account for their
 #' relative positions (for example, two tightly linked eQTL would each count
 #' about 1/2 of an isolated eQTL)
-#' @param map.function Used if \code{weightByLinkage} is TRUE
+#' @param map.function Used if `weightByLinkage` is TRUE
 #' @param verbose if TRUE, give verbose output.
-#' @return A matrix with \code{nind(cross)} rows and \code{nrow(pheno)}
+#' @return A matrix with `nind(cross)` rows and `nrow(pheno)`
 #' columns, containing the distances.  The individual IDs are in the row and
-#' column names.  The matrix is assigned class \code{"lineupdist"}.
+#' column names.  The matrix is assigned class `"lineupdist"`.
 #'
 #' The names of the genes that were used to construct the classifier are saved
-#' in an attribute \code{"retained"}.
+#' in an attribute `"retained"`.
 #'
 #' The observed and inferred eQTL genotypes are saved as attributes
-#' \code{"obsg"} and \code{"infg"}.
+#' `"obsg"` and `"infg"`.
 #'
 #' The denominators of the proportions that form the inter-individual distances
-#' are in the attribute \code{"denom"}.
+#' are in the attribute `"denom"`.
 #' @author Karl W Broman, \email{broman@@wisc.edu}
-#' @seealso \code{\link{distee}}, \code{\link{summary.lineupdist}},
-#' \code{\link{pulldiag}}, \code{\link{omitdiag}}, \code{\link{findCommonID}},
-#' \code{\link{find.gene.pseudomarker}}, \code{\link{calc.locallod}},
-#' \code{\link{plot.lineupdist}}, \code{\link[class]{knn}},
-#' \code{\link{plotEGclass}}
+#' @seealso [distee()], [summary.lineupdist()],
+#' [pulldiag()], [omitdiag()], [findCommonID()],
+#' [find.gene.pseudomarker()], [calc.locallod()],
+#' [plot.lineupdist()], [class::knn()],
+#' [plotEGclass()]
 #' @keywords utilities
 #' @examples
 #' library(qtl)

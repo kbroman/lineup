@@ -7,29 +7,29 @@
 #' self and non-self distances.
 #'
 #'
-#' @param d1 Output of \code{\link{distee}}.
-#' @param d2 Output of \code{\link{distee}}.
+#' @param d1 Output of [distee()].
+#' @param d2 Output of [distee()].
 #' @param hirow Names of rows to highlight in green.
 #' @param hicol Names of columns to highlight in orange.
 #' @param xlab X-axis label (optional)
 #' @param ylab Y-axis label (optional)
 #' @param smoothScatter If TRUE, plot non-self distances with
-#' \code{\link[graphics]{smoothScatter}}; if FALSE, use
-#' \code{\link[graphics]{plot}}.
+#' [graphics::smoothScatter()]; if FALSE, use
+#' [graphics::plot()].
 #' @param colself Color to use for the self-self points.  If NULL, these aren't
 #' plotted.
 #' @param colnonself Color to use for the non-self points.  If NULL, these
 #' aren't plotted.
-#' @param colhirow Color to use for the \code{hirow} points.  If NULL, these
+#' @param colhirow Color to use for the `hirow` points.  If NULL, these
 #' aren't plotted.
-#' @param colhicol Color to use for the \code{hicol} points.  If NULL, these
+#' @param colhicol Color to use for the `hicol` points.  If NULL, these
 #' aren't plotted.
-#' @param \dots Passed to \code{\link[graphics]{plot}} and
-#' \code{\link[graphics]{points}}.
+#' @param \dots Passed to [graphics::plot()] and
+#' [graphics::points()].
 #' @return None.
 #' @author Karl W Broman, \email{broman@@wisc.edu}
-#' @seealso \code{\link{pulldiag}}, \code{\link{distee}},
-#' \code{\link{summary.lineupdist}}
+#' @seealso [pulldiag()], [distee()],
+#' [summary.lineupdist()]
 #' @keywords graphics
 #' @examples
 #' data(expr1, expr2)

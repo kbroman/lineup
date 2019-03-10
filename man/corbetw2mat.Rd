@@ -44,7 +44,7 @@ columns of y.
 }
 \details{
 Missing values (\code{NA}) are ignored, and we calculate the correlation
-using all complete pairs, as in \code{\link[stats]{cor}} with
+using all complete pairs, as in \code{\link[stats:cor]{stats::cor()}} with
 \code{use="pairwise.complete.obs"}.
 }
 \examples{
@@ -66,7 +66,7 @@ r_bestright <- corbetw2mat(expr1, expr2, what="bestright")
 
 }
 \seealso{
-\code{\link{distee}}, \code{\link{findCommonID}}
+\code{\link[=distee]{distee()}}, \code{\link[=findCommonID]{findCommonID()}}
 }
 \author{
 Karl W Broman, \email{broman@wisc.edu}

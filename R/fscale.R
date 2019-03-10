@@ -8,7 +8,7 @@
 #' Standardize each column in a matrix, so that the columns have mean 0 and SD
 #' 1.
 #'
-#' Missing values (\code{NA}) are ignored and left as is.
+#' Missing values (`NA`) are ignored and left as is.
 #'
 #' If there is just 1 non-missing value in a column, it is left as is.
 #'
@@ -19,7 +19,7 @@
 #' @return A matrix of the same form as the input, but with columns transformed
 #' to have mean 0 and SD 1.
 #' @author Karl W Broman, \email{broman@@wisc.edu}
-#' @seealso \code{\link[base]{scale}}
+#' @seealso [base::scale()]
 #' @keywords array
 #' @examples
 #'

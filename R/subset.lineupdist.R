@@ -4,19 +4,19 @@
 #' Subsetting distance matrix
 #'
 #' Pull out a specified set of rows and columns from a distance matrix
-#' calculated by \code{\link{distee}} or \code{\link{disteg}}.
+#' calculated by [distee()] or [disteg()].
 #'
 #'
 #' @aliases subset.lineupdist [.lineupdist
-#' @param x A distance matrix object as obtained from \code{\link{distee}} or
-#' \code{\link{disteg}}.
+#' @param x A distance matrix object as obtained from [distee()] or
+#' [disteg()].
 #' @param rows Optional vector of selected rows.
 #' @param cols Optional vector of selected columns.
 #' @param \dots Ignored at this point.
 #' @return The input distance matrix object, but with only the specified subset
 #' of the data.
 #' @author Karl W Broman, \email{broman@@wisc.edu}
-#' @seealso \code{\link{disteg}}, \code{\link{distee}}, \code{\link{pulldiag}}
+#' @seealso [disteg()], [distee()], [pulldiag()]
 #' @keywords manip
 #'
 #' @examples

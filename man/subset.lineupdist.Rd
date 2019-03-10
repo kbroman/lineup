@@ -10,8 +10,8 @@
 \method{[}{lineupdist}(x, rows = NULL, cols = NULL)
 }
 \arguments{
-\item{x}{A distance matrix object as obtained from \code{\link{distee}} or
-\code{\link{disteg}}.}
+\item{x}{A distance matrix object as obtained from \code{\link[=distee]{distee()}} or
+\code{\link[=disteg]{disteg()}}.}
 
 \item{rows}{Optional vector of selected rows.}
 
@@ -25,7 +25,7 @@ of the data.
 }
 \description{
 Pull out a specified set of rows and columns from a distance matrix
-calculated by \code{\link{distee}} or \code{\link{disteg}}.
+calculated by \code{\link[=distee]{distee()}} or \code{\link[=disteg]{disteg()}}.
 }
 \examples{
 data(expr1, expr2)
@@ -49,7 +49,7 @@ d[samp, samp]
 
 }
 \seealso{
-\code{\link{disteg}}, \code{\link{distee}}, \code{\link{pulldiag}}
+\code{\link[=disteg]{disteg()}}, \code{\link[=distee]{distee()}}, \code{\link[=pulldiag]{pulldiag()}}
 }
 \author{
 Karl W Broman, \email{broman@wisc.edu}

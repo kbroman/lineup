@@ -5,7 +5,7 @@
 \alias{f2cross}
 \title{Example experimental cross data}
 \format{An object of class \code{"cross"}. See
-\code{\link[qtl]{read.cross}} in the R/qtl package for details.}
+\code{\link[qtl:read.cross]{qtl::read.cross()}} in the R/qtl package for details.}
 \usage{
 data(f2cross)
 }
@@ -20,6 +20,6 @@ data(f2cross)
 summary(f2cross)
 }
 \seealso{
-\code{\link{expr1}}, \code{\link{expr2}}, \code{\link{genepos}}, \code{\link{pmap}}
+\code{\link[=expr1]{expr1()}}, \code{\link[=expr2]{expr2()}}, \code{\link[=genepos]{genepos()}}, \code{\link[=pmap]{pmap()}}
 }
 \keyword{datasets}

@@ -6,11 +6,11 @@
 #' Plot classifier of eQTL genotype from expression data
 #'
 #' Diagnostic plot of one of the eQTL classifiers from the results of
-#' \code{\link{disteg}}: generally expression phenotype against observed eQTL
+#' [disteg()]: generally expression phenotype against observed eQTL
 #' genotype, colored by inferred eQTL genotype.
 #'
 #' The function produces a diagnostic plot for studying one of the k-nearest
-#' neighbor classifiers underlying the output from \code{\link{disteg}}.
+#' neighbor classifiers underlying the output from [disteg()].
 #'
 #' In the case of one expression phenotype attached to the selected eQTL, the
 #' plot is a dot plot of gene expression against observed eQTL genotype.
@@ -19,25 +19,25 @@
 #' two expression phenotypes against each other.
 #'
 #' In the case of more than two expression phenotypes, we use
-#' \code{\link[graphics]{pairs}} to produce a matrix of scatterplots.
+#' [graphics::pairs()] to produce a matrix of scatterplots.
 #'
-#' @param d Output of \code{\link{disteg}}.
+#' @param d Output of [disteg()].
 #' @param eqtl Numeric index or a character vector (of the form "1@@102.35")
 #' indicating the eQTL to consider.
 #' @param outercol Indicates how to color the outer edge of the points:
-#' \code{"observed"} indicates to color based on observed genotypes;
-#' \code{"inferred"} indicates to color based on inferred genotypes; otherwise,
+#' `"observed"` indicates to color based on observed genotypes;
+#' `"inferred"` indicates to color based on inferred genotypes; otherwise,
 #' give a color.
-#' @param innercol Like \code{outercol}, but indicating the interior of the
+#' @param innercol Like `outercol`, but indicating the interior of the
 #' points.
 #' @param thecolors The colors to use in the plot.  The last element (after the
 #' number of genotypes) indicates the color to use for missing values.
-#' @param \dots Passed to \code{\link[graphics]{plot}} and
-#' \code{\link[graphics]{points}}.
+#' @param \dots Passed to [graphics::plot()] and
+#' [graphics::points()].
 #' @return None.
 #' @author Karl W Broman, \email{broman@@wisc.edu}
-#' @seealso \code{\link{disteg}}, \code{\link{plot.lineupdist}},
-#' \code{\link{plot2dist}}, \code{\link[class]{knn}}
+#' @seealso [disteg()], [plot.lineupdist()],
+#' [plot2dist()], [class::knn()]
 #' @keywords graphics
 #' @examples
 #' library(qtl)

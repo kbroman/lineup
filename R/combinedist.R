@@ -11,18 +11,18 @@
 #' The row and column names of the input distance matrices define the
 #' individual IDs.
 #'
-#' If the input distance matrices all have an attribute \code{"denom"} (for
-#' denominator) and \code{method="mean"}, we use a weighted mean, weighted by
+#' If the input distance matrices all have an attribute `"denom"` (for
+#' denominator) and `method="mean"`, we use a weighted mean, weighted by
 #' the denominators.  This could be used to calculate an overall proportion.
 #'
-#' @param \dots Set of distance matrices, as calculated by \code{\link{distee}}
-#' or \code{\link{disteg}}.
+#' @param \dots Set of distance matrices, as calculated by [distee()]
+#' or [disteg()].
 #' @param method Indicates whether to summarize using the median or the mean.
-#' @return A distance matrix, with class \code{"lineupdist"}.  The individual
+#' @return A distance matrix, with class `"lineupdist"`.  The individual
 #' IDs are in the row and column names.
 #' @author Karl W Broman, \email{broman@@wisc.edu}
-#' @seealso \code{\link{distee}}, \code{\link{disteg}},
-#' \code{\link{summary.lineupdist}}
+#' @seealso [distee()], [disteg()],
+#' [summary.lineupdist()]
 #' @keywords utilities
 #' @examples
 #' library(qtl)

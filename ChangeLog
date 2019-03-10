@@ -15,6 +15,11 @@ copyright (c) 2011-2019, Karl W Broman
     at https://www.r-project.org/Licenses/GPL-3
 ----------------------------------------------------------------------
 
+Version 0.38-1, 2019-03-10
+
+    Converted documentation to use markdown
+
+
 Version 0.37-11, 2019-03-06
 
     Fixed a bug in distee()

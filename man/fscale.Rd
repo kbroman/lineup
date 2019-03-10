@@ -32,7 +32,7 @@ y <- fscale(x)
 
 }
 \seealso{
-\code{\link[base]{scale}}
+\code{\link[base:scale]{base::scale()}}
 }
 \author{
 Karl W Broman, \email{broman@wisc.edu}

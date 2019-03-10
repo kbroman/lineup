@@ -28,6 +28,6 @@ rho <- corbetw2mat(expr1[id$first,], expr2[id$second,])
 hist(rho, breaks=100)
 }
 \seealso{
-\code{\link{genepos}}, \code{\link{f2cross}}, \code{\link{pmap}}
+\code{\link[=genepos]{genepos()}}, \code{\link[=f2cross]{f2cross()}}, \code{\link[=pmap]{pmap()}}
 }
 \keyword{datasets}

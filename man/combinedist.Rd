@@ -7,8 +7,8 @@
 combinedist(..., method = c("median", "mean"))
 }
 \arguments{
-\item{\dots}{Set of distance matrices, as calculated by \code{\link{distee}}
-or \code{\link{disteg}}.}
+\item{\dots}{Set of distance matrices, as calculated by \code{\link[=distee]{distee()}}
+or \code{\link[=disteg]{disteg()}}.}
 
 \item{method}{Indicates whether to summarize using the median or the mean.}
 }
@@ -72,8 +72,8 @@ summary(d)
 
 }
 \seealso{
-\code{\link{distee}}, \code{\link{disteg}},
-\code{\link{summary.lineupdist}}
+\code{\link[=distee]{distee()}}, \code{\link[=disteg]{disteg()}},
+\code{\link[=summary.lineupdist]{summary.lineupdist()}}
 }
 \author{
 Karl W Broman, \email{broman@wisc.edu}

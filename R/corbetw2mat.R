@@ -8,36 +8,36 @@
 #' For matrices x and y, calculate the correlation between columns of x and
 #' columns of y.
 #'
-#' Missing values (\code{NA}) are ignored, and we calculate the correlation
-#' using all complete pairs, as in \code{\link[stats]{cor}} with
-#' \code{use="pairwise.complete.obs"}.
+#' Missing values (`NA`) are ignored, and we calculate the correlation
+#' using all complete pairs, as in [stats::cor()] with
+#' `use="pairwise.complete.obs"`.
 #'
 #' @param x A numeric matrix.
-#' @param y A numeric matrix with the same number of rows as \code{x}.
+#' @param y A numeric matrix with the same number of rows as `x`.
 #' @param what Indicates which correlations to calculate and return.  See
 #' value, below.
-#' @param corthresh Threshold on correlations if \code{what="bestpairs"}.
-#' @return If \code{what="paired"}, the return value is a vector of
-#' correlations, between columns of \code{x} and the corresponding column of
-#' \code{y}.  \code{x} and \code{y} must have the same number of columns.
+#' @param corthresh Threshold on correlations if `what="bestpairs"`.
+#' @return If `what="paired"`, the return value is a vector of
+#' correlations, between columns of `x` and the corresponding column of
+#' `y`.  `x` and `y` must have the same number of columns.
 #'
-#' If \code{what="bestright"}, we return a data frame of size \code{ncol(x)} by
-#' \code{3}, with the \eqn{i}th row being the maximum correlation between
-#' column \eqn{i} of \code{x} and a column of \code{y}, and then the
-#' \code{y}-column index and \code{y}-column name with that correlation.  (In
+#' If `what="bestright"`, we return a data frame of size `ncol(x)` by
+#' `3`, with the \eqn{i}th row being the maximum correlation between
+#' column \eqn{i} of `x` and a column of `y`, and then the
+#' `y`-column index and `y`-column name with that correlation.  (In
 #' case of ties, we give the first one.)
 #'
-#' If \code{what="bestpairs"}, we return a data frame with five columns,
-#' containing all pairs of columns (with one in \code{x} and one in \code{y})
-#' with correlation \eqn{\ge} \code{corthresh}.  Each row corresponds to a
-#' column pair, and contains the correlation and then the \code{x}- and
-#' \code{y}-column indices followed by the \code{x}- and \code{y}-column names.
+#' If `what="bestpairs"`, we return a data frame with five columns,
+#' containing all pairs of columns (with one in `x` and one in `y`)
+#' with correlation \eqn{\ge} `corthresh`.  Each row corresponds to a
+#' column pair, and contains the correlation and then the `x`- and
+#' `y`-column indices followed by the `x`- and `y`-column names.
 #'
-#' If \code{what="all"}, the output is a matrix of size \code{ncol(x)} by
-#' \code{ncol(y)}, with all correlations between columns of \code{x} and
-#' columns of \code{y}.
+#' If `what="all"`, the output is a matrix of size `ncol(x)` by
+#' `ncol(y)`, with all correlations between columns of `x` and
+#' columns of `y`.
 #' @author Karl W Broman, \email{broman@@wisc.edu}
-#' @seealso \code{\link{distee}}, \code{\link{findCommonID}}
+#' @seealso [distee()], [findCommonID()]
 #' @keywords array univar multivariate
 #' @examples
 #'

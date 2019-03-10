@@ -8,7 +8,7 @@ find.gene.pseudomarker(cross, pmap, geneloc, where = c("prob", "draws"))
 }
 \arguments{
 \item{cross}{An object of class \code{"cross"} containing data for a QTL
-experiment.  See the help file for \code{\link[qtl]{read.cross}} in the
+experiment.  See the help file for \code{\link[qtl:read.cross]{qtl::read.cross()}} in the
 R/qtl package (\url{http://www.rqtl.org}).}
 
 \item{pmap}{A physical map of the markers in \code{cross}, with locations in
@@ -20,8 +20,8 @@ There should be two columns, \code{chr} for chromosome and \code{pos} for
 position in Mbp.  The rownames should indicate the gene names.}
 
 \item{where}{Indicates whether to pull pseudomarkers from the genotype
-probabilities (produced by \code{\link[qtl]{calc.genoprob}}) or from the
-imputed genotypes (produced by \code{\link[qtl]{sim.geno}}).}
+probabilities (produced by \code{\link[qtl:calc.genoprob]{qtl::calc.genoprob()}}) or from the
+imputed genotypes (produced by \code{\link[qtl:sim.geno]{qtl::sim.geno()}}).}
 }
 \value{
 A data frame with columns \code{chr} (the chromosome) and
@@ -37,7 +37,7 @@ series of genes.
 \details{
 We first convert positions (by interpolation) from those contained within
 \code{cross} to physical coordinates contained in \code{pmap}.  We then use
-\code{\link[qtl]{find.pseudomarker}} to identify the closest pseudomarker to
+\code{\link[qtl:find.pseudomarker]{qtl::find.pseudomarker()}} to identify the closest pseudomarker to
 each gene location.
 
 We also include the positions of the pseudomarkers, and we print a warning
@@ -60,9 +60,9 @@ pmark <- find.gene.pseudomarker(f2cross, pmap, genepos, "prob")
 
 }
 \seealso{
-\code{\link[qtl]{find.pseudomarker}},
-\code{\link[qtl]{find.pseudomarkerpos}}, \code{\link{plotEGclass}},
-\code{\link{disteg}}, \code{\link{calc.locallod}}
+\code{\link[qtl:find.pseudomarker]{qtl::find.pseudomarker()}},
+\code{\link[qtl:find.pseudomarkerpos]{qtl::find.pseudomarkerpos()}}, \code{\link[=plotEGclass]{plotEGclass()}},
+\code{\link[=disteg]{disteg()}}, \code{\link[=calc.locallod]{calc.locallod()}}
 }
 \author{
 Karl W Broman, \email{broman@wisc.edu}

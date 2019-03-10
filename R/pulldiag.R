@@ -4,16 +4,16 @@
 #' Pull out the diagonal from a distance matrix
 #'
 #' Pull out the diagonal from a distance matrix calculated by
-#' \code{\link{distee}} (that is, self-self distances).
+#' [distee()] (that is, self-self distances).
 #'
 #' We use the row and column names to identify which entries are self-self.
 #'
-#' @param d A distance matrix calculated by \code{\link{distee}}.
+#' @param d A distance matrix calculated by [distee()].
 #' @return A vector with the self-self distances.
 #' @author Karl W Broman, \email{broman@@wisc.edu}
-#' @seealso \code{\link{omitdiag}}, \code{\link{distee}}, \code{\link{disteg}},
-#' \code{\link{summary.lineupdist}}, \code{\link{plot2dist}},
-#' \code{\link{plot.lineupdist}}
+#' @seealso [omitdiag()], [distee()], [disteg()],
+#' [summary.lineupdist()], [plot2dist()],
+#' [plot.lineupdist()]
 #' @keywords array
 #' @examples
 #' data(expr1, expr2)
