@@ -5,21 +5,21 @@
 #
 #' Summarize inter-individual distances
 #'
-#' Summarize the results of \code{\link{distee}} or \code{\link{disteg}}, with
+#' Summarize the results of [distee()] or [disteg()], with
 #' inter-individual distances between two sets of gene expression data.
 #'
 #'
-#' @param object Output of \code{\link{distee}} or \code{\link{disteg}}.
+#' @param object Output of [distee()] or [disteg()].
 #' @param cutoff (Optional) Cutoff on correlation/distance, with rows in the
 #' results only being kept if the best distance/correlation is above this
 #' cutoff or the self-self result is not missing and is above this cutoff.
 #' @param dropmatches If TRUE, omit rows for which an individual's best match
 #' is itself.
-#' @param reorder If \code{"bydistance"}, reorder rows by increasing distance
+#' @param reorder If `"bydistance"`, reorder rows by increasing distance
 #' (or decreasing correlation) to the best match and then by decreasing
-#' distance (or decreasing correlation) to self; if \code{"alignmatches"},
-#' group related errors together; if \code{"no"}, leave as is.
-#' @param \dots Passed to \code{\link[base]{print.data.frame}}.
+#' distance (or decreasing correlation) to self; if `"alignmatches"`,
+#' group related errors together; if `"no"`, leave as is.
+#' @param \dots Passed to [base::print.data.frame()].
 #' @return A list with two components: the distances summarized by row and the
 #' distances summarized by column.
 #'
@@ -28,9 +28,9 @@
 #' distances to others, and finally indicate the individual (or individuals)
 #' that is closest.
 #' @author Karl W Broman, \email{broman@@wisc.edu}
-#' @seealso \code{\link{pulldiag}}, \code{\link{omitdiag}},
-#' \code{\link{distee}}, \code{\link{disteg}}, \code{\link{plot2dist}},
-#' \code{\link{plot.lineupdist}}
+#' @seealso [pulldiag()], [omitdiag()],
+#' [distee()], [disteg()], [plot2dist()],
+#' [plot.lineupdist()]
 #' @keywords utilities
 #' @examples
 #' data(expr1, expr2)

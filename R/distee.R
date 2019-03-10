@@ -9,26 +9,26 @@
 #' expression data sets
 #'
 #' We calculate the pairwise distance between all individuals (rows) in
-#' \code{e1} and all individuals in \code{e2}.  This distance is either the RMS
-#' difference (\code{d.method="rmsd"}) or the correlation
-#' (\code{d.method="cor"}).
+#' `e1` and all individuals in `e2`.  This distance is either the RMS
+#' difference (`d.method="rmsd"`) or the correlation
+#' (`d.method="cor"`).
 #'
 #' @param e1 Numeric matrix of gene expression data, as individuals x genes.
 #' The row and column names must contain individual and gene identifiers.
-#' @param e2 (Optional) Like \code{e1}.  An appreciable number of individuals
+#' @param e2 (Optional) Like `e1`.  An appreciable number of individuals
 #' and genes must be in common.
 #' @param d.method Calculate inter-individual distance as RMS difference or as
 #' correlation.
 #' @param labels Two character strings, to use as labels for the two data
 #' matrices in subsequent output.
 #' @param verbose if TRUE, give verbose output.
-#' @return A matrix with \code{nrow(e1)} rows and \code{nrow(e2)} columns,
+#' @return A matrix with `nrow(e1)` rows and `nrow(e2)` columns,
 #' containing the distances.  The individual IDs are in the row and column
-#' names.  The matrix is assigned class \code{"lineupdist"}.
+#' names.  The matrix is assigned class `"lineupdist"`.
 #' @author Karl W Broman, \email{broman@@wisc.edu}
-#' @seealso \code{\link{pulldiag}}, \code{\link{omitdiag}},
-#' \code{\link{summary.lineupdist}}, \code{\link{plot2dist}},
-#' \code{\link{disteg}}, \code{\link{corbetw2mat}}
+#' @seealso [pulldiag()], [omitdiag()],
+#' [summary.lineupdist()], [plot2dist()],
+#' [disteg()], [corbetw2mat()]
 #' @keywords utilities
 #' @examples
 #'

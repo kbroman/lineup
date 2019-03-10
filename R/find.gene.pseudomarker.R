@@ -8,34 +8,34 @@
 #' series of genes.
 #'
 #' We first convert positions (by interpolation) from those contained within
-#' \code{cross} to physical coordinates contained in \code{pmap}.  We then use
-#' \code{\link[qtl]{find.pseudomarker}} to identify the closest pseudomarker to
+#' `cross` to physical coordinates contained in `pmap`.  We then use
+#' [qtl::find.pseudomarker()] to identify the closest pseudomarker to
 #' each gene location.
 #'
 #' We also include the positions of the pseudomarkers, and we print a warning
 #' message if pseudomarkers are > 2 Mbp from the respective gene.
 #'
-#' @param cross An object of class \code{"cross"} containing data for a QTL
-#' experiment.  See the help file for \code{\link[qtl]{read.cross}} in the
-#' R/qtl package (\url{http://www.rqtl.org}).
-#' @param pmap A physical map of the markers in \code{cross}, with locations in
+#' @param cross An object of class `"cross"` containing data for a QTL
+#' experiment.  See the help file for [qtl::read.cross()] in the
+#' R/qtl package (<http://www.rqtl.org>).
+#' @param pmap A physical map of the markers in `cross`, with locations in
 #' Mbp.  This is a list whose components are the marker locations on each
 #' chromosome.
 #' @param geneloc A data frame specifying the physical locations of the genes.
-#' There should be two columns, \code{chr} for chromosome and \code{pos} for
+#' There should be two columns, `chr` for chromosome and `pos` for
 #' position in Mbp.  The rownames should indicate the gene names.
 #' @param where Indicates whether to pull pseudomarkers from the genotype
-#' probabilities (produced by \code{\link[qtl]{calc.genoprob}}) or from the
-#' imputed genotypes (produced by \code{\link[qtl]{sim.geno}}).
-#' @return A data frame with columns \code{chr} (the chromosome) and
-#' \code{pmark} (the name of the pseudomarker).  The third column \code{pos}
+#' probabilities (produced by [qtl::calc.genoprob()]) or from the
+#' imputed genotypes (produced by [qtl::sim.geno()]).
+#' @return A data frame with columns `chr` (the chromosome) and
+#' `pmark` (the name of the pseudomarker).  The third column `pos`
 #' contains the Mbp position of the pseudomarker.  The final column is the
 #' signed distance between the gene and the pseudomarker.  The rownames
 #' indicate the gene names.
 #' @author Karl W Broman, \email{broman@@wisc.edu}
-#' @seealso \code{\link[qtl]{find.pseudomarker}},
-#' \code{\link[qtl]{find.pseudomarkerpos}}, \code{\link{plotEGclass}},
-#' \code{\link{disteg}}, \code{\link{calc.locallod}}
+#' @seealso [qtl::find.pseudomarker()],
+#' [qtl::find.pseudomarkerpos()], [plotEGclass()],
+#' [disteg()], [calc.locallod()]
 #' @keywords utilities
 #' @examples
 #' data(f2cross, expr1, genepos, pmap)

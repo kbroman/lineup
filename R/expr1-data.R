@@ -1,7 +1,7 @@
 #' Example gene expression data
 #'
 #' Matrices of simulated gene expression data, each for 98 individuals
-#' at 5,000 genes. Think of \code{expr1} and \code{expr2} as
+#' at 5,000 genes. Think of `expr1` and `expr2` as
 #' expression data on two different tissues.
 #'
 #' @name expr-data
@@ -18,7 +18,7 @@
 #'
 #' @keywords datasets
 #'
-#' @seealso \code{\link{genepos}}, \code{\link{f2cross}}, \code{\link{pmap}}
+#' @seealso [genepos()], [f2cross()], [pmap()]
 #'
 #' @examples
 #' data(expr1)

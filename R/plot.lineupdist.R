@@ -4,29 +4,29 @@
 #' Plot summary of inter-individual distances
 #'
 #' Plot histograms of self-self and self-nonself distances from a distance
-#' matrix calculated by \code{\link{distee}} or \code{\link{disteg}}.
+#' matrix calculated by [distee()] or [disteg()].
 #'
-#' We call \code{\link{pulldiag}} and \code{\link{omitdiag}} to get the
+#' We call [pulldiag()] and [omitdiag()] to get the
 #' self-self and self-nonself distances.
 #'
 #' If all of the self-self distances are missing, we plot just the self-nonself
 #' distances.
 #'
-#' @param x Output of \code{\link{distee}} or \code{\link{disteg}}.
+#' @param x Output of [distee()] or [disteg()].
 #' @param breaks Optional vector of breaks, passed to
-#' \code{\link[graphics]{hist}}, though if it is length 1, we interpret it as
+#' [graphics::hist()], though if it is length 1, we interpret it as
 #' the number of breaks and ensure that both histograms use the same set of
 #' breaks.
-#' @param add.rug If true, also include \code{\link[graphics]{rug}} below
+#' @param add.rug If true, also include [graphics::rug()] below
 #' histograms.
 #' @param what Indicates whether to plot both self-self and self-nonself
-#' distances (or correlations) or just one or the other.  (\code{"ss"}
-#' indicates self-self and \code{"sn"} indicates self-nonself.)
+#' distances (or correlations) or just one or the other.  (`"ss"`
+#' indicates self-self and `"sn"` indicates self-nonself.)
 #' @param \dots Ignored at this point.
 #' @return None.
 #' @author Karl W Broman, \email{broman@@wisc.edu}
-#' @seealso \code{\link{pulldiag}}, \code{\link{distee}},
-#' \code{\link{plot2dist}}
+#' @seealso [pulldiag()], [distee()],
+#' [plot2dist()]
 #' @keywords utilities
 #' @examples
 #' data(expr1, expr2)

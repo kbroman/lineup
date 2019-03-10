@@ -8,12 +8,12 @@
 #'
 #' @usage data(f2cross)
 #'
-#' @format An object of class \code{"cross"}. See
-#' \code{\link[qtl]{read.cross}} in the R/qtl package for details.
+#' @format An object of class `"cross"`. See
+#' [qtl::read.cross()] in the R/qtl package for details.
 #'
 #' @keywords datasets
 #'
-#' @seealso \code{\link{expr1}}, \code{\link{expr2}}, \code{\link{genepos}}, \code{\link{pmap}}
+#' @seealso [expr1()], [expr2()], [genepos()], [pmap()]
 #'
 #' @examples
 #' library(qtl)

@@ -8,8 +8,8 @@
 #' For gene expression data with physical positions of the genes, calculate the
 #' LOD score at those positions to assess evidence for local eQTL.
 #'
-#' \code{cross} and \code{pheno} must contain exactly the same individuals in
-#' the same order.  (Use \code{\link{findCommonID}} to line them up.)
+#' `cross` and `pheno` must contain exactly the same individuals in
+#' the same order.  (Use [findCommonID()] to line them up.)
 #'
 #' We consider the expression phenotypes in batches: those whose closest
 #' pseudomarker is the same.
@@ -17,33 +17,33 @@
 #' We use Haley-Knott regression to calculate the LOD scores.
 #'
 #' Actually, we use a bit of a contortion of the data to force the
-#' \code{\link[qtl]{scanone}} function in R/qtl to calculate the LOD score at a
+#' [qtl::scanone()] function in R/qtl to calculate the LOD score at a
 #' single position.
 #'
 #' We omit any transcripts that map to the X chromosome; we can only handle
 #' autosomal loci for now.
 #'
-#' @param cross An object of class \code{"cross"} containing data for a QTL
-#' experiment.  See the help file for \code{\link[qtl]{read.cross}} in the
-#' R/qtl package (\url{http://www.rqtl.org}).  There must be a phenotype named
-#' \code{"id"} or \code{"ID"} that contains the individual identifiers.
+#' @param cross An object of class `"cross"` containing data for a QTL
+#' experiment.  See the help file for [qtl::read.cross()] in the
+#' R/qtl package (<http://www.rqtl.org>).  There must be a phenotype named
+#' `"id"` or `"ID"` that contains the individual identifiers.
 #' @param pheno A data frame of phenotypes (generally gene expression data),
 #' stored as individuals x phenotypes.  The row names must contain individual
 #' identifiers.
-#' @param pmark Pseudomarkers that are closest to the genes in \code{pheno}, as
-#' output by \code{\link{find.gene.pseudomarker}}.
-#' @param addcovar Additive covariates passed to \code{\link{scanone}}.
-#' @param intcovar Interactive covariates passed to \code{\link{scanone}}.
+#' @param pmark Pseudomarkers that are closest to the genes in `pheno`, as
+#' output by [find.gene.pseudomarker()].
+#' @param addcovar Additive covariates passed to [scanone()].
+#' @param intcovar Interactive covariates passed to [scanone()].
 #' @param verbose If TRUE, print tracing information.
 #' @param n.cores Number of CPU cores to use in the calculations. With
-#' \code{n.cores=0}, \code{\link[parallel]{detectCores}} is used to
+#' `n.cores=0`, [parallel::detectCores()] is used to
 #' detect the number of available cores.
 #'
 #' @return A vector of LOD scores.  The names indicate the gene names (columns in
-#' \code{pheno}).
+#' `pheno`).
 #' @author Karl W Broman, \email{broman@@wisc.edu}
-#' @seealso \code{\link{find.gene.pseudomarker}}, \code{\link{plotEGclass}},
-#' \code{\link{findCommonID}}, \code{\link{disteg}}
+#' @seealso [find.gene.pseudomarker()], [plotEGclass()],
+#' [findCommonID()], [disteg()]
 #' @keywords utilities
 #' @examples
 #' data(f2cross, expr1, genepos, pmap)

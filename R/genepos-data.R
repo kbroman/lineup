@@ -1,7 +1,7 @@
 #' Genomic positions of genes in simulated expression data
 #'
 #' A table with the genomic positions of genes in the simulated
-#' expression data, \code{\link{expr1}} and \code{\link{expr2}}.
+#' expression data, [expr1()] and [expr2()].
 #'
 #' @docType data
 #'
@@ -11,7 +11,7 @@
 #'
 #' @keywords datasets
 #'
-#' @seealso \code{\link{expr1}}, \code{\link{expr2}}, \code{\link{f2cross}}, \code{\link{pmap}}
+#' @seealso [expr1()], [expr2()], [f2cross()], [pmap()]
 #'
 #' @examples
 #' data(genepos)

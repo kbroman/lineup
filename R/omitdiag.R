@@ -4,19 +4,19 @@
 #' Replace the diagonal in a distance matrix with missing values
 #'
 #' Replace the diagonal (that is, self-self distances) from a distance matrix
-#' calculated by \code{\link{distee}} or \code{\link{disteg}} with missing
+#' calculated by [distee()] or [disteg()] with missing
 #' values (so that only self-nonself distances are left).
 #'
 #' We use the row and column names to identify which entries are self-self.
 #'
-#' @param d A distance matrix calculated by \code{\link{distee}} or
-#' \code{\link{disteg}}.
+#' @param d A distance matrix calculated by [distee()] or
+#' [disteg()].
 #' @return A matrix of the same form as the input, but with self-self distances
-#' replaced with \code{NA}.
+#' replaced with `NA`.
 #' @author Karl W Broman, \email{broman@@wisc.edu}
-#' @seealso \code{\link{pulldiag}}, \code{\link{distee}}, \code{\link{disteg}},
-#' \code{\link{summary.lineupdist}}, \code{\link{plot2dist}},
-#' \code{\link{plot.lineupdist}}
+#' @seealso [pulldiag()], [distee()], [disteg()],
+#' [summary.lineupdist()], [plot2dist()],
+#' [plot.lineupdist()]
 #' @keywords array
 #' @examples
 #' data(expr1, expr2)
