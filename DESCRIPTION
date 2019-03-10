@@ -26,10 +26,9 @@ Suggests:
     devtools,
     testthat
 License: GPL-3
-Roxygen: list(wrap = FALSE)
 VignetteBuilder: knitr
 LazyData: true
 ByteCompile: true
 Encoding: UTF-8
-RoxygenNote: 6.1.1
 Roxygen: list(markdown=TRUE)
+RoxygenNote: 6.1.1
