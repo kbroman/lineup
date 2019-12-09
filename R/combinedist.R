@@ -76,11 +76,21 @@ combinedist <-
     # input is already a list?
     if(length(v) == 1 && is.list(v[[1]])) v <- v[[1]]
 
-    if(!all(sapply(v, function(a) "lineupdist" %in% class(a))))
+    if(!all(sapply(v, function(a) inherits(a, "lineupdist"))))
         stop("Input distance matrices must each be of class \"lineupdist\".")
 
-    if(length(unique(sapply(v, function(a) class(a)[1]))) > 1)
+    # check that they all have exactly the same class
+    cl <- lapply(v, class)
+    cl_len <- sapply(cl, length)
+    if(!all(cl_len == cl_len[1])) {
         stop("Need all of the distance matrices to be the same type.")
+    }
+    else {
+        same <- sapply(cl, function(a) all(a==cl[[1]]))
+        if(!all(same)) {
+            stop("Need all of the distance matrices to be the same type.")
+        }
+    }
 
     rn <- unique(unlist(lapply(v, rownames)))
     cn <- unique(unlist(lapply(v, colnames)))

@@ -15,6 +15,12 @@ copyright (c) 2011-2019, Karl W Broman
     at https://www.r-project.org/Licenses/GPL-3
 ----------------------------------------------------------------------
 
+Version 0.39-1, 2019-12-09
+
+    Fix use of class(), for example using inherits(object, "blah")
+    rather than "blah" %in% class(object).
+
+
 Version 0.38-1, 2019-03-10
 
     Converted documentation to use markdown

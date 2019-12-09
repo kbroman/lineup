@@ -82,7 +82,7 @@ plotEGclass <-
     function(d, eqtl=1, outercol="inferred", innercol="observed",
              thecolors=c("#7B68ED", "#1B9E78", "#CA3767", "#E59E00"), ...)
 {
-    if(!("eg.lineupdist" %in% class(d)))
+    if(!inherits(d, "eg.lineupdist"))
         stop("Input d must be as produced by disteg().")
 
     # inner and outer colors based on...

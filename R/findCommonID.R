@@ -45,12 +45,12 @@
 findCommonID <-
     function(id1, id2)
 {
-    if("cross" %in% class(id1))
+    if(inherits(id1, "cross"))
         id1 <- qtl::getid(id1)
     else if(!is.null(rownames(id1)))
         id1 <- rownames(id1)
 
-    if("cross" %in% class(id2))
+    if(inherits(id2, "cross"))
         id2 <- qtl::getid(id2)
     else if(!is.null(rownames(id2)))
         id2 <- rownames(id2)

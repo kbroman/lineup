@@ -304,9 +304,22 @@ disteg <-
     attr(d, "y") <- ysave
     attr(d, "denom") <- denom
     attr(d, "linkwts") <- linkwts
-    attr(d, "genonames") <- qtl::getgenonames(class(cross)[1], "A", "simple",
+    attr(d, "genonames") <- qtl::getgenonames(crosstype(cross), "A", "simple",
                                               qtl::getsex(cross), attributes(cross))
     class(d) <- c("eg.lineupdist", "lineupdist")
 
     d
+}
+
+
+# determine cross type
+crosstype <-
+function(cross)
+{
+    type <- class(cross)
+    type <- type[type != "cross" & type != "list"]
+    if(length(type) > 1) {
+        warning("cross has multiple classes")
+    }
+    type[1]
 }
