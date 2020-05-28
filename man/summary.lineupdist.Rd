@@ -4,8 +4,13 @@
 \alias{summary.lineupdist}
 \title{Summarize inter-individual distances}
 \usage{
-\method{summary}{lineupdist}(object, cutoff = NULL, dropmatches = TRUE,
-  reorder = c("alignmatches", "bydistance", "no"), ...)
+\method{summary}{lineupdist}(
+  object,
+  cutoff = NULL,
+  dropmatches = TRUE,
+  reorder = c("alignmatches", "bydistance", "no"),
+  ...
+)
 }
 \arguments{
 \item{object}{Output of \code{\link[=distee]{distee()}} or \code{\link[=disteg]{disteg()}}.}

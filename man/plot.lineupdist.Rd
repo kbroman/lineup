@@ -4,8 +4,7 @@
 \alias{plot.lineupdist}
 \title{Plot summary of inter-individual distances}
 \usage{
-\method{plot}{lineupdist}(x, breaks = NULL, add.rug = TRUE,
-  what = c("both", "ss", "sn"), ...)
+\method{plot}{lineupdist}(x, breaks = NULL, add.rug = TRUE, what = c("both", "ss", "sn"), ...)
 }
 \arguments{
 \item{x}{Output of \code{\link[=distee]{distee()}} or \code{\link[=disteg]{disteg()}}.}

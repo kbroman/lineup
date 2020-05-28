@@ -4,11 +4,21 @@
 \alias{disteg}
 \title{Calculate distance between two gene expression data sets}
 \usage{
-disteg(cross, pheno, pmark, min.genoprob = 0.99, k = 20,
-  min.classprob = 0.8, classprob2drop = 1, repeatKNN = TRUE,
-  max.selfd = 0.3, phenolabel = "phenotype", weightByLinkage = FALSE,
+disteg(
+  cross,
+  pheno,
+  pmark,
+  min.genoprob = 0.99,
+  k = 20,
+  min.classprob = 0.8,
+  classprob2drop = 1,
+  repeatKNN = TRUE,
+  max.selfd = 0.3,
+  phenolabel = "phenotype",
+  weightByLinkage = FALSE,
   map.function = c("haldane", "kosambi", "c-f", "morgan"),
-  verbose = TRUE)
+  verbose = TRUE
+)
 }
 \arguments{
 \item{cross}{An object of class \code{"cross"} containing data for a QTL

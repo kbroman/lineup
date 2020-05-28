@@ -4,7 +4,9 @@
 \name{genepos}
 \alias{genepos}
 \title{Genomic positions of genes in simulated expression data}
-\format{A data frame with two columns, chromosome and physical position (in Mbp).}
+\format{
+A data frame with two columns, chromosome and physical position (in Mbp).
+}
 \usage{
 data(genepos)
 }

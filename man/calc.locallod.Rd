@@ -4,8 +4,15 @@
 \alias{calc.locallod}
 \title{Calculate LOD score at physical position of each gene}
 \usage{
-calc.locallod(cross, pheno, pmark, addcovar = NULL, intcovar = NULL,
-  verbose = TRUE, n.cores = 1)
+calc.locallod(
+  cross,
+  pheno,
+  pmark,
+  addcovar = NULL,
+  intcovar = NULL,
+  verbose = TRUE,
+  n.cores = 1
+)
 }
 \arguments{
 \item{cross}{An object of class \code{"cross"} containing data for a QTL

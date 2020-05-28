@@ -4,8 +4,12 @@
 \alias{corbetw2mat}
 \title{Calculate correlations between columns of two matrices}
 \usage{
-corbetw2mat(x, y, what = c("paired", "bestright", "bestpairs", "all"),
-  corthresh = 0.9)
+corbetw2mat(
+  x,
+  y,
+  what = c("paired", "bestright", "bestpairs", "all"),
+  corthresh = 0.9
+)
 }
 \arguments{
 \item{x}{A numeric matrix.}

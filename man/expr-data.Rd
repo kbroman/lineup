@@ -6,7 +6,9 @@
 \alias{expr1}
 \alias{expr2}
 \title{Example gene expression data}
-\format{A matrix of integers, individuals as rows and genes as columns.}
+\format{
+A matrix of integers, individuals as rows and genes as columns.
+}
 \usage{
 data(expr1)
 data(expr2)

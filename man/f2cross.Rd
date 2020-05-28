@@ -4,8 +4,10 @@
 \name{f2cross}
 \alias{f2cross}
 \title{Example experimental cross data}
-\format{An object of class \code{"cross"}. See
-\code{\link[qtl:read.cross]{qtl::read.cross()}} in the R/qtl package for details.}
+\format{
+An object of class \code{"cross"}. See
+\code{\link[qtl:read.cross]{qtl::read.cross()}} in the R/qtl package for details.
+}
 \usage{
 data(f2cross)
 }

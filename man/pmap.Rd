@@ -4,8 +4,10 @@
 \name{pmap}
 \alias{pmap}
 \title{Physical map of markers}
-\format{A list of vectors, each containing the locations of markers in Mbp.
-(Technically, an object of class \code{"map"}.)}
+\format{
+A list of vectors, each containing the locations of markers in Mbp.
+(Technically, an object of class \code{"map"}.)
+}
 \usage{
 data(pmap)
 }

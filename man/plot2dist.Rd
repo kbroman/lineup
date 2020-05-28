@@ -4,9 +4,20 @@
 \alias{plot2dist}
 \title{Plot two sets of inter-individual distances against one another}
 \usage{
-plot2dist(d1, d2, hirow = NULL, hicol = NULL, xlab = NULL,
-  ylab = NULL, smoothScatter = FALSE, colself = "black",
-  colnonself = "gray", colhirow = "green", colhicol = "orange", ...)
+plot2dist(
+  d1,
+  d2,
+  hirow = NULL,
+  hicol = NULL,
+  xlab = NULL,
+  ylab = NULL,
+  smoothScatter = FALSE,
+  colself = "black",
+  colnonself = "gray",
+  colhirow = "green",
+  colhicol = "orange",
+  ...
+)
 }
 \arguments{
 \item{d1}{Output of \code{\link[=distee]{distee()}}.}
