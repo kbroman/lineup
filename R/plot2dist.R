@@ -15,7 +15,7 @@
 #' @param ylab Y-axis label (optional)
 #' @param smoothScatter If TRUE, plot non-self distances with
 #' [graphics::smoothScatter()]; if FALSE, use
-#' [graphics::plot()].
+#' [base::plot()].
 #' @param colself Color to use for the self-self points.  If NULL, these aren't
 #' plotted.
 #' @param colnonself Color to use for the non-self points.  If NULL, these
@@ -24,7 +24,7 @@
 #' aren't plotted.
 #' @param colhicol Color to use for the `hicol` points.  If NULL, these
 #' aren't plotted.
-#' @param \dots Passed to [graphics::plot()] and
+#' @param \dots Passed to [base::plot()] and
 #' [graphics::points()].
 #' @return None.
 #' @author Karl W Broman, \email{broman@@wisc.edu}
@@ -44,7 +44,7 @@
 #' # plot distances against one another
 #' plot2dist(d_rmsd, d_cor)
 #'
-#' @importFrom graphics plot points
+#' @importFrom graphics points
 #' @importFrom grDevices colorRampPalette
 #' @export
 plot2dist <-

@@ -34,7 +34,7 @@ plot2dist(
 
 \item{smoothScatter}{If TRUE, plot non-self distances with
 \code{\link[graphics:smoothScatter]{graphics::smoothScatter()}}; if FALSE, use
-\code{\link[graphics:plot]{graphics::plot()}}.}
+\code{\link[base:plot]{base::plot()}}.}
 
 \item{colself}{Color to use for the self-self points.  If NULL, these aren't
 plotted.}
@@ -48,7 +48,7 @@ aren't plotted.}
 \item{colhicol}{Color to use for the \code{hicol} points.  If NULL, these
 aren't plotted.}
 
-\item{\dots}{Passed to \code{\link[graphics:plot]{graphics::plot()}} and
+\item{\dots}{Passed to \code{\link[base:plot]{base::plot()}} and
 \code{\link[graphics:points]{graphics::points()}}.}
 }
 \value{

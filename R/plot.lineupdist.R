@@ -40,7 +40,7 @@
 #' # plot histograms of self-self and self-nonself correlations
 #' plot(d)
 #'
-#' @importFrom graphics plot par hist rug
+#' @importFrom graphics par hist rug
 #' @export
 plot.lineupdist <-
     function(x, breaks=NULL, add.rug=TRUE, what=c("both", "ss", "sn"), ...)
