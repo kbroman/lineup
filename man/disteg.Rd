@@ -23,7 +23,7 @@ disteg(
 \arguments{
 \item{cross}{An object of class \code{"cross"} containing data for a QTL
 experiment.  See the help file for \code{\link[qtl:read.cross]{qtl::read.cross()}} in the
-R/qtl package (\url{http://www.rqtl.org}).  There must be a phenotype named
+R/qtl package (\url{https://rqtl.org}).  There must be a phenotype named
 \code{"id"} or \code{"ID"} that contains the individual identifiers.}
 
 \item{pheno}{A data frame of phenotypes (generally gene expression data),

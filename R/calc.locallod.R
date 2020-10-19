@@ -25,7 +25,7 @@
 #'
 #' @param cross An object of class `"cross"` containing data for a QTL
 #' experiment.  See the help file for [qtl::read.cross()] in the
-#' R/qtl package (<http://www.rqtl.org>).  There must be a phenotype named
+#' R/qtl package (<https://rqtl.org>).  There must be a phenotype named
 #' `"id"` or `"ID"` that contains the individual identifiers.
 #' @param pheno A data frame of phenotypes (generally gene expression data),
 #' stored as individuals x phenotypes.  The row names must contain individual

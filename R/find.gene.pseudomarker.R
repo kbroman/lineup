@@ -17,7 +17,7 @@
 #'
 #' @param cross An object of class `"cross"` containing data for a QTL
 #' experiment.  See the help file for [qtl::read.cross()] in the
-#' R/qtl package (<http://www.rqtl.org>).
+#' R/qtl package (<https://rqtl.org>).
 #' @param pmap A physical map of the markers in `cross`, with locations in
 #' Mbp.  This is a list whose components are the marker locations on each
 #' chromosome.

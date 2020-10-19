@@ -9,7 +9,7 @@ find.gene.pseudomarker(cross, pmap, geneloc, where = c("prob", "draws"))
 \arguments{
 \item{cross}{An object of class \code{"cross"} containing data for a QTL
 experiment.  See the help file for \code{\link[qtl:read.cross]{qtl::read.cross()}} in the
-R/qtl package (\url{http://www.rqtl.org}).}
+R/qtl package (\url{https://rqtl.org}).}
 
 \item{pmap}{A physical map of the markers in \code{cross}, with locations in
 Mbp.  This is a list whose components are the marker locations on each
@@ -61,7 +61,7 @@ pmark <- find.gene.pseudomarker(f2cross, pmap, genepos, "prob")
 }
 \seealso{
 \code{\link[qtl:find.pseudomarker]{qtl::find.pseudomarker()}},
-\code{\link[qtl:find.pseudomarkerpos]{qtl::find.pseudomarkerpos()}}, \code{\link[=plotEGclass]{plotEGclass()}},
+\code{\link[qtl:qtl-internal]{qtl::find.pseudomarkerpos()}}, \code{\link[=plotEGclass]{plotEGclass()}},
 \code{\link[=disteg]{disteg()}}, \code{\link[=calc.locallod]{calc.locallod()}}
 }
 \author{

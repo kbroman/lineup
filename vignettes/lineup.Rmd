@@ -19,7 +19,7 @@ detecting and correcting sample mix-ups between two sets of
 measurements, such as between gene expression data on two tissues, and
 between gene expression and marker genotype data in an experimental cross. The
 package is particularly aimed at eQTL data for an experimental cross
-and as a companion to [R/qtl](http://rqtl.org).
+and as a companion to [R/qtl](https://rqtl.org).
 
 This document provides a brief tutorial on the use of the package.
 
@@ -60,7 +60,7 @@ data(genepos)
 ```
 
 The data set `f2cross` is the experimental cross, in the form used by
-[R/qtl](http://rqtl.org) (that is, an object of class `"cross"`).  The
+[R/qtl](https://rqtl.org) (that is, an object of class `"cross"`).  The
 data sets `expr1` and `expr2` are matrices with the gene expression
 data, with individuals as rows and genes as columns. The object `pmap` is a
 physical map of the markers in `f2cross` (with positions in Mbp), and

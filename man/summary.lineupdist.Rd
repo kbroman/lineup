@@ -27,7 +27,7 @@ is itself.}
 distance (or decreasing correlation) to self; if \code{"alignmatches"},
 group related errors together; if \code{"no"}, leave as is.}
 
-\item{\dots}{Passed to \code{\link[base:print.data.frame]{base::print.data.frame()}}.}
+\item{\dots}{Passed to \code{\link[base:print.dataframe]{base::print.data.frame()}}.}
 }
 \value{
 A list with two components: the distances summarized by row and the
