@@ -30,7 +30,7 @@ points.}
 \item{thecolors}{The colors to use in the plot.  The last element (after the
 number of genotypes) indicates the color to use for missing values.}
 
-\item{\dots}{Passed to \code{\link[base:plot]{base::plot()}} and
+\item{\dots}{Passed to \code{base::plot()} and
 \code{\link[graphics:points]{graphics::points()}}.}
 }
 \value{

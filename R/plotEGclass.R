@@ -32,7 +32,7 @@
 #' points.
 #' @param thecolors The colors to use in the plot.  The last element (after the
 #' number of genotypes) indicates the color to use for missing values.
-#' @param \dots Passed to [base::plot()] and
+#' @param \dots Passed to `base::plot()` and
 #' [graphics::points()].
 #' @return None.
 #' @author Karl W Broman, \email{broman@@wisc.edu}
