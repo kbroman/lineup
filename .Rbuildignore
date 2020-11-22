@@ -1,4 +1,4 @@
 \.git
 Makefile
 ^LICENSE\.md$
-^\.travis\.yml$
+^\.github$

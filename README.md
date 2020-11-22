@@ -1,6 +1,6 @@
 ### R/lineup: detecting and correcting sample mix-ups
 
-[![Build Status](https://travis-ci.org/kbroman/lineup.svg?branch=master)](https://travis-ci.org/kbroman/lineup)
+[![R build status](https://github.com/kbroman/lineup/workflows/R-CMD-check/badge.svg)](https://github.com/kbroman/lineup/actions)
 [![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/lineup)](https://cran.r-project.org/package=lineup)
 
 [Karl W Broman](https://kbroman.org)
