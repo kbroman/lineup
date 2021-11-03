@@ -15,14 +15,14 @@ copyright (c) 2011-2021, Karl W Broman
     at https://www.r-project.org/Licenses/GPL-3
 ----------------------------------------------------------------------
 
-Version 0.39-1, 2021-08-05
+Version 0.40, 2021-11-03
 
-    Fix lineupversion() to handle a case like "0.40".
+    Fixed lineupversion() to handle a case like "0.40".
 
 
 Version 0.38-3, 2020-11-16
 
-    Fix use of class(), for example using inherits(object, "blah")
+    Fixed use of class(), for example using inherits(object, "blah")
     rather than "blah" %in% class(object).
 
     Fixed potential problem in documentation, since plot() has moved
