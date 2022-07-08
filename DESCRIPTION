@@ -1,6 +1,6 @@
 Package: lineup
-Version: 0.40
-Date: 2021-11-03
+Version: 0.42
+Date: 2022-07-08
 Title: Lining Up Two Sets of Measurements
 Description: Tools for detecting and correcting sample mix-ups between two sets
     of measurements, such as between gene expression data on two tissues.
@@ -33,4 +33,4 @@ LazyData: true
 ByteCompile: true
 Encoding: UTF-8
 Roxygen: list(markdown=TRUE)
-RoxygenNote: 7.1.1
+RoxygenNote: 7.2.0

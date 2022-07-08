@@ -2,9 +2,9 @@
  *
  * propmismatch.c
  *
- * copyright (c) 2011, Karl W Broman
+ * copyright (c) 2011-2022, Karl W Broman
  *
- * last modified Apr, 2011
+ * last modified Jul, 2022
  * first written Mar, 2011
  *
  *     This program is free software; you can redistribute it and/or
@@ -29,6 +29,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <math.h>
+#include <limits.h>
 #include "propmismatch.h"
 #include "util.h"
 
