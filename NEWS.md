@@ -1,4 +1,4 @@
-## Version 0.42, 2022-07-08
+## Version 0.42, 2022-07-10
 
 - Include <limits.h> in a C file, for an upcoming change in R
 
