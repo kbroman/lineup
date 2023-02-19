@@ -1,6 +1,6 @@
 citHeader("To cite R/lineup in publications use:")
 
-citEntry(entry="article",
+bibentry(bibtype="article",
          title = "Identification and correction of sample mix-ups in expression genetic data: A case study",
          author = personList(person(c("Karl", "W."), "Broman"),
                              person(c("Mark", "P."), "Keller"),
