@@ -1,4 +1,4 @@
-## Version 0.43-2, 2024-07-15
+## Version 0.44, 2024-07-15
 
 - Fixed link in documention
 
