@@ -1,6 +1,6 @@
 ## Version 0.44, 2024-07-15
 
-- Fixed link in documention
+- Fixed link in documentation
 
 
 ## Version 0.43-1, 2023-02-19
