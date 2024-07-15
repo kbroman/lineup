@@ -1,3 +1,8 @@
+## Version 0.43-2, 2024-07-15
+
+- Fixed link in documention
+
+
 ## Version 0.43-1, 2023-02-19
 
 - Revise CITATION file to use `bibentry()` rather than `citEntry()`

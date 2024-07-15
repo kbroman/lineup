@@ -27,9 +27,9 @@ identifiers.}
 \item{pmark}{Pseudomarkers that are closest to the genes in \code{pheno}, as
 output by \code{\link[=find.gene.pseudomarker]{find.gene.pseudomarker()}}.}
 
-\item{addcovar}{Additive covariates passed to \code{\link[=scanone]{scanone()}}.}
+\item{addcovar}{Additive covariates passed to \code{\link[qtl:scanone]{qtl::scanone()}}.}
 
-\item{intcovar}{Interactive covariates passed to \code{\link[=scanone]{scanone()}}.}
+\item{intcovar}{Interactive covariates passed to \code{\link[qtl:scanone]{qtl::scanone()}}.}
 
 \item{verbose}{If TRUE, print tracing information.}
 

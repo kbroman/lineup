@@ -32,8 +32,8 @@
 #' identifiers.
 #' @param pmark Pseudomarkers that are closest to the genes in `pheno`, as
 #' output by [find.gene.pseudomarker()].
-#' @param addcovar Additive covariates passed to [scanone()].
-#' @param intcovar Interactive covariates passed to [scanone()].
+#' @param addcovar Additive covariates passed to [qtl::scanone()].
+#' @param intcovar Interactive covariates passed to [qtl::scanone()].
 #' @param verbose If TRUE, print tracing information.
 #' @param n.cores Number of CPU cores to use in the calculations. With
 #' `n.cores=0`, [parallel::detectCores()] is used to
