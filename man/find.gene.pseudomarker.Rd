@@ -61,7 +61,7 @@ pmark <- find.gene.pseudomarker(f2cross, pmap, genepos, "prob")
 }
 \seealso{
 \code{\link[qtl:find.pseudomarker]{qtl::find.pseudomarker()}},
-\code{\link[qtl:qtl-internal]{qtl::find.pseudomarkerpos()}}, \code{\link[=plotEGclass]{plotEGclass()}},
+\code{\link[qtl:find.pseudomarkerpos]{qtl::find.pseudomarkerpos()}}, \code{\link[=plotEGclass]{plotEGclass()}},
 \code{\link[=disteg]{disteg()}}, \code{\link[=calc.locallod]{calc.locallod()}}
 }
 \author{
