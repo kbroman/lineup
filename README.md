@@ -19,8 +19,9 @@ This is particularly aimed at eQTL data for an experimental cross.
 
 Install the R/lineup package from [CRAN](https://cran.r-project.org):
 
-    install.packages("lineup")
-
+```r
+install.packages("lineup")
+```
 
 Alternatively, install it from [R
 universe](https://rqtl.r-universe.dev):
