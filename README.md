@@ -14,6 +14,8 @@ between gene expression data on two tissues.
 
 This is particularly aimed at eQTL data for an experimental cross.
 
+See the [lineup vignette](https://kbroman.org/lineup.html).
+
 #### Citation
 
 To cite R/lineup in publications use
