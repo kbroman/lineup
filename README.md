@@ -17,7 +17,7 @@ This is particularly aimed at eQTL data for an experimental cross.
 
 ### Installation
 
-Install the qtl2convert package from [CRAN](https://cran.r-project.org):
+Install the R/lineup package from [CRAN](https://cran.r-project.org):
 
     install.packages("lineup")
 
