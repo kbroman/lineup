@@ -24,10 +24,10 @@ install.packages("lineup")
 ```
 
 Alternatively, install it from [R
-universe](https://rqtl.r-universe.dev):
+universe](https://kbroman.r-universe.dev):
 
 ```r
-install.packages("lineup", repos=c("https://rqtl.r-universe.dev",
+install.packages("lineup", repos=c("https://kbroman.r-universe.dev",
                                    "https://cloud.r-project.org"))
 ```
 
