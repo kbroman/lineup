@@ -14,7 +14,42 @@ between gene expression data on two tissues.
 
 This is particularly aimed at eQTL data for an experimental cross.
 
-See the [lineup vignette](https://kbroman.org/lineup.html).
+
+### Installation
+
+Install the qtl2convert package from [CRAN](https://cran.r-project.org):
+
+    install.packages("lineup")
+
+
+Alternatively, install it from [R
+universe](https://rqtl.r-universe.dev):
+
+```r
+install.packages("lineup", repos=c("https://rqtl.r-universe.dev",
+                                   "https://cloud.r-project.org"))
+```
+
+Or use [remotes](https://remotes.r-lib.org) to install it from its GitHub source:
+
+```r
+install.packages("remotes")
+remotes::install_github("kbroman/lineup")
+```
+
+
+### Vignette
+
+A vignette describing the use of the package is available
+[on the web](https://kbroman.org/lineup/lineup.html).
+Or view it from within R by loading the package and then using the
+`vignette()` function.
+
+```r
+library(lineup2)
+vignette("lineup", package="lineup")
+```
+
 
 #### Citation
 
@@ -25,6 +60,7 @@ To cite R/lineup in publications use
   sample mix-ups in expression genetic data: A case study.
   G3 5:2177-2186
   [doi:10.1534/g3.115.019778](https://doi.org/10.1534/g3.115.019778)
+
 
 #### License
 
