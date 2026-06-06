@@ -1,3 +1,8 @@
+## Version 0.45-1, 2026-06-05
+
+- Added package logo
+
+
 ## Version 0.44, 2024-07-15
 
 - Fixed link in documentation
