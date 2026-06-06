@@ -1,4 +1,4 @@
-### R/lineup: detecting and correcting sample mix-ups
+### R/lineup: detecting and correcting sample mix-ups <a href="https://github.com/kbroman/lineup"><img src="https://kbroman.org/lineup/lineup_logo.png" align="right" height="138" alt="R/lineup logo"/></a>
 
 [![R-CMD-check](https://github.com/kbroman/lineup/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/kbroman/lineup/actions/workflows/R-CMD-check.yaml)
 [![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/lineup)](https://cran.r-project.org/package=lineup)
