@@ -10,6 +10,13 @@
 
 Tools for detecting and correcting sample mix-ups between two sets of measurements, such as between gene expression data on two tissues. Broman et al. (2015) \doi{10.1534/g3.115.019778}.
 }
+\section{Vignette}{
+
+\itemize{
+\item \href{https://kbroman.org/lineup/lineup.html}{R/lineup User Guide}
+}
+}
+
 \seealso{
 Useful links:
 \itemize{
