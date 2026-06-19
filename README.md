@@ -5,8 +5,6 @@
 [![r-universe badge](https://kbroman.r-universe.dev/lineup/badges/version)](https://kbroman.r-universe.dev/lineup)
 [![zenodo DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.4277411.svg)](https://doi.org/10.5281/zenodo.4277411)
 
-[Karl W Broman](https://kbroman.org)
-
 [R/lineup](https://github.com/kbroman/lineup) is an
 [R](https://www.r-project.org) package with tools for detecting and
 correcting sample mix-ups between two sets of measurements, such as
