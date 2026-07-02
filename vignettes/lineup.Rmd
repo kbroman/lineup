@@ -17,10 +17,7 @@ options(digits=4, scipen=5)
 
 <a href="https://github.com/kbroman/lineup"><img src="https://kbroman.org/lineup/lineup_logo.png" align="right" height="138" alt="R/lineup logo"/></a>
 
-[![R-CMD-check](https://github.com/kbroman/lineup/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/kbroman/lineup/actions/workflows/R-CMD-check.yaml)
-[![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/lineup)](https://cran.r-project.org/package=lineup)
-[![r-universe badge](https://kbroman.r-universe.dev/lineup/badges/version)](https://kbroman.r-universe.dev/lineup)
-[![zenodo DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.4277411.svg)](https://doi.org/10.5281/zenodo.4277411)
+<!-- paste badges here -->
 
 [R/lineup](https://github.com/kbroman/lineup) is an
 [R](https://www.r-project.org) package with tools for
