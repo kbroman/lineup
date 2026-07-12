@@ -1,6 +1,10 @@
-## Version 0.45-1, 2026-06-05
+## Version 0.45-2, 2026-07-12
 
 - Added package logo
+
+- For parallel computing, use of `n.cores=0` argument now results in all
+  but one core (`parallel::detectCores()-1`) rather than **all**
+  cores.
 
 
 ## Version 0.44, 2024-07-15

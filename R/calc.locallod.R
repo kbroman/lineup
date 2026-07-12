@@ -108,7 +108,7 @@ calc.locallod <-
     }
 
     # if n.cores == 0, detect available cores
-    if(n.cores == 0) n.cores <- parallel::detectCores()
+    if(n.cores == 0) n.cores <- max(1, parallel::detectCores()-1, na.rm=TRUE)
 
     if(n.cores > 1) {
         if(Sys.info()[1] == "Windows") { # Windows doesn't support mclapply
