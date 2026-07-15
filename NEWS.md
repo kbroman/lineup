@@ -1,4 +1,4 @@
-## Version 0.45-2, 2026-07-12
+## Version 0.46, 2026-07-15
 
 - Added package logo
 
